@@ -6,7 +6,7 @@ const app =express();
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
-app.use(express.static('script'));
+app.use(express.static('images'));
 
 const db = sql.createConnection({
 	host:'localhost',
@@ -24,6 +24,28 @@ app.listen(3100,()=>{
 	console.log('Server listening on 3100 !!!!!!!!!!!');
 
 })
-app.get('/projectportal',(req,res)=>{
-	res.sendFile(`${__dirname}/index.html`);
+app.get('/index',(req,res)=>{
+    res.sendFile(`${__dirname}/index.html`)
 })
+app.get('/register.html',(req,res)=>{
+    res.sendFile(`${__dirname}/register.html`);
+})
+app.get('/login.html',(req,res)=>{
+    res.sendFile(`${__dirname}/login.html`);
+})
+app.post('/register',(req,res)=>{
+
+    console.log(req.body);
+    var name = req.body.name;
+    var email = req.body.email;
+    var regno = req.body.regno;
+    var password = req.body.password;
+    let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${password}')`;
+    db.query(qr,(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+    })
+    res.redirect('/dashboard');
+})
+
