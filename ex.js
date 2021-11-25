@@ -1,12 +1,18 @@
 const express =require('express');
 const sql =require('mysql2');
 const bp = require('body-parser');
+var session = require('express-session');
 
 const app =express();
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
 app.use(express.static('images'));
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 const db = sql.createConnection({
 	host:'localhost',
@@ -50,17 +56,31 @@ app.post('/register',(req,res)=>{
 })
 app.post('/login',(req,res)=>{
 
-    console.log(req.body);
+   
     var email = req.body.email;
+    console.log(email);
     var password = req.body.password;
-    let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${password}')`;
-    db.query(qr,(err,result)=>{
-        if(err){
-            console.log(err);
-        }
-    })
-    res.redirect('/dashboard');
-})
+    console.log(password);
+    
+    if (email && password) {
+		db.query(`SELECT * FROM student WHERE mail = '${email}' AND password = '${password}'`, function(error, results) {
+			if (results.length > 0) {
+                console.log(results);
+				req.session.loggedin = true;
+				req.session.email = email;
+				res.redirect('/dashboard');
+			} else {
+                console.log(results);
+				res.send('Incorrect Username and/or Password!');
+			}			
+			res.end();
+		});
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
+});
+
 
 
 
