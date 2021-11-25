@@ -48,4 +48,19 @@ app.post('/register',(req,res)=>{
     })
     res.redirect('/dashboard');
 })
+app.post('/login',(req,res)=>{
+
+    console.log(req.body);
+    var email = req.body.email;
+    var password = req.body.password;
+    let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${password}')`;
+    db.query(qr,(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+    })
+    res.redirect('/dashboard');
+})
+
+
 
