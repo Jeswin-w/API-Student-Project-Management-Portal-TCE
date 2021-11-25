@@ -30,6 +30,9 @@ app.listen(3100,()=>{
 	console.log('Server listening on 3100 !!!!!!!!!!!');
 
 })
+app.get('/dashboard',(req,res)=>{
+	res.sendFile(`${__dirname}/dashboard.html`)
+})
 app.get('/index',(req,res)=>{
     res.sendFile(`${__dirname}/index.html`)
 })
@@ -71,13 +74,13 @@ app.post('/login',(req,res)=>{
 				res.redirect('/dashboard');
 			} else {
                 console.log(results);
-				res.send('Incorrect Username and/or Password!');
+				res.redirect('/login.html')
 			}			
 			res.end();
 		});
 	} else {
-		res.send('Please enter Username and Password!');
-		res.end();
+		res.redirect('/login.html')
+		
 	}
 });
 
