@@ -8,6 +8,10 @@
         label{
             color:brown;
             font-weight:bold;
+            
+        }
+        input{
+            margin-bottom:30px;
         }
         #text{
             border: 1px solid brown;
@@ -16,6 +20,18 @@
         #text:hover{
             box-shadow: 2px 2px brown;
         }
+        .button1{
+                background-color: brown;
+                color: lemonchiffon;
+                border-radius: 20px; 
+                width: 350px;
+                border-color: brown;
+
+            }
+            .button1:hover{
+                width: 360px;
+                height:35px
+            }
     </style>
     <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,16 +43,25 @@
     <body style="overflow: hidden; background-color: lemonchiffon;">
         <div class="container-fluid" style="background-color: brown; color:lemonchiffon;text-align: center;">
         <h1><u><b>Register</b></u></h1></div>
-        <div class="container" style="border: 1px solid brown">
+        <div class="container" style="box-shadow: 1px 1px 2px 2px brown; padding-bottom: 10px; margin-top: 50px;padding-left: 30px;padding-right: 30px">
         <form method="post" action="/dashboard">
             <div class="row">
-                <div class="col-sm-6">
-            <label>Name: </label>
-
-            <input type="text" class="form-control" id="text"></div>
-            <div class="col-sm-6">
-                </div>
                 
+            <label>Name: </label><br>
+
+            <input type="text" class="form-control" id="text" name="name" style="height: 50px;"><br><br>
+            <label>Email: </label><br>
+
+            <input type="email" class="form-control" id="text" name="email" style="height: 50px;">
+           
+            <label>Reg No: </label><br>
+
+            <input type="text" class="form-control" id="text" name="regno" style="height: 50px;"><br><br>
+            <label>Password:</label><br>
+            <input type="password" class="form-control" id="text" name="password" style="height: 50px;">                
+        <br>
+                </div>
+                <center><br><button class="button1" >register</button></center>
             </div>
         </form>
         </div>
