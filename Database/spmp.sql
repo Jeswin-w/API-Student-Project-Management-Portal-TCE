@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2021 at 05:48 PM
+-- Generation Time: Nov 26, 2021 at 09:34 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -29,7 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `course` (
   `course_id` varchar(20) NOT NULL,
-  `fid` varchar(20) NOT NULL
+  `fid` varchar(20) NOT NULL,
+  `course_name` varchar(255) NOT NULL,
+  `did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -41,7 +43,30 @@ CREATE TABLE `course` (
 CREATE TABLE `course_faculty` (
   `fid` varchar(10) NOT NULL,
   `mail` varchar(30) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `did` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `did` int(11) NOT NULL,
+  `d_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enrollment`
+--
+
+CREATE TABLE `enrollment` (
+  `course_id` int(11) NOT NULL,
+  `regno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -53,7 +78,8 @@ CREATE TABLE `course_faculty` (
 CREATE TABLE `faculty_advisor` (
   `fid` varchar(10) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -81,8 +107,16 @@ CREATE TABLE `student` (
   `regno` varchar(8) NOT NULL,
   `mail` varchar(50) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`regno`, `mail`, `password`, `name`, `did`) VALUES
+('19IT027', 'eniyan@gmail.com', 'eniyan123', 'Eniyan', 0);
 
 -- --------------------------------------------------------
 
@@ -124,6 +158,12 @@ ALTER TABLE `course_faculty`
   ADD UNIQUE KEY `mail` (`mail`);
 
 --
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`did`);
+
+--
 -- Indexes for table `faculty_advisor`
 --
 ALTER TABLE `faculty_advisor`
@@ -148,6 +188,16 @@ ALTER TABLE `student`
 --
 ALTER TABLE `team`
   ADD PRIMARY KEY (`team_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `did` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
