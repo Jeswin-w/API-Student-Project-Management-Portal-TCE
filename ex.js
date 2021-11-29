@@ -41,6 +41,23 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
+app.get('/ecourse',(req, res)=>{
+	var obj;
+	var ecourse;
+	var email=req.session.email;
+	db.query(`SELECT * FROM student WHERE mail = '${email}'`,(err,result)=>{
+		obj=result;
+		
+	})
+	var x=obj[0];
+	var y=x.regno;
+	db.query(`Select * from enrollments WHERE email = '${y}'`,(err,result)=>{
+		ecourse=result;
+	})
+
+res.send(ecourse);
+	
+})
 app.get('/dashboard.html',(req,res)=>{
 	res.sendFile(`${__dirname}/dashboard.html`)
 })
@@ -83,6 +100,7 @@ app.post('/login',(req,res)=>{
                 console.log(results);
 				req.session.loggedin = true;
 				req.session.email = email;
+				req.session.regno= regno;
 				res.redirect('/dashboard.html');
 			} else {
                 console.log(results);
