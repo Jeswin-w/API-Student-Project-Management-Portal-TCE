@@ -8,6 +8,7 @@ const app =express();
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
 app.use(express.static('images'));
+app.use(express.static('scripts'));
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -30,7 +31,17 @@ app.listen(3100,()=>{
 	console.log('Server listening on 3100 !!!!!!!!!!!');
 
 })
-app.get('/dashboard',(req,res)=>{
+app.get('/dashboard',(req, res)=>{
+	var obj;
+	var email=req.session.email;
+	db.query(`SELECT * FROM student WHERE mail = '${email}'`,(err,result)=>{
+		obj=result;
+		res.send(obj);
+		res.end();
+	})
+	
+})
+app.get('/dashboard.html',(req,res)=>{
 	res.sendFile(`${__dirname}/dashboard.html`)
 })
 app.get('/index',(req,res)=>{
@@ -55,7 +66,7 @@ app.post('/register',(req,res)=>{
             console.log(err);
         }
     })
-    res.redirect('/dashboard');
+    res.redirect('/dashboard.html');
 })
 app.post('/login',(req,res)=>{
 
@@ -71,7 +82,7 @@ app.post('/login',(req,res)=>{
                 console.log(results);
 				req.session.loggedin = true;
 				req.session.email = email;
-				res.redirect('/dashboard');
+				res.redirect('/dashboard.html');
 			} else {
                 console.log(results);
 				res.redirect('/login.html')
