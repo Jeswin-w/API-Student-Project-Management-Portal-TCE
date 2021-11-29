@@ -1,22 +1,10 @@
+var app = angular.module('dash',[]);
 
-import axios from "axios";
+app.controller('dashcon',function($scope,$http){
+	$http.get('/dashboard').then(function(data){
+		$scope.user = data.data[0];
+	})
 
-export default {
-    name: 'hello',
-    data() {
-      return {
-        User: {},
-      }
-    },
-    mounted() {
-      axios.get('http://localhost:3100/dashboard')
-        .then((response) =>{
-        console.log(response.data);
-        this.User = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    },
-  }
+
+})
 
