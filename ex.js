@@ -46,6 +46,9 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
+app.get('/enroll.html',(req, res)=>{
+	res.sendFile(`${__dirname}/enroll.html`)
+})
 app.get('/ecourse',(req, res)=>{
 	
 	var ecourse;

@@ -2,6 +2,16 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript" src="dash.js"></script>
+
+        <link rel="stylesheet" href="style1.css">
 <style>
 ul, #myUL {
   list-style-type: none;
@@ -42,7 +52,7 @@ ul, #myUL {
 }
 </style>
 </head>
-<body>
+<body ng-app="dash" ng-controller="dashcon">
   <nav class="navbar navbar-expand-sm "style="background-color:brown; color:lemonchiffon" id="dark">
         
     <a class="navbar-brand" href="/dashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:60px; height:60px ;margin-left: 10px;"> </a>
@@ -58,6 +68,7 @@ ul, #myUL {
         
 
   </nav><br><br>
+  <div class="container">
 <ul id="myUL">
   <li><span class="caret">Departments</span>
     <ul class="nested">  
@@ -141,7 +152,7 @@ ul, #myUL {
       </ul>
   </li>
 </ul>
- 
+ </div>
 
 <script>
 var toggler = document.getElementsByClassName("caret");
