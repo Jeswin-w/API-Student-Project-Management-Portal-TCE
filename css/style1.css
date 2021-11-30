@@ -69,7 +69,12 @@ input{
     color: lemonchiffon;
     border-radius: 10px; 
     width: 100px;
-    height:30px;
+    height:25px;
     border-color: brown;
 
+}
+
+a{
+    text-decoration: none;
+    color:lemonchiffon;
 }

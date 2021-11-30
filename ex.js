@@ -50,16 +50,38 @@ app.get('/enroll',(req, res)=>{
 	var dept=req.query.dept;
 	var course_id=req.query.course_id;
 	var regno=req.session.regno;
-
-	let q=`insert into enrollment (regno,course_no,dept) values('${regno}','${course_id}','${dept}')`;
-	db.query(q,(err,result)=>{
+	console.log(req.session);
+	console.log(course_id);
+	console.log(dept);
+	let qr=`select * from enrollment where course_id = ${course_id} AND regno='${regno}'`
+	db.quert(qr,(err, resu)=>{
+		if (resu.length>0)
+		{
+			res.write(`<script>window.alert('Already registered!!!');window.location.href = 'enroll.html';</script>`);
+		}
+		else{
+			let q=`insert into enrollment (regno,course_id,dept) values('${regno}',${course_id},${dept})`;
+			db.query(q,(err,result)=>{
+		if (err) {
+			throw err;
+		}
 		console.log("inserted");
+		res.redirect('/enroll.html');
 	})
+		}
+
+	})
+	
 
 
 })
 app.get('/enroll.html',(req, res)=>{
+	if(req.session.loggedin==false || req.session.regno==''){
+		res.redirect("/login.html");
+	}
+	else{
 	res.sendFile(`${__dirname}/enroll.html`)
+	}
 })
 app.get('/ecourse',(req, res)=>{
 	
@@ -76,7 +98,7 @@ res.send(ecourse);
 
 app.get('/dashboard.html',(req,res)=>{
 	console.log(req.session)
-	if(req.session.loggedin==false){
+	if(req.session.loggedin==false || req.session.regno==''){
 		res.redirect("/login.html");
 	}
 	else{res.sendFile(`${__dirname}/dashboard.html`)}
