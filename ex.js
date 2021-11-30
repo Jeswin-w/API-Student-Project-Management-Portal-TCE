@@ -12,6 +12,8 @@ app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
 app.use(express.static('images'));
 app.use(express.static('scripts'));
+app.use(express.static('css'));
+
 app.use(session({
 	secret: 'secret',
 	resave: true,

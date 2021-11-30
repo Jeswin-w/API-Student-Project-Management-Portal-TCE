@@ -6,7 +6,7 @@ app.controller('dashcon',function($scope,$http){
 	})
 
 	$http.get('/ecourse').then(function(data){
-		$scope.ecourse = data.data[0];
+		$scope.ecourse = data.data;
 	})
   
 
