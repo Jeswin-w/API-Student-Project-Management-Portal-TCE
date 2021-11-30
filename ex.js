@@ -2,6 +2,9 @@ const express =require('express');
 const sql =require('mysql2');
 const bp = require('body-parser');
 var session = require('express-session');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 const app =express();
 
@@ -79,7 +82,13 @@ app.post('/register',(req,res)=>{
     var email = req.body.email;
     var regno = req.body.regno;
     var password = req.body.password;
-    let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${password}')`;
+	var hashpassword;
+	bcrypt.genSalt(saltRounds, function(err, salt) {
+		bcrypt.hash(password, salt, function(err, hash) {
+			hashpassword = hash;
+		});
+	})
+    let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${hashpassword}')`;
     db.query(qr,(err,result)=>{
         if(err){
             console.log(err);
@@ -96,16 +105,24 @@ app.post('/login',(req,res)=>{
     console.log(password);
     
     if (email && password) {
-		db.query(`SELECT * FROM student WHERE mail = '${email}' AND password = '${password}'`, function(error, results) {
+		db.query(`SELECT * FROM student WHERE mail = '${email}' `, function(error, results) {
 			if (results.length > 0) {
+				var hash=results.password;
+				bcrypt.compare(passwrd, hash, function(err, result) {
+					if (result==true){
+				
                 console.log(results);
 				req.session.loggedin = true;
 				req.session.email = email;
 				req.session.regno= results.regno;
-				res.redirect('/dashboard.html');
+				res.redirect('/dashboard.html');}
+				else {
+					res.write(`<script>window.alert('wrong  Password!!!!!');window.location.href = 'login.html';</script>`)
+				}
+				});
 			} else {
                 console.log(results);
-				res.write(`<script>window.alert('wrong password or email!!!!!');window.location.href = 'login.html';</script>`)
+				res.write(`<script>window.alert('wrong  email!!!!!');window.location.href = 'login.html';</script>`)
 			}			
 			res.end();
 		});
