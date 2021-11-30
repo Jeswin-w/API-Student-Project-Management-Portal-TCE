@@ -1,0 +1,54 @@
+#x:hover{
+    text-decoration: underline;
+    font-weight: bold;
+}
+#box1{
+    border: 1px solid brown;
+    
+}
+.button1{
+    background-color: brown;
+    color: lemonchiffon;
+    border-radius: 20px; 
+    width: 350px;
+    height:40px;
+    border-color: brown;
+
+}
+.button2{
+    background-color:lemonchiffon;
+    color: brown;
+    border-radius: 20px; 
+    width: 350px;
+    height:40px;
+    border-color: brown;
+    
+}
+.button1:hover{
+    width: 360px;
+    height:45px
+}
+.button2:hover{
+    background-color:brown;
+    color: lemonchiffon;
+    border-radius: 20px; 
+    width: 360px;
+    height: 45px;
+    border-color: brown;
+}
+
+label{
+    color:brown;
+    font-weight:bold;
+    
+}
+input{
+    margin-bottom:30px;
+}
+#text{
+    border: 1px solid brown;
+
+}
+#text:hover{
+    box-shadow: 2px 2px brown;
+}

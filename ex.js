@@ -12,6 +12,8 @@ app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
 app.use(express.static('images'));
 app.use(express.static('scripts'));
+app.use(express.static('css'));
+
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -45,16 +47,11 @@ app.get('/dashboard',(req, res)=>{
 	
 })
 app.get('/ecourse',(req, res)=>{
-	var obj;
+	
 	var ecourse;
-	var email=req.session.email;
-	db.query(`SELECT * FROM student WHERE mail = '${email}'`,(err,result)=>{
-		obj=result;
-		
-	})
-	var x=obj[0];
-	var y=x.regno;
-	db.query(`Select * from enrollments WHERE email = '${y}'`,(err,result)=>{
+	var regno=req.session.regno;
+	
+	db.query(`Select * from enrollments WHERE regno = '${regno}'`,(err,result)=>{
 		ecourse=result;
 	})
 
@@ -63,6 +60,7 @@ res.send(ecourse);
 })
 
 app.get('/dashboard.html',(req,res)=>{
+	console.log(req.session)
 	if(req.session.loggedin==false){
 		res.redirect("/login.html");
 	}
@@ -86,6 +84,7 @@ app.post('/register',(req,res)=>{
     var email = req.body.email;
     var regno = req.body.regno;
     var password = req.body.password;
+	var dept=req.body.dept;
 	
 	
 	let qr1=`SELECT regno FROM student WHERE regno=('${regno}')`;
@@ -96,11 +95,14 @@ app.post('/register',(req,res)=>{
 		else{
 					const passwordHash = bcrypt.hashSync(password, 10);
 					
-					let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${passwordHash}')`;
+					let qr = `INSERT into student(name,mail,regno,password,dept) values('${name}','${email}','${regno}','${passwordHash}','${dept}')`;
     db.query(qr,(err,result)=>{
         if(err){
             console.log(err);
         }
+		req.session.loggedin = true;
+		req.session.email = email;
+		req.session.regno= results.regno;
 		res.redirect('/dashboard.html');
 				});
 			
@@ -109,6 +111,12 @@ app.post('/register',(req,res)=>{
 		}
 	})
     
+})
+app.get('/logout', (req, res)=>{
+	req.session.loggedin=false;
+	req.session.email="";
+	req.session.regno="";
+	res.redirect('/login.html');
 })
 app.post('/login',(req,res)=>{
 
@@ -133,7 +141,7 @@ app.post('/login',(req,res)=>{
 						
 						req.session.loggedin = true;
 						req.session.email = email;
-						req.session.regno= results.regno;
+						req.session.regno= results[0].regno;
 						res.redirect('/dashboard.html');
 					}
 					else{

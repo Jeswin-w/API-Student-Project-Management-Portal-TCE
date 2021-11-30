@@ -1,11 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
+<<<<<<< HEAD
 -- Host: localhost
 -- Generation Time: Nov 30, 2021 at 11:46 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
+=======
+-- Host: 127.0.0.1
+-- Generation Time: Nov 30, 2021 at 11:28 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.16
+>>>>>>> 9cf6e20375c3eafaffbade191b7bc883ec2c51cd
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -139,17 +146,16 @@ CREATE TABLE `student` (
   `mail` varchar(50) NOT NULL,
   `password` varchar(300) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `dept_id` varchar(11) NOT NULL
+  `dept` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`regno`, `mail`, `password`, `name`, `dept_id`) VALUES
-('19IT027', 'eniyan@student.tce.edu', 'password', 'ENIYAN S', 'IT'),
-('19IT040', 'jeswinw@student.tce.edu', 'password', 'JESWIN W', 'IT'),
-('19IT082', 'sanjaykumars@student.tce.edu', 'password', 'SANJAYKUMAR S', 'IT');
+INSERT INTO `student` (`regno`, `mail`, `password`, `name`, `dept`) VALUES
+('19IT027', 'eniyan@student.tce.edu', '$2b$10$GKFmox3lM7VK6FUunW2P5OGjXyqNeFDxhcGhnMtQyDpRnigchJz5y', 'Eniyan', 'IT'),
+('19IT040', 'jeswin@student.tce.edu', '$2b$10$niaF.B4DizHGc462aQvkA.F3oHDTGijjM0EUDpnLTBK8K5dRkJRue', 'Jeswin W', 'IT');
 
 -- --------------------------------------------------------
 
