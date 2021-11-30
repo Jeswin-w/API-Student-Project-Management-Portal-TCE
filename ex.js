@@ -58,6 +58,7 @@ app.get('/ecourse',(req, res)=>{
 res.send(ecourse);
 	
 })
+
 app.get('/dashboard.html',(req,res)=>{
 	res.sendFile(`${__dirname}/dashboard.html`)
 })
@@ -100,16 +101,16 @@ app.post('/login',(req,res)=>{
                 console.log(results);
 				req.session.loggedin = true;
 				req.session.email = email;
-				req.session.regno= regno;
+				req.session.regno= results.regno;
 				res.redirect('/dashboard.html');
 			} else {
                 console.log(results);
-				res.redirect('/login.html')
+				res.write(`<script>window.alert('wrong password or email!!!!!');window.location.href = 'login.html';</script>`)
 			}			
 			res.end();
 		});
 	} else {
-		res.redirect('/login.html')
+		res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = 'login.html';</script>`)
 		
 	}
 });
