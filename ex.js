@@ -54,7 +54,7 @@ app.get('/enroll',(req, res)=>{
 	console.log(course_id);
 	console.log(dept);
 	let qr=`select * from enrollment where course_id = ${course_id} AND regno='${regno}'`
-	db.quert(qr,(err, resu)=>{
+	db.query(qr,(err, resu)=>{
 		if (resu.length>0)
 		{
 			res.write(`<script>window.alert('Already registered!!!');window.location.href = 'enroll.html';</script>`);
