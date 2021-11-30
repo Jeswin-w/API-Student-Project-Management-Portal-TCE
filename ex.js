@@ -79,13 +79,22 @@ app.post('/register',(req,res)=>{
     var email = req.body.email;
     var regno = req.body.regno;
     var password = req.body.password;
-    let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${password}')`;
+	let qr1=`SELECT regno FROM student WHERE regno=('${regno}')`;
+    db.query(qr1,(err,result)=>{
+		if(result.length!=0){
+			res.write(`<script>window.alert('regno already exists!!!!!!');window.location.href = 'register.html';</script>`)
+		}
+		else{
+			let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${password}')`;
     db.query(qr,(err,result)=>{
         if(err){
             console.log(err);
         }
+		res.redirect('/dashboard.html');
     })
-    res.redirect('/dashboard.html');
+		}
+	})
+    
 })
 app.post('/login',(req,res)=>{
 
