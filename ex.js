@@ -94,7 +94,7 @@ app.post('/register',(req,res)=>{
 			res.write(`<script>window.alert('regno already exists!!!!!!');window.location.href = 'register.html';</script>`)
 		}
 		else{
-					const passwordHash = bcrypt.hashSync('passeord', 10);
+					const passwordHash = bcrypt.hashSync(password, 10);
 					
 					let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${passwordHash}')`;
     db.query(qr,(err,result)=>{
@@ -125,7 +125,8 @@ app.post('/login',(req,res)=>{
 				
 				console.log(hash);
 				console.log(password);
-				
+				const passwordHash = bcrypt.hashSync(password, 10);
+				console.log(passwordHash);
 				const verified = bcrypt.compareSync(password, hash);
 					console.log(verified);
 					if (verified){
