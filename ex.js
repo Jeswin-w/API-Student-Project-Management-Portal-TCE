@@ -82,6 +82,7 @@ app.post('/register',(req,res)=>{
     var email = req.body.email;
     var regno = req.body.regno;
     var password = req.body.password;
+<<<<<<< HEAD
 	var hashpassword;
 	bcrypt.genSalt(saltRounds, function(err, salt) {
 		bcrypt.hash(password, salt, function(err, hash) {
@@ -89,12 +90,24 @@ app.post('/register',(req,res)=>{
 		});
 	})
     let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${hashpassword}')`;
+=======
+	let qr1=`SELECT regno FROM student WHERE regno=('${regno}')`;
+    db.query(qr1,(err,result)=>{
+		if(result.length!=0){
+			res.write(`<script>window.alert('regno already exists!!!!!!');window.location.href = 'register.html';</script>`)
+		}
+		else{
+			let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${password}')`;
+>>>>>>> a1a8e894d20c4abe64b87dddb297ddaaec150b4f
     db.query(qr,(err,result)=>{
         if(err){
             console.log(err);
         }
+		res.redirect('/dashboard.html');
     })
-    res.redirect('/dashboard.html');
+		}
+	})
+    
 })
 app.post('/login',(req,res)=>{
 
