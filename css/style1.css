@@ -57,7 +57,7 @@ input{
     background-color: brown;
     color: lemonchiffon;
     border-radius: 10px; 
-    width: 200px;
+    width: 150px;
     height:40px;
     border-color: brown;
 
@@ -77,4 +77,12 @@ input{
 a{
     text-decoration: none;
     color:lemonchiffon;
+}
+
+#cour{
+    
+    color:blue;
+}
+#cour:hover{
+    text-decoration:underline;
 }

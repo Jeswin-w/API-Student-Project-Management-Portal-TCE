@@ -17,7 +17,7 @@ app.use(express.static('css'));
 app.use(session({
 	secret: 'secret',
 	resave: true,
-	saveUninitialized: true
+	saveUninitialized: false
 }));
 
 const db = sql.createConnection({
@@ -33,7 +33,7 @@ db.connect((err)=>{
 	}
 });
 app.listen(3100,()=>{
-	console.log('Server listening on 3100 !!!!!!!!!!!');
+	
 
 })
 app.get('/dashboard',(req, res)=>{
@@ -86,19 +86,24 @@ app.get('/enroll.html',(req, res)=>{
 app.get('/ecourse',(req, res)=>{
 	
 	var ecourse;
+	var coursedet;
+	var facultydet;
 	var regno=req.session.regno;
-	
-	db.query(`Select * from enrollments WHERE regno = '${regno}'`,(err,result)=>{
-		ecourse=result;
+	var data;
+	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
+	db.query(q,(err,result)=>{
+		res.send(result);
+		console.log(result)
+		res.end()
 	})
 
-res.send(ecourse);
+
 	
 })
 
 app.get('/dashboard.html',(req,res)=>{
 	console.log(req.session)
-	if(req.session.loggedin==false || req.session.regno==''){
+	if(!req.session.loggedin){
 		res.redirect("/login.html");
 	}
 	else{res.sendFile(`${__dirname}/dashboard.html`)}
@@ -182,13 +187,13 @@ app.post('/login',(req,res)=>{
 						res.redirect('/dashboard.html');
 					}
 					else{
-						res.write(`<script>window.alert('wrong  password!!!!!');window.location.href = 'login.html';</script>`);
+						res.write(`<script>window.alert('Enter the correct password!!!!!');window.location.href = 'login.html';</script>`);
 					}
 				
 				
 			} else {
                 console.log(results);
-				res.write(`<script>window.alert('wrong  email!!!!!');window.location.href = 'login.html';</script>`)
+				res.write(`<script>window.alert('Enter the correct email!!!!!');window.location.href = 'login.html';</script>`)
 			}			
 			res.end();
 		});
