@@ -63,7 +63,11 @@ res.send(ecourse);
 })
 
 app.get('/dashboard.html',(req,res)=>{
-	res.sendFile(`${__dirname}/dashboard.html`)
+	if(req.session.loggedin==false){
+		res.redirect("/login.html");
+	}
+	else{res.sendFile(`${__dirname}/dashboard.html`)}
+	
 })
 app.get('/index',(req,res)=>{
     res.sendFile(`${__dirname}/index.html`)
@@ -82,7 +86,7 @@ app.post('/register',(req,res)=>{
     var email = req.body.email;
     var regno = req.body.regno;
     var password = req.body.password;
-	var hashpassword;
+	
 	
 	let qr1=`SELECT regno FROM student WHERE regno=('${regno}')`;
     db.query(qr1,(err,result)=>{
@@ -90,46 +94,52 @@ app.post('/register',(req,res)=>{
 			res.write(`<script>window.alert('regno already exists!!!!!!');window.location.href = 'register.html';</script>`)
 		}
 		else{
-			bcrypt.genSalt(saltRounds, function(err, salt) {
-				bcrypt.hash(password, salt, function(err, hash) {
-					hashpassword = hash;
-				});
-			})
-			let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${hashpassword}')`;
+					const passwordHash = bcrypt.hashSync('passeord', 10);
+					
+					let qr = `INSERT into student(name,mail,regno,password) values('${name}','${email}','${regno}','${passwordHash}')`;
     db.query(qr,(err,result)=>{
         if(err){
             console.log(err);
         }
 		res.redirect('/dashboard.html');
-    })
+				});
+			
+			
+    
 		}
 	})
     
 })
 app.post('/login',(req,res)=>{
 
-   
+   req.session.loggedin=false;
     var email = req.body.email;
-    console.log(email);
+    
     var password = req.body.password;
-    console.log(password);
+    
     
     if (email && password) {
 		db.query(`SELECT * FROM student WHERE mail = '${email}' `, function(error, results) {
 			if (results.length > 0) {
-				var hash=results.password;
-				bcrypt.compare(passwrd, hash, function(err, result) {
-					if (result==true){
+				var hash=results[0].password;
 				
-                console.log(results);
-				req.session.loggedin = true;
-				req.session.email = email;
-				req.session.regno= results.regno;
-				res.redirect('/dashboard.html');}
-				else {
-					res.write(`<script>window.alert('wrong  Password!!!!!');window.location.href = 'login.html';</script>`)
-				}
-				});
+				console.log(hash);
+				console.log(password);
+				
+				const verified = bcrypt.compareSync(password, hash);
+					console.log(verified);
+					if (verified){
+						
+						req.session.loggedin = true;
+						req.session.email = email;
+						req.session.regno= results.regno;
+						res.redirect('/dashboard.html');
+					}
+					else{
+						res.write(`<script>window.alert('wrong  password!!!!!');window.location.href = 'login.html';</script>`);
+					}
+				
+				
 			} else {
                 console.log(results);
 				res.write(`<script>window.alert('wrong  email!!!!!');window.location.href = 'login.html';</script>`)
