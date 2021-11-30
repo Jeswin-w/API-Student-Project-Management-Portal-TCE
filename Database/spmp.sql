@@ -2,17 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
-<<<<<<< HEAD
--- Host: localhost
--- Generation Time: Nov 30, 2021 at 11:46 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
-=======
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 11:28 AM
+-- Generation Time: Nov 30, 2021 at 12:50 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
->>>>>>> 9cf6e20375c3eafaffbade191b7bc883ec2c51cd
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -166,7 +159,6 @@ INSERT INTO `student` (`regno`, `mail`, `password`, `name`, `dept`) VALUES
 CREATE TABLE `team` (
   `team_id` int(30) NOT NULL,
   `team_members` varchar(30) NOT NULL,
-  `project_description` varchar(800) NOT NULL,
   `course_id` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -174,8 +166,8 @@ CREATE TABLE `team` (
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`team_id`, `team_members`, `project_description`, `course_id`) VALUES
-(1, '19IT082, 19IT041, 19IT040', '', '18ES390 - A');
+INSERT INTO `team` (`team_id`, `team_members`, `course_id`) VALUES
+(1, '19IT082, 19IT041, 19IT040', '18ES390 - A');
 
 --
 -- Indexes for dumped tables

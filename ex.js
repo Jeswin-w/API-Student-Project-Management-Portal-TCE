@@ -49,8 +49,14 @@ app.get('/dashboard',(req, res)=>{
 app.get('/enroll',(req, res)=>{
 	var dept=req.query.dept;
 	var course_id=req.query.course_id;
+	var regno=req.session.regno;
 
-	
+	let q=`insert into enrollment (regno,course_no,dept) values('${regno}','${course_id}','${dept}')`;
+	db.query(q,(err,result)=>{
+		console.log("inserted");
+	})
+
+
 })
 app.get('/enroll.html',(req, res)=>{
 	res.sendFile(`${__dirname}/enroll.html`)
