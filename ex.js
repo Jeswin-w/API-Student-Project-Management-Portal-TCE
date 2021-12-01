@@ -20,17 +20,12 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-	  cb(null, './sub')
-	},
-	filename: function (req, file, cb) {
-		console.log(file);
-		console.log(file.mimetype)
-		
-		cb(null, Date.now()+ path.extname(file.originalname));
-	}
-  })
+const upload = multer({ dest: './sub' })
+app.post('/stats', upload.single('uploaded_file'), function (req, res) {
+   // req.file is the name of your file in the form above, here 'uploaded_file'
+   // req.body will hold the text fields, if there were any 
+   console.log(req.file, req.body)
+});
   
   const upload = multer({ storage: storage });
   app.post('/upl',upload.single("filer"),(req, res)=>{
