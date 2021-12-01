@@ -9,11 +9,9 @@ app.controller('dashcon',function($scope,$http){
 		$scope.ecourse = data.data;
 	})
 
-	$http.get('/courses').then(function(data){
-		$scope.course_name = data.course_name;
+	$http.get('/send').then(function(data){
+		$scope.course = data.data;
 	})
-  
-
-
+ 
 })
 

@@ -55,6 +55,7 @@ app.listen(3100,()=>{
 	console.log("Server listening to port 3100!!!!")
 
 })
+
 app.get('/dashboard',(req, res)=>{
 	var obj;
 	var email=req.session.email;
@@ -68,18 +69,19 @@ app.get('/dashboard',(req, res)=>{
 app.get('/team', (req, res)=>{
 	res.sendFile(`${__dirname}/teamdetails.html`);
 })
+
+var arr = [];
+
 app.get('/course.html',(req, res)=>{
 	var cdept =req.query.cdept;
 	var course_id=req.query.cid;
-	
-
-	req.session.course_id=course_id;
-	req.session.cdept=cdept;
-	console.log(req.session);
-	
-
-
-	res.end()
+	var course_name = req.query.dept_name;
+	arr = [cdept, course_id, course_name];
+	console.log(arr);
+	res.sendFile(`${__dirname}/course.html`)
+});
+app.get('/send', (req, res)=>{
+	res.send(arr);
 })
 
 app.get('/enroll',(req, res)=>{
@@ -127,12 +129,9 @@ app.get('/ecourse',async (req, res)=>{
 	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
 	db.query(q,(err,result)=>{
 		res.send(result);
-		
+		console.log(result)
 		res.end()
 	})
-
-
-	
 })
 app.get('/addproject.html',(req,res)=>{
 	console.log(req.session)
@@ -173,9 +172,6 @@ app.get('/flogin.html',(req,res)=>{
     res.sendFile(`${__dirname}/flogin.html`);
 })
 
-app.get('/course.html', (req, res)=>{
-	res.sendFile(`${__dirname}/courses.html`)
-})
 
 app.post('/register',(req,res)=>{
 
@@ -296,8 +292,7 @@ app.post('/flogin',(req,res)=>{
 			 res.end();
 		 });
 	 } else {
-		 res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = 'login.html';</script>`)
-		 
+		 res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = 'login.html';</script>`)		 
 	 }
  });
 
