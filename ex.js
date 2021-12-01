@@ -44,6 +44,18 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
+app.get('/course.html',(req, res)=>{
+	var cdept =req.query.cdept;
+	var course_id=req.query.cid;
+	
+
+	req.session.course_id=course_id;
+	req.session.cdept=cdept;
+	console.log(req.session);
+	
+
+	res.end()
+})
 app.get('/enroll',(req, res)=>{
 	var dept=req.query.dept;
 	var course_id=req.query.course_id;
@@ -79,7 +91,7 @@ app.get('/enroll.html',(req, res)=>{
 	res.sendFile(`${__dirname}/enroll.html`)
 	}
 })
-app.get('/ecourse',(req, res)=>{
+app.get('/ecourse',async (req, res)=>{
 	
 	var regno=req.session.regno;
 	
@@ -103,7 +115,8 @@ app.get('/addproject.html',(req,res)=>{
 })
 
 app.get('/dashboard.html',(req,res)=>{
-	
+	req.session.course_id="";
+	req.session.cdept="";
 	if(!req.session.loggedin){
 		res.redirect("/login.html");
 	}
