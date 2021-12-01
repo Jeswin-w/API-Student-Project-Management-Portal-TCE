@@ -4,8 +4,6 @@ const bp = require('body-parser');
 var session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
-
 const app =express();
 
 app.use(bp.json());
@@ -94,7 +92,6 @@ app.get('/enroll.html',(req, res)=>{
 })
 app.get('/ecourse',async (req, res)=>{
 	
-	
 	var regno=req.session.regno;
 	
 	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
@@ -133,6 +130,13 @@ app.get('/register.html',(req,res)=>{
 })
 app.get('/login.html',(req,res)=>{
     res.sendFile(`${__dirname}/login.html`);
+})
+app.get('/flogin.html',(req,res)=>{
+    res.sendFile(`${__dirname}/flogin.html`);
+})
+
+app.get('/course.html', (req, res)=>{
+	res.sendFile(`${__dirname}/courses.html`)
 })
 
 app.post('/register',(req,res)=>{
@@ -217,6 +221,47 @@ app.post('/login',(req,res)=>{
 		
 	}
 });
+app.post('/flogin',(req,res)=>{
+
+	req.session.loggedin=false;
+	 var email = req.body.email;
+	 
+	 var password = req.body.password;
+	 
+	 
+	 if (email && password) {
+		 db.query(`SELECT * FROM faculty_advisor WHERE mail = '${email}' `, function(error, results) {
+			 if (results.length > 0) {
+				 var hash=results[0].password;
+				 
+				 
+				 const passwordHash = bcrypt.hashSync(password, 10);
+				 
+				 const verified = bcrypt.compareSync(password, hash);
+					 
+					 if (verified){
+						 
+						 req.session.loggedin = true;
+						 req.session.email = email;
+						 req.session.fid= results[0].fid;
+						 res.redirect('/dashboard.html');
+					 }
+					 else{
+						 res.write(`<script>window.alert('Enter the correct password!!!!!');window.location.href = 'flogin.html';</script>`);
+					 }
+				 
+				 
+			 } else {
+				 
+				 res.write(`<script>window.alert('Enter the correct email!!!!!');window.location.href = 'flogin.html';</script>`)
+			 }			
+			 res.end();
+		 });
+	 } else {
+		 res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = 'login.html';</script>`)
+		 
+	 }
+ });
 
 
 

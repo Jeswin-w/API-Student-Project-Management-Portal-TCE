@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TCE-Student Project Management Portal</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript" src="dash.js"></script>
+
+        <link rel="stylesheet" href="style1.css">
+        
+        
+</head>
+<body style="background-color: lemonchiffon;"  ng-app="dash" ng-controller='dashcon'>
+    <nav class="navbar navbar-expand-sm "style="background-color:brown; color:lemonchiffon" id="dark">
+        
+        <a class="navbar-brand" href="/dashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:60px; height:60px ;margin-left: 10px;"> </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+               <h4> <a class="nav-link" href="/dashboard.html" style="font-family:lobster;color:lemonchiffon;"><h2 style="margin-top: 10px;">TCE-Student Project Management Portal</h2></a></h4>
+            </li></ul>
+            
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color:lemonchiffon">{{user.name}}</a></h5></li>
+                    <li class="nav-item"> <h5><a class="nav-link" id='x' href="/logout" style="font-family:lobster;color:lemonchiffon;">Logout</a></h5></li>
+                </ul>
+            
+
+      </nav><br><br>
+      <div class="container">
+          
+      <div class="row">
+          
+      <div class="col-sm" ">
+        <div style="border:solid 1px ; margin: 5px 5px 5px 5px;"></div>
+      </div>
+      
+      <div class="col-sm-8" style="box-shadow: 1px 1px 2px 2px;">
+        <h2><center>Requirements Gathering</center></h2>  
+
+    
+    </div>
+    <div class="col-sm" >
+            <h6>Enroll courses:</h6>
+            <form method="get" action="/enroll.html"><center><button class="button3" >Enroll Courses</button></center></form><br>
+            <div  style="border:solid 1px; margin: 5px 5px 5px 5px;" >
+        <h5 style="text-align: center;">Calender</h5></div>
+    </div>
+    
+    </div>
+    </div>
+
+</body>
