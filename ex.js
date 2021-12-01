@@ -58,6 +58,14 @@ app.get('/ecourse',(req, res)=>{
 res.send(ecourse);
 	
 })
+app.get('/addproject.html',(req,res)=>{
+	console.log(req.session)
+	if(req.session.loggedin==false){
+		res.redirect("/login.html");
+	}
+	else{res.sendFile(`${__dirname}/addproject.html`)}
+	
+})
 
 app.get('/dashboard.html',(req,res)=>{
 	console.log(req.session)
