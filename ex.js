@@ -52,6 +52,7 @@ app.get('/course.html',(req, res)=>{
 	req.session.course_id=course_id;
 	req.session.cdept=cdept;
 	console.log(req.session);
+	
 
 	res.end()
 })
