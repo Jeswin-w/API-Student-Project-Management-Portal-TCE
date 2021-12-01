@@ -15,6 +15,16 @@
         
         
 </head>
+<style>
+input[type="submit"]{
+    background-color: brown;
+    padding: 10px;
+    font-size: 16px;
+    align-content: center;
+    padding: 10px 15px;
+    color:white;
+}
+</style>
 <body style="background-color: lemonchiffon;"  ng-app="dash" ng-controller='dashcon'>
     <nav class="navbar navbar-expand-sm "style="background-color:brown; color:lemonchiffon" id="dark">
         
@@ -32,25 +42,18 @@
 
       </nav><br><br>
       <div class="container">
-          
-      <div class="row">
-          
-      <div class="col-sm" ">
-        <div style="border:solid 1px ; margin: 5px 5px 5px 5px;"></div>
-      </div>
-      
-      <div class="col-sm-8" style="box-shadow: 1px 1px 2px 2px;">
-        <h2><center>Requirements Gathering</center></h2>  
-
+      <h1>{{course_namme}}</h1>
+      <br><br>
+      <div class="col-sm-8" style="box-shadow: 1px 1px 2px 2px; padding: 20px 30px; width: 900px;">
+                
+                <h2>STAGE:1 REQUIREMENT GATHERING</h2><br><br>
+                <input type="file" value="ADD FILE"><br>
+                <input type="submit" value="Submit">
+            <hr>
+        </div>    
     
     </div>
-    <div class="col-sm" >
-            <h6>Enroll courses:</h6>
-            <form method="get" action="/enroll.html"><center><button class="button3" >Enroll Courses</button></center></form><br>
-            <div  style="border:solid 1px; margin: 5px 5px 5px 5px;" >
-        <h5 style="text-align: center;">Calender</h5></div>
-    </div>
-    
+   
     </div>
     </div>
 

@@ -17,7 +17,7 @@ app.use(express.static('sub'));
 app.use(session({
 	secret: 'secret',
 	resave: true,
-	saveUninitialized: false
+	saveUninitialized: true
 }));
 
 const storage = multer.diskStorage({
@@ -52,7 +52,7 @@ db.connect((err)=>{
 	}
 });
 app.listen(3100,()=>{
-	console.log("Server listening to port 3100!!!!")
+	console.log('Server listening on 3100 !!!!!!!!!!!');
 
 })
 app.get('/dashboard',(req, res)=>{
@@ -65,16 +65,19 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
-app.get('/team', (req, res)=>{
-	res.sendFile(`${__dirname}/teamdetails.html`);
-})
-app.get('/course.html',(req, res)=>{
+
+app.get('/course', (req, res)=>{
 	var cdept =req.query.cdept;
 	var course_id=req.query.cid;
-	
+	var course_name;
+	q = `SELECT course_name FROM course WHERE course_id='${course_id}' AND cdept='${cdept}'`
 
+	db.query(q, (err, result)=>{
+         course_name = result;
+	})
 	req.session.course_id=course_id;
 	req.session.cdept=cdept;
+	req.session.course_name = course_name;
 	console.log(req.session);
 	
 
@@ -86,7 +89,9 @@ app.get('/enroll',(req, res)=>{
 	var dept=req.query.dept;
 	var course_id=req.query.course_id;
 	var regno=req.session.regno;
-	
+	console.log(req.session);
+	console.log(course_id);
+	console.log(dept);
 	let qr=`select * from enrollment where course_id = ${course_id} AND regno='${regno}'`
 	db.query(qr,(err, resu)=>{
 		if (resu.length>0)
@@ -120,39 +125,28 @@ app.get('/enroll.html',(req, res)=>{
 	res.sendFile(`${__dirname}/enroll.html`)
 	}
 })
-app.get('/ecourse',async (req, res)=>{
+app.get('/ecourse',(req, res)=>{
 	
+	var ecourse;
 	var regno=req.session.regno;
 	
-	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
-	db.query(q,(err,result)=>{
-		res.send(result);
-		
-		res.end()
+	db.query(`Select * from enrollments WHERE regno = '${regno}'`,(err,result)=>{
+		ecourse=result;
 	})
 
-
-	
-})
-app.get('/addproject.html',(req,res)=>{
-	console.log(req.session)
-	if(req.session.loggedin==false){
-		res.redirect("/login.html");
-	}
-	else{res.sendFile(`${__dirname}/addproject.html`)}
+res.send(ecourse);
 	
 })
 
 app.get('/dashboard.html',(req,res)=>{
-	req.session.course_id="";
-	req.session.cdept="";
-	if(!req.session.loggedin){
+	console.log(req.session)
+	if(req.session.loggedin==false || req.session.regno==''){
 		res.redirect("/login.html");
 	}
 	else{res.sendFile(`${__dirname}/dashboard.html`)}
 	
 })
-app.get('/',(req,res)=>{
+app.get('/index',(req,res)=>{
     res.sendFile(`${__dirname}/index.html`)
 })
 app.get('/register.html',(req,res)=>{
@@ -161,17 +155,10 @@ app.get('/register.html',(req,res)=>{
 app.get('/login.html',(req,res)=>{
     res.sendFile(`${__dirname}/login.html`);
 })
-app.get('/flogin.html',(req,res)=>{
-    res.sendFile(`${__dirname}/flogin.html`);
-})
-
-app.get('/course.html', (req, res)=>{
-	res.sendFile(`${__dirname}/courses.html`)
-})
 
 app.post('/register',(req,res)=>{
 
-    
+    console.log(req.body);
     var name = req.body.name;
     var email = req.body.email;
     var regno = req.body.regno;
@@ -223,11 +210,12 @@ app.post('/login',(req,res)=>{
 			if (results.length > 0) {
 				var hash=results[0].password;
 				
-				
+				console.log(hash);
+				console.log(password);
 				const passwordHash = bcrypt.hashSync(password, 10);
-				
+				console.log(passwordHash);
 				const verified = bcrypt.compareSync(password, hash);
-					
+					console.log(verified);
 					if (verified){
 						
 						req.session.loggedin = true;
@@ -236,13 +224,13 @@ app.post('/login',(req,res)=>{
 						res.redirect('/dashboard.html');
 					}
 					else{
-						res.write(`<script>window.alert('Enter the correct password!!!!!');window.location.href = 'login.html';</script>`);
+						res.write(`<script>window.alert('wrong  password!!!!!');window.location.href = 'login.html';</script>`);
 					}
 				
 				
 			} else {
-                
-				res.write(`<script>window.alert('Enter the correct email!!!!!');window.location.href = 'login.html';</script>`)
+                console.log(results);
+				res.write(`<script>window.alert('wrong  email!!!!!');window.location.href = 'login.html';</script>`)
 			}			
 			res.end();
 		});
@@ -251,47 +239,6 @@ app.post('/login',(req,res)=>{
 		
 	}
 });
-app.post('/flogin',(req,res)=>{
-
-	req.session.loggedin=false;
-	 var email = req.body.email;
-	 
-	 var password = req.body.password;
-	 
-	 
-	 if (email && password) {
-		 db.query(`SELECT * FROM faculty_advisor WHERE mail = '${email}' `, function(error, results) {
-			 if (results.length > 0) {
-				 var hash=results[0].password;
-				 
-				 
-				 const passwordHash = bcrypt.hashSync(password, 10);
-				 
-				 const verified = bcrypt.compareSync(password, hash);
-					 
-					 if (verified){
-						 
-						 req.session.loggedin = true;
-						 req.session.email = email;
-						 req.session.fid= results[0].fid;
-						 res.redirect('/dashboard.html');
-					 }
-					 else{
-						 res.write(`<script>window.alert('Enter the correct password!!!!!');window.location.href = 'flogin.html';</script>`);
-					 }
-				 
-				 
-			 } else {
-				 
-				 res.write(`<script>window.alert('Enter the correct email!!!!!');window.location.href = 'flogin.html';</script>`)
-			 }			
-			 res.end();
-		 });
-	 } else {
-		 res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = 'login.html';</script>`)
-		 
-	 }
- });
 
 
 
