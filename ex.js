@@ -4,8 +4,6 @@ const bp = require('body-parser');
 var session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
-
 const app =express();
 
 app.use(bp.json());
