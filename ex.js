@@ -3,20 +3,41 @@ const sql =require('mysql2');
 const bp = require('body-parser');
 var session = require('express-session');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const multer = require('multer');
 const app =express();
+const path = require('path');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
 app.use(express.static('images'));
 app.use(express.static('scripts'));
 app.use(express.static('css'));
+app.use(express.static('sub'));
 
 app.use(session({
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: false
 }));
+
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, './sub')
+	},
+	filename: function (req, file, cb) {
+		console.log(file);
+		console.log(file.mimetype)
+		
+		cb(null, Date.now()+ path.extname(file.originalname));
+	}
+  })
+  
+  const upload = multer({ storage: storage });
+  app.post('/upl',upload.single("filer"),(req, res)=>{
+	  
+	res.send('fileeeee');
+
+})
 
 const db = sql.createConnection({
 	host:'localhost',
@@ -55,11 +76,12 @@ app.get('/course.html',(req, res)=>{
 	req.session.course_id=course_id;
 	req.session.cdept=cdept;
 	console.log(req.session);
-	let q=
+	
 
 
 	res.end()
 })
+
 app.get('/enroll',(req, res)=>{
 	var dept=req.query.dept;
 	var course_id=req.query.course_id;
@@ -86,6 +108,9 @@ app.get('/enroll',(req, res)=>{
 	
 
 
+})
+app.get('/f',(req, res)=>{
+	res.sendFile(`${__dirname}/file.html`)
 })
 app.get('/enroll.html',(req, res)=>{
 	if(req.session.loggedin==false || req.session.regno==''){
