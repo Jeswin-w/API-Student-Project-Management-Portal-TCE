@@ -147,7 +147,7 @@ app.get('/addsubmission.html',(req,res)=>{
 	if(req.session.loggedin==false){
 		res.redirect("/login.html");
 	}
-	else{res.sendFile(`${__dirname}/login.html`)}
+	else{res.sendFile(`${__dirname}/addsubmission.html`)}
 	
 })
 
