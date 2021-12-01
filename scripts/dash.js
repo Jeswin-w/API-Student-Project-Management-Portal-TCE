@@ -8,6 +8,10 @@ app.controller('dashcon',function($scope,$http){
 	$http.get('/ecourse').then(function(data){
 		$scope.ecourse = data.data;
 	})
+
+	$http.get('/courses').then(function(data){
+		$scope.course_name = data.course_name;
+	})
   
 
 

@@ -50,12 +50,16 @@ app.get('/dashboard',(req, res)=>{
 app.get('/course', (req, res)=>{
 	var cdept =req.query.cdept;
 	var course_id=req.query.cid;
-	
+	var course_name;
+	q = `SELECT course_name FROM course WHERE course_id='${course_id}' AND cdept='${cdept}'`
 
+	db.query(q, (err, result)=>{
+         course_name = result;
+	})
 	req.session.course_id=course_id;
 	req.session.cdept=cdept;
+	req.session.course_name = course_name;
 	console.log(req.session);
-	
 	res.sendFile(`${__dirname}/courses.html`)
 })
 app.get('/enroll',(req, res)=>{
