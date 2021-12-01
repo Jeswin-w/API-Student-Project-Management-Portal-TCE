@@ -83,7 +83,6 @@ app.get('/enroll.html',(req, res)=>{
 })
 app.get('/ecourse',(req, res)=>{
 	
-	
 	var regno=req.session.regno;
 	
 	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
@@ -121,6 +120,10 @@ app.get('/register.html',(req,res)=>{
 })
 app.get('/login.html',(req,res)=>{
     res.sendFile(`${__dirname}/login.html`);
+})
+
+app.get('/course.html', (req, res)=>{
+	res.sendFile(`${__dirname}/courses.html`)
 })
 
 app.post('/register',(req,res)=>{
