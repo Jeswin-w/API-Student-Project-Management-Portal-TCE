@@ -44,6 +44,9 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
+app.get('/team', (req, res)=>{
+	res.sendFile(`${__dirname}/teamdetails.html`);
+})
 app.get('/course.html',(req, res)=>{
 	var cdept =req.query.cdept;
 	var course_id=req.query.cid;
@@ -52,7 +55,8 @@ app.get('/course.html',(req, res)=>{
 	req.session.course_id=course_id;
 	req.session.cdept=cdept;
 	console.log(req.session);
-	
+	let q=
+
 
 	res.end()
 })
