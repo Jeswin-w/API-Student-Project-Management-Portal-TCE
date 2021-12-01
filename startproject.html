@@ -1,10 +1,12 @@
 <!DOCTYPE html>  
 <html>  
 <head>  
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style1.css">
 </head>
 <style>
 body{
@@ -19,18 +21,14 @@ color: black}
   <center>  <h1> Start Your project</h1> </center>  
   <hr>  
 <label > Team Name </label>   
-<input type="text" name="teamname" placeholder= "Enter your Team name"   class="form-control"required /><br>
-<label> Team Members Name </label>   
-<input type="text" name="teammembersname" placeholder= "Enter your Team members" class="form-control"required /><br> 
-<label> Project Name </label>   
-<input type="text" name="projectname" placeholder= "Enter your Project name" class="form-control"required /><br>
-<label> Project Domain </label>   
-<input type="text" name="projectdomain" placeholder= "Enter your Project domain" class="form-control"required /><br>  
+<input type="text" name="teamname" placeholder= "Enter your Team name" class="form-control" id="text" required /><br>
+<label> Team Member's registerno </label>   
+<input type="number" name="teammembersregno" placeholder= "Enter your Team member's RegNo" class="form-control" id="text" required /><br> 
 <div>  
 <label>   
 Guide  
 </label>   
-<select class="form-control">  
+<select class="form-control" id="text">  
 <option value="guide">Guide</option>  
 <option value="Dr.P.Karthikeyan">Dr.P.Karthikeyan</option>  
 <option value="Dr.A.M.Abirami">Dr.A.M.Abirami</option>  
@@ -39,9 +37,7 @@ Guide
 <option value="Dr.C.Jeyamala">Dr.C.Jeyamala</option>  
 <option value="Dr.K.V.Uma">Dr.K.V.Uma</option>  
 </select>  
-</div><br>
-<label> Team Leader </label>   
-<input type="text" name="teamleader" placeholder= "Enter Team leader" class="form-control"required />  
+</div><br> 
 <br><br>  
 <center>
 <button type="submit" >Submit</button>  
