@@ -1,32 +1,177 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-  .btn:after {
-    font-family: "Glyphicons Halflings";
-    content: "\e114";
-    float: right;
-    margin-left: 15px;
-  }
-  .btn.collapsed:after {
-    content: "\e080";
-  }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript" src="dash.js"></script>
+
+        <link rel="stylesheet" href="style1.css">
+<style>
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
 </style>
 </head>
-<body>
-<div class="container">
-  <center>
-  <h1>Enroll</h1>
-  </center>
-  <button type="button" class="btn btn-lg btn-info collapsed" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
-  <div id="demo" class="collapse">
-    
-  </div>
-</div>
-    
+<body ng-app="dash" ng-controller="dashcon">
+  <nav class="navbar navbar-expand-sm "style="background-color:brown; color:lemonchiffon" id="dark">
+        
+    <a class="navbar-brand" href="/dashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:60px; height:60px ;margin-left: 10px;"> </a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+           <h4> <a class="nav-link" href="/dashboard.html" style="font-family:lobster;color:lemonchiffon;">TCE-Student Project Management Portal</a></h4>
+        </li></ul>
+        
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color:lemonchiffon">{{user.name}}</a></h5></li>
+                <li class="nav-item"> <h5><a class="nav-link" id='x' href="/logout" style="font-family:lobster;color:lemonchiffon;">Logout</a></h5></li>
+            </ul>
+        
+
+  </nav><br><br>
+  <div class="container">
+<ul id="myUL">
+  <h3>Departments</h3>
+  <div class="container" style="margin-left:50px">
+      <li><span class="caret">Department of Civil Engineering</span>
+        <ul class="nested">
+            <li><span class="caret">Courses</span>
+            <ul class="nested">
+              <div class='row'><div class='col-sm-3'><li>System Thinking - A</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='civil'&&course_id='18ES590 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>System Thinking - B</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='civil'&&course_id='18ES590 - B'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='civil'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - B</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='civil'&&course_id='18ES390 - B'">Enroll</a></button></div></div>
+            </ul>
+            </li>
+        </ul>
+      </li>
+      <li><span class="caret">Department of Mechanical Engineering</span>
+        <ul class="nested">
+            <li><span class="caret">Courses</span>
+            <ul class="nested">
+              <div class='row'><div class='col-sm-3'><li>System Thinking - A</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='mech'&&course_id='18ES590 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>System Thinking - B</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='mech'&&course_id='18ES590 - B'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='mech'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - B</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='mech'&&course_id='18ES390 - B'">Enroll</a></button></div></div>
+            </ul>
+            </li>
+        </ul>
+      </li>
+      <li><span class="caret">Department of Electrical and Electronics Engineering</span>
+        <ul class="nested">
+            <li><span class="caret">Courses</span>
+            <ul class="nested">
+              <div class='row'><div class='col-sm-3'><li>System Thinking - A</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='eee'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>System Thinking - B</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='eee'&&course_id='18ES390 - B'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='eee'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='eee'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+            </ul>
+            </li>
+        </ul>
+      </li>
+      <li><span class="caret">Department of Electrical and Communication Engineering</span>
+        <ul class="nested">
+            <li><span class="caret">Courses</span>
+            <ul class="nested">
+              <div class='row'><div class='col-sm-3'><li>System Thinking - A</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='ece'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>System Thinking - B</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='ece'&&course_id='18ES390 - B'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='ece'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='ece'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+            </ul>
+            </li>
+        </ul>
+      </li>
+      <li><span class="caret">Department of Computer Science Engineering</span>
+        <ul class="nested">
+            <li><span class="caret">Courses</span>
+            <ul class="nested">
+              <div class='row'><div class='col-sm-3'><li>System Thinking - A</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='cse'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>System Thinking - B</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='cse'&&course_id='18ES390 - B'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='cse'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='cse'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+            </ul>
+            </li>
+        </ul>
+      </li>
+      <li><span class="caret">Department of Information Technology</span>
+        <ul class="nested">
+            <li><span class="caret">Courses</span>
+            <ul class="nested">
+              <div class='row'><div class='col-sm-3'><li>System Thinking - A</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='it'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>System Thinking - B</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='it'&&course_id='18ES390 - B'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='it'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='it'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+            </ul>
+            </li>
+        </ul>
+      </li>
+      <li><span class="caret">Department of Mechatronics</span>
+        <ul class="nested">
+            <li><span class="caret">Courses</span>
+            <ul class="nested">
+              <div class='row'><div class='col-sm-3'><li>System Thinking - A</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='mect'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>System Thinking - B</li></div><div class='col-sm-4'><button class="button4" ><a href="/enroll?dept='mect'&&course_id='18ES390 - B'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='mect'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+              <div class='row'><div class='col-sm-3'><li>Design Thinking - A</li></div><div class='col-sm-4'><button class="button4"><a href="/enroll?dept='mect'&&course_id='18ES390 - A'">Enroll</a></button></div></div>
+            </ul>
+            </li>
+        </ul>
+      </li>
+      </ul>
+  </li></div>
+
+ </div>
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+</script>
+
 </body>
 </html>
