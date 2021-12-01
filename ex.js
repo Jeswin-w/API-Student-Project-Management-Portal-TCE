@@ -137,6 +137,14 @@ app.get('/addproject.html',(req,res)=>{
 	else{res.sendFile(`${__dirname}/addproject.html`)}
 	
 })
+app.get('/addsubmission.html',(req,res)=>{
+	console.log(req.session)
+	if(req.session.loggedin==false){
+		res.redirect("/login.html");
+	}
+	else{res.sendFile(`${__dirname}/login.html`)}
+	
+})
 
 app.get('/dashboard.html',(req,res)=>{
 	req.session.course_id="";
