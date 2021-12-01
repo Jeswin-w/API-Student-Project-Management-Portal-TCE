@@ -33,7 +33,7 @@ db.connect((err)=>{
 	}
 });
 app.listen(3100,()=>{
-	
+	console.log("Server listening to port 3100!!!!")
 
 })
 app.get('/dashboard',(req, res)=>{
@@ -50,9 +50,7 @@ app.get('/enroll',(req, res)=>{
 	var dept=req.query.dept;
 	var course_id=req.query.course_id;
 	var regno=req.session.regno;
-	console.log(req.session);
-	console.log(course_id);
-	console.log(dept);
+	
 	let qr=`select * from enrollment where course_id = ${course_id} AND regno='${regno}'`
 	db.query(qr,(err, resu)=>{
 		if (resu.length>0)
@@ -85,15 +83,13 @@ app.get('/enroll.html',(req, res)=>{
 })
 app.get('/ecourse',(req, res)=>{
 	
-	var ecourse;
-	var coursedet;
-	var facultydet;
+	
 	var regno=req.session.regno;
-	var data;
+	
 	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
 	db.query(q,(err,result)=>{
 		res.send(result);
-		console.log(result)
+		
 		res.end()
 	})
 
@@ -102,14 +98,14 @@ app.get('/ecourse',(req, res)=>{
 })
 
 app.get('/dashboard.html',(req,res)=>{
-	console.log(req.session)
+	
 	if(!req.session.loggedin){
 		res.redirect("/login.html");
 	}
 	else{res.sendFile(`${__dirname}/dashboard.html`)}
 	
 })
-app.get('/index',(req,res)=>{
+app.get('/',(req,res)=>{
     res.sendFile(`${__dirname}/index.html`)
 })
 app.get('/register.html',(req,res)=>{
@@ -121,7 +117,7 @@ app.get('/login.html',(req,res)=>{
 
 app.post('/register',(req,res)=>{
 
-    console.log(req.body);
+    
     var name = req.body.name;
     var email = req.body.email;
     var regno = req.body.regno;
@@ -173,12 +169,11 @@ app.post('/login',(req,res)=>{
 			if (results.length > 0) {
 				var hash=results[0].password;
 				
-				console.log(hash);
-				console.log(password);
+				
 				const passwordHash = bcrypt.hashSync(password, 10);
-				console.log(passwordHash);
+				
 				const verified = bcrypt.compareSync(password, hash);
-					console.log(verified);
+					
 					if (verified){
 						
 						req.session.loggedin = true;
@@ -192,7 +187,7 @@ app.post('/login',(req,res)=>{
 				
 				
 			} else {
-                console.log(results);
+                
 				res.write(`<script>window.alert('Enter the correct email!!!!!');window.location.href = 'login.html';</script>`)
 			}			
 			res.end();
