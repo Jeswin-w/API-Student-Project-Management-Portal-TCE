@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 12:58 PM
+-- Generation Time: Dec 01, 2021 at 07:45 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -31,14 +31,14 @@ CREATE TABLE `course` (
   `course_id` varchar(20) NOT NULL,
   `fid` varchar(20) NOT NULL,
   `course_name` varchar(40) NOT NULL,
-  `dept` varchar(30) NOT NULL
+  `cdept` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`course_id`, `fid`, `course_name`, `dept`) VALUES
+INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
 ('18ES390 - A', 'IT007', 'DESIGN THINKING', 'IT'),
 ('18ES390 - B', 'IT003', 'DESIGN THINKING', 'IT'),
 ('18IT490 - A', 'IT004', 'PROJECT MANAGEMENT', 'IT'),
@@ -52,6 +52,7 @@ INSERT INTO `course` (`course_id`, `fid`, `course_name`, `dept`) VALUES
 
 CREATE TABLE `course_faculty` (
   `fid` varchar(10) NOT NULL,
+  `fname` varchar(50) NOT NULL,
   `mail` varchar(30) NOT NULL,
   `password` varchar(300) NOT NULL,
   `dept` varchar(30) NOT NULL
@@ -61,10 +62,10 @@ CREATE TABLE `course_faculty` (
 -- Dumping data for table `course_faculty`
 --
 
-INSERT INTO `course_faculty` (`fid`, `mail`, `password`, `dept`) VALUES
-('IT003', 'faculty003@tce.edu', 'password', 'IT'),
-('IT004', 'faculty004@tce.edu', 'password', 'IT'),
-('IT007', 'faculty007@tce.edu', 'password', 'IT');
+INSERT INTO `course_faculty` (`fid`, `fname`, `mail`, `password`, `dept`) VALUES
+('IT003', 'Parkavi', 'faculty003@tce.edu', 'password', 'IT'),
+('IT004', 'Pudumalar', 'faculty004@tce.edu', 'password', 'IT'),
+('IT007', 'Karthikeyan', 'faculty007@tce.edu', 'password', 'IT');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,10 @@ CREATE TABLE `enrollment` (
 
 INSERT INTO `enrollment` (`regno`, `course_id`, `dept`) VALUES
 ('19IT082', '18IT490 - A', 'IT'),
-('19IT041', '18IT490 - B', 'IT');
+('19IT041', '18IT490 - B', 'IT'),
+('19IT027', '18ES390 - A', 'IT'),
+('19IT027', '18IT490 - A', 'IT'),
+('19IT027', '18ES390 - B', 'it');
 
 -- --------------------------------------------------------
 
@@ -96,18 +100,19 @@ CREATE TABLE `faculty_advisor` (
   `fid` varchar(10) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(300) NOT NULL,
-  `dept` varchar(11) NOT NULL
+  `dept` varchar(11) NOT NULL,
+  `fname` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `faculty_advisor`
 --
 
-INSERT INTO `faculty_advisor` (`fid`, `email`, `password`, `dept`) VALUES
-('CSE011', 'facultycse011@tce.edu', 'password', 'CSE'),
-('IT001', 'faculty001@tce.edu', 'password', 'IT'),
-('IT010', 'faculty010@tce.edu', 'password', 'IT'),
-('MA001', 'facultymech001@tce.edu', 'password', 'MECH');
+INSERT INTO `faculty_advisor` (`fid`, `email`, `password`, `dept`, `fname`) VALUES
+('CSE011', 'facultycse011@tce.edu', 'password', 'CSE', ''),
+('IT001', 'faculty001@tce.edu', 'password', 'IT', 'Manoj Kumar'),
+('IT010', 'faculty010@tce.edu', 'password', 'IT', 'Abirami'),
+('MA001', 'facultymech001@tce.edu', 'password', 'MECH', '');
 
 -- --------------------------------------------------------
 
@@ -159,15 +164,18 @@ INSERT INTO `student` (`regno`, `mail`, `password`, `name`, `dept`) VALUES
 CREATE TABLE `team` (
   `team_id` int(30) NOT NULL,
   `team_members` varchar(30) NOT NULL,
-  `course_id` varchar(30) NOT NULL
+  `course_id` varchar(30) NOT NULL,
+  `team_name` varchar(30) NOT NULL,
+  `fid` varchar(30) NOT NULL,
+  `cdept` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`team_id`, `team_members`, `course_id`) VALUES
-(1, '19IT082, 19IT041, 19IT040', '18ES390 - A');
+INSERT INTO `team` (`team_id`, `team_members`, `course_id`, `team_name`, `fid`, `cdept`) VALUES
+(1, '19IT027, 19IT041, 19IT040', '18ES390 - A', 'Eniyan and his fans', 'IT001', 'IT');
 
 --
 -- Indexes for dumped tables
