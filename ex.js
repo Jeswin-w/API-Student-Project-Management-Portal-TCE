@@ -25,7 +25,7 @@ var storage = multer.diskStorage({
         callback(null, 'sub');
     },
     filename: function (request, file, callback) {
-        console.log(file);
+        
         callback(null, file.originalname)
     }
 });
@@ -34,8 +34,7 @@ var upload = multer({ storage: storage });
 
 app.post('/upl', upload.single('filer'), function (req, res) {
 
-    console.log(req.body) // form fields
-    console.log(req.file) // form files
+    
     res.status(204).end()
 });
 
@@ -76,9 +75,41 @@ app.get('/course.html',(req, res)=>{
 	var cdept =req.query.cdept;
 	var course_id=req.query.cid;
 	var course_name = req.query.dept_name;
+	var regno=req.session.regno;
 	arr = [cdept, course_id, course_name];
-	console.log(arr);
-	res.sendFile(`${__dirname}/course.html`)
+	
+	let q=`Select * from team where  course_id='${course_id}' and cdept='${cdept}' and team_members LIKE '%${regno}%' `
+	db.query(q, (err,result)=>{
+		
+		if(err){
+			throw err;
+		}
+		if(result.length>0){
+		var team=result[0].team_members.split(',');
+		
+		arr=[...arr,team]
+		
+		let qr1=`Select * from project where team_id='${result[0].team_id}'`;
+		db.query(qr1, (err,result1)=>{
+			if(result.length>0){
+				
+				arr=[...arr,result1[0].project_name,result1[0].project_desc]
+				
+				res.sendFile(`${__dirname}/course.html`)}
+			
+			else{
+
+				res.sendFile(`${__dirname}/addproject.html?team=${result[0].team_id}`)
+			}
+		})
+	}
+
+		
+		else{
+			res.send('No team registered');
+		}
+	})
+	
 });
 app.get('/send', (req, res)=>{
 	res.send(arr);
@@ -129,12 +160,12 @@ app.get('/ecourse',async (req, res)=>{
 	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
 	db.query(q,(err,result)=>{
 		res.send(result);
-		console.log(result)
+		
 		res.end()
 	})
 })
 app.get('/addproject.html',(req,res)=>{
-	console.log(req.session)
+	
 	if(req.session.loggedin==false){
 		res.redirect("/login.html");
 	}
@@ -142,7 +173,7 @@ app.get('/addproject.html',(req,res)=>{
 	
 })
 app.get('/addsubmission.html',(req,res)=>{
-	console.log(req.session)
+	
 	if(req.session.loggedin==false){
 		res.redirect("/login.html");
 	}
