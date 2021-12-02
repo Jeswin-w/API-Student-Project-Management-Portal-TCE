@@ -86,6 +86,7 @@ app.get('/course.html',(req, res)=>{
 		}
 		if(result.length>0){
 		var team=result[0].team_members.split(',');
+		
 		arr=[...arr,team]
 		
 		let qr1=`Select * from project where team_id='${result[0].team_id}'`;
