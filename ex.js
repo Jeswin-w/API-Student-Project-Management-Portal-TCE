@@ -111,6 +111,7 @@ app.get('/course.html',(req, res)=>{
 	})
 	
 });
+
 app.get('/send', (req, res)=>{
 	res.send(arr);
 })
