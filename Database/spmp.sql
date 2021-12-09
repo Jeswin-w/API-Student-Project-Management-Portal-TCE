@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 02:15 PM
+-- Generation Time: Dec 09, 2021 at 08:28 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -40,9 +40,9 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
 ('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
-('18ES390 - B', 'IT003', 'DESIGN THINKING', 'IT'),
-('18IT490 - A', 'IT004', 'PROJECT MANAGEMENT', 'IT'),
-('18IT490 - B', 'IT007', 'PROJECT MANAGEMENT', 'IT');
+('18ES390 - B', 'IT004', 'DESIGN THINKING', 'IT'),
+('18IT490 - A', 'IT007', 'PROJECT MANAGEMENT', 'IT'),
+('18IT490 - B', 'IT003', 'PROJECT MANAGEMENT', 'IT');
 
 -- --------------------------------------------------------
 
@@ -61,11 +61,8 @@ CREATE TABLE `enrollment` (
 --
 
 INSERT INTO `enrollment` (`regno`, `course_id`, `dept`) VALUES
-('19IT082', '18IT490 - A', 'IT'),
-('19IT041', '18IT490 - B', 'IT'),
-('19IT027', '18ES390 - A', 'IT'),
-('19IT027', '18IT490 - A', 'IT'),
-('19IT027', '18ES390 - B', 'it');
+('19IT027', '18ES390 - A', 'it'),
+('19IT027', '18IT490 - A', 'it');
 
 -- --------------------------------------------------------
 
@@ -88,7 +85,9 @@ CREATE TABLE `faculty_advisor` (
 INSERT INTO `faculty_advisor` (`fid`, `mail`, `password`, `dept`, `fname`) VALUES
 ('CSE011', 'facultycse011@tce.edu', 'password', 'CSE', ''),
 ('IT001', 'faculty001@tce.edu', 'password', 'IT', 'Faculty001'),
-('IT010', 'faculty010@tce.edu', 'password', 'IT', 'Faculty010'),
+('IT003', 'faculty003@gmail.com', 'password', 'IT', 'Faculty003'),
+('IT004', 'faculty004@tce.edu', 'password', 'IT', 'Faculty004'),
+('IT007', 'faculty010@tce.edu', 'password', 'IT', 'Faculty010'),
 ('MA001', 'facultymech001@tce.edu', 'password', 'MECH', '');
 
 -- --------------------------------------------------------

@@ -5,7 +5,7 @@ app.controller('dashcon',function($scope,$http){
 		$scope.user = data.data[0];
 	})
 	$http.get('/fdashboard').then(function(data){
-		$scope.user = data.data[0];
+		$scope.fuser = data.data[0];
 	})
 
 	$http.get('/ecourse').then(function(data){

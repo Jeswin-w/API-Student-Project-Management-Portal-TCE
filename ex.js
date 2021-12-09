@@ -65,42 +65,6 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
-app.get('/fdashboard',(req, res)=>{
-	var obj;
-	var email=req.session.email;
-	db.query(`SELECT * FROM  faculty_advisor WHERE mail = '${email}'`,(err,result)=>{
-		obj=result;
-		res.send(obj);
-		res.end();
-	})
-	
-})
-app.get('/fcourses',(req, res)=>{
-	var fid=req.session.fid;
-	
-	var q1=`select * from course where fid='${fid}'`;
-	db.query(q1,(err,result)=>{
-		
-		res.send(result);
-	})
-
-
-})
-app.get('/fcourses1',(req, res)=>{
-	var fid=req.session.fid;
-	
-	var q1=`select dept from faculty_advisor where fid='${fid}'`;
-	db.query(q1,(err,result)=>{
-		var dept=result[0].dept;
-		var q2=`select * from course where cdept='${dept}'`;
-		db.query(q2,(err,result1)=>{
-			console.log(result1);
-			res.send(result1);
-		})
-	})
-
-
-})
 app.get('/team', (req, res)=>{
 	res.sendFile(`${__dirname}/teamdetails.html`);
 })
@@ -147,7 +111,6 @@ app.get('/course.html',(req, res)=>{
 	})
 	
 });
-
 app.get('/send', (req, res)=>{
 	res.send(arr);
 })
@@ -194,8 +157,9 @@ app.get('/ecourse',async (req, res)=>{
 	
 	var regno=req.session.regno;
 	
-	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join course_faculty as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
+	var q=`Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join faculty_advisor as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
 	db.query(q,(err,result)=>{
+		
 		res.send(result);
 		
 		res.end()
@@ -282,12 +246,6 @@ app.get('/logout', (req, res)=>{
 	req.session.regno="";
 	res.redirect('/login.html');
 })
-app.get('/flogout', (req, res)=>{
-	req.session.loggedin=false;
-	req.session.email="";
-	req.session.regno="";
-	res.redirect('/flogin.html');
-})
 app.post('/login',(req,res)=>{
 
    req.session.loggedin=false;
@@ -329,16 +287,6 @@ app.post('/login',(req,res)=>{
 		
 	}
 });
-app.get('/faculty',(req, res)=>
-{
-	if(req.session.loggedin==true){
-	console.log(req.session);
-	res.sendFile(`${__dirname}/fdashboard.html`)
-	}
-	else{
-		res.redirect('/flogin.html');
-	}
-})
 app.post('/flogin',(req,res)=>{
 
 	req.session.loggedin=false;
@@ -380,7 +328,60 @@ app.post('/flogin',(req,res)=>{
 		 res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = 'login.html';</script>`)		 
 	 }
  });
+ app.get('/flogout', (req, res)=>{
+	req.session.loggedin=false;
+	req.session.email="";
+	req.session.regno="";
+	res.redirect('/flogin.html');
+})
+ app.get('/fcourses',(req, res)=>{
+	var fid=req.session.fid;
+	if(fid!=null){
+	var q1=`select * from course where fid='${fid}'`;
+	db.query(q1,(err,result)=>{
+		
+		res.send(result);
+	})
+	}
 
+})
+app.get('/fcourses1',(req, res)=>{
+	var fid=req.session.fid;
+	if(fid!=null){
+	var q1=`select dept from faculty_advisor where fid='${fid}'`;
+	db.query(q1,(err,result)=>{
+		var dept=result[0].dept;
+		var q2=`select * from course where cdept='${dept}'`;
+		db.query(q2,(err,result1)=>{
+			console.log(result1);
+			res.send(result1);
+		})
+	})}
+
+
+})
+
+app.get('/fdashboard',(req, res)=>{
+	var obj;
+	var email=req.session.email;
+	db.query(`SELECT * FROM  faculty_advisor WHERE mail = '${email}'`,(err,result)=>{
+		obj=result;
+		res.send(obj);
+		res.end();
+	})
+	
+})
+
+app.get('/faculty',(req, res)=>
+{
+	if(req.session.loggedin==true){
+	console.log(req.session);
+	res.sendFile(`${__dirname}/fdashboard.html`)
+	}
+	else{
+		res.redirect('/flogin.html');
+	}
+})
 
 
 
