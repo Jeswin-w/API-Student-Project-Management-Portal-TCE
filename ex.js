@@ -65,6 +65,42 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
+app.get('/fdashboard',(req, res)=>{
+	var obj;
+	var email=req.session.email;
+	db.query(`SELECT * FROM  faculty_advisor WHERE mail = '${email}'`,(err,result)=>{
+		obj=result;
+		res.send(obj);
+		res.end();
+	})
+	
+})
+app.get('/fcourses',(req, res)=>{
+	var fid=req.session.fid;
+	
+	var q1=`select * from course where fid='${fid}'`;
+	db.query(q1,(err,result)=>{
+		
+		res.send(result);
+	})
+
+
+})
+app.get('/fcourses1',(req, res)=>{
+	var fid=req.session.fid;
+	
+	var q1=`select dept from faculty_advisor where fid='${fid}'`;
+	db.query(q1,(err,result)=>{
+		var dept=result[0].dept;
+		var q2=`select * from course where cdept='${dept}'`;
+		db.query(q2,(err,result1)=>{
+			console.log(result1);
+			res.send(result1);
+		})
+	})
+
+
+})
 app.get('/team', (req, res)=>{
 	res.sendFile(`${__dirname}/teamdetails.html`);
 })
@@ -246,6 +282,12 @@ app.get('/logout', (req, res)=>{
 	req.session.regno="";
 	res.redirect('/login.html');
 })
+app.get('/flogout', (req, res)=>{
+	req.session.loggedin=false;
+	req.session.email="";
+	req.session.regno="";
+	res.redirect('/flogin.html');
+})
 app.post('/login',(req,res)=>{
 
    req.session.loggedin=false;
@@ -287,6 +329,16 @@ app.post('/login',(req,res)=>{
 		
 	}
 });
+app.get('/faculty',(req, res)=>
+{
+	if(req.session.loggedin==true){
+	console.log(req.session);
+	res.sendFile(`${__dirname}/fdashboard.html`)
+	}
+	else{
+		res.redirect('/flogin.html');
+	}
+})
 app.post('/flogin',(req,res)=>{
 
 	req.session.loggedin=false;
@@ -298,19 +350,20 @@ app.post('/flogin',(req,res)=>{
 	 if (email && password) {
 		 db.query(`SELECT * FROM faculty_advisor WHERE mail = '${email}' `, function(error, results) {
 			 if (results.length > 0) {
-				 var hash=results[0].password;
+				//  var hash=results[0].password;
 				 
 				 
-				 const passwordHash = bcrypt.hashSync(password, 10);
+				//  const passwordHash = bcrypt.hashSync(password, 10);
 				 
-				 const verified = bcrypt.compareSync(password, hash);
+				//  const verified = bcrypt.compareSync(password, hash);
+				 var verified=true;
 					 
 					 if (verified){
 						 
 						 req.session.loggedin = true;
 						 req.session.email = email;
 						 req.session.fid= results[0].fid;
-						 res.redirect('/dashboard.html');
+						 res.redirect('/faculty');
 					 }
 					 else{
 						 res.write(`<script>window.alert('Enter the correct password!!!!!');window.location.href = 'flogin.html';</script>`);

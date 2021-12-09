@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2021 at 06:04 PM
+-- Generation Time: Dec 09, 2021 at 02:15 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -39,33 +39,10 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
-('18ES390 - A', 'IT007', 'DESIGN THINKING', 'IT'),
+('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
 ('18ES390 - B', 'IT003', 'DESIGN THINKING', 'IT'),
 ('18IT490 - A', 'IT004', 'PROJECT MANAGEMENT', 'IT'),
 ('18IT490 - B', 'IT007', 'PROJECT MANAGEMENT', 'IT');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `course_faculty`
---
-
-CREATE TABLE `course_faculty` (
-  `fid` varchar(10) NOT NULL,
-  `fname` varchar(50) NOT NULL,
-  `mail` varchar(30) NOT NULL,
-  `password` varchar(300) NOT NULL,
-  `dept` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `course_faculty`
---
-
-INSERT INTO `course_faculty` (`fid`, `fname`, `mail`, `password`, `dept`) VALUES
-('IT003', 'Parkavi', 'faculty003@tce.edu', 'password', 'IT'),
-('IT004', 'Pudumalar', 'faculty004@tce.edu', 'password', 'IT'),
-('IT007', 'Karthikeyan', 'faculty007@tce.edu', 'password', 'IT');
 
 -- --------------------------------------------------------
 
@@ -98,7 +75,7 @@ INSERT INTO `enrollment` (`regno`, `course_id`, `dept`) VALUES
 
 CREATE TABLE `faculty_advisor` (
   `fid` varchar(10) NOT NULL,
-  `email` varchar(30) NOT NULL,
+  `mail` varchar(30) NOT NULL,
   `password` varchar(300) NOT NULL,
   `dept` varchar(11) NOT NULL,
   `fname` varchar(50) NOT NULL
@@ -108,10 +85,10 @@ CREATE TABLE `faculty_advisor` (
 -- Dumping data for table `faculty_advisor`
 --
 
-INSERT INTO `faculty_advisor` (`fid`, `email`, `password`, `dept`, `fname`) VALUES
+INSERT INTO `faculty_advisor` (`fid`, `mail`, `password`, `dept`, `fname`) VALUES
 ('CSE011', 'facultycse011@tce.edu', 'password', 'CSE', ''),
-('IT001', 'faculty001@tce.edu', 'password', 'IT', 'Manoj Kumar'),
-('IT010', 'faculty010@tce.edu', 'password', 'IT', 'Abirami'),
+('IT001', 'faculty001@tce.edu', 'password', 'IT', 'Faculty001'),
+('IT010', 'faculty010@tce.edu', 'password', 'IT', 'Faculty010'),
 ('MA001', 'facultymech001@tce.edu', 'password', 'MECH', '');
 
 -- --------------------------------------------------------
@@ -123,15 +100,16 @@ INSERT INTO `faculty_advisor` (`fid`, `email`, `password`, `dept`, `fname`) VALU
 CREATE TABLE `project` (
   `project_id` int(50) NOT NULL,
   `project_name` varchar(50) NOT NULL,
-  `team_id` int(50) NOT NULL
+  `team_id` int(50) NOT NULL,
+  `project_desc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`project_id`, `project_name`, `team_id`) VALUES
-(1, 'Clinic Appointment System', 1);
+INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`) VALUES
+(1, 'Clinic Appointment System', 1, 'clinic appointment using node js');
 
 -- --------------------------------------------------------
 
@@ -188,18 +166,11 @@ ALTER TABLE `course`
   ADD PRIMARY KEY (`course_id`);
 
 --
--- Indexes for table `course_faculty`
---
-ALTER TABLE `course_faculty`
-  ADD PRIMARY KEY (`fid`),
-  ADD UNIQUE KEY `mail` (`mail`);
-
---
 -- Indexes for table `faculty_advisor`
 --
 ALTER TABLE `faculty_advisor`
   ADD PRIMARY KEY (`fid`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`mail`);
 
 --
 -- Indexes for table `project`
