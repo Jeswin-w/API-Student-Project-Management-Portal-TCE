@@ -383,6 +383,3 @@ app.get('/faculty',(req, res)=>
 		res.redirect('/flogin.html');
 	}
 })
-
-
-
