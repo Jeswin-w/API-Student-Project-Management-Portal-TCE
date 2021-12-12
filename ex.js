@@ -216,7 +216,7 @@ app.get('/flogin.html',(req,res)=>{
     res.sendFile(`${__dirname}/flogin.html`);
 })
 app.get('/submissions',(req,res)=>{
-	console.log(req.session);
+	
 	
 		var course_id = req.session.course_id;
 		var cdept=req.session.cdept;
@@ -230,7 +230,7 @@ app.post('/addsubmission',(req,res)=>{
 	
 	var course_id=req.session.course_id;
 	var cdept =req.session.cdept;
-	console.log(cdept);
+	
 	var ptitle=req.body.project_title;
 	var pdesc=req.body.project_desc;
 	var pdue=req.body.project_due;
