@@ -2,43 +2,45 @@
     text-decoration: underline;
     font-weight: bold;
 }
+#container{
+    width :430px;
+    height :300px;
+}
 #box1{
-    border: 1px solid brown;
+    border: 1px solid #003380;
     
 }
 .button1{
-    background-color: brown;
-    color: lemonchiffon;
+    background-color: #003380;
+    color: whitesmoke;
     border-radius: 20px; 
-    width: 350px;
+    width:170px;
     height:40px;
-    border-color: brown;
+    border-color: #003380;
 
 }
 .button2{
-    background-color:lemonchiffon;
-    color: brown;
+    background-color:#003380;
+    color: whitesmoke;
     border-radius: 20px; 
-    width: 350px;
+    width:170px;
     height:40px;
-    border-color: brown;
+    border-color: #003380;
     
 }
 .button1:hover{
-    width: 360px;
-    height:45px
+
+    width: 220px;
+    height:43px
 }
 .button2:hover{
-    background-color:brown;
-    color: lemonchiffon;
-    border-radius: 20px; 
-    width: 360px;
-    height: 45px;
-    border-color: brown;
+ 
+    width: 220px;
+    height: 43px;
 }
 
 label{
-    color:brown;
+    color: #003380;
     font-weight:bold;
     
 }
@@ -46,42 +48,43 @@ input{
     margin-bottom:30px;
 }
 #text{
-    border: 1px solid brown;
+    border: 1px solid #003380;
+    height: 45px;
+    width: 350px;
 
 }
 #text:hover{
-    box-shadow: 2px 2px brown;
+    box-shadow: 2px 2px #003380;
 }
 
 .button3{
-    background-color: brown;
-    color: lemonchiffon;
+    background-color: #003380;
+    color: whitesmoke;
     border-radius: 10px; 
     width: 150px;
     height:40px;
-    border-color: brown;
+    border-color: #003380;
 
 }
 
-
 .button4{
-    background-color: brown;
-    color: lemonchiffon;
+    background-color: #003380;
+    color: whitesmoke;
     border-radius: 10px; 
     width: 100px;
     height:25px;
-    border-color: brown;
+    border-color: #003380;
 
 }
 
 a{
     text-decoration: none;
-    color:lemonchiffon;
+    color: whitesmoke;
 }
 
 #cour{
     
-    color:blue;
+    color: #003380;
 }
 #cour:hover{
     text-decoration:underline;
