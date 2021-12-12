@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
  
 var upload = multer({ storage: storage });
 
-app.post('/upl', upload.single('filer'), function (req, res) {
+app.get('/upl', upload.single('filer'), function (req, res) {
 	var sid=req.query.sid;
 	const file = req.file
 	if (!file) {
@@ -254,8 +254,6 @@ app.get('/submissions',(req,res)=>{
 						else{
 							result[i].sub_status=`${diffDays} day more`;	}
 						}	
-					
-					
 			}
 		}
 		console.log(result)
