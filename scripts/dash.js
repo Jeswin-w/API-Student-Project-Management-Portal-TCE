@@ -22,5 +22,9 @@ app.controller('dashcon',function($scope,$http){
 	$http.get('/fcourses1').then(function(data){
 		$scope.fm = data.data;
 	})
+
+	$http.get('/submissions').then(function(data){
+		$scope.sd = data.data;
+	})
 })
 

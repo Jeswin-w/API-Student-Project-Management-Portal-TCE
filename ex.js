@@ -215,9 +215,19 @@ app.get('/login.html',(req,res)=>{
 app.get('/flogin.html',(req,res)=>{
     res.sendFile(`${__dirname}/flogin.html`);
 })
-
-app.post('/addsubmission',(req,res)=>{
+app.get('/submissions',(req,res)=>{
 	console.log(req.session);
+	
+		var course_id = req.session.course_id;
+		var cdept=req.session.cdept;
+		let q=`Select * from add_submission where course_id='${course_id}' and cdept='${cdept}'`;
+		db.query(q,function(err,result){
+			res.send(result);
+	})
+	
+})
+app.post('/addsubmission',(req,res)=>{
+	
 	var course_id=req.session.course_id;
 	var cdept =req.session.cdept;
 	console.log(cdept);
