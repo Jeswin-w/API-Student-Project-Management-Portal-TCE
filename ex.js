@@ -354,7 +354,7 @@ app.get('/fcourses1',(req, res)=>{
 		var dept=result[0].dept;
 		var q2=`select * from course where cdept='${dept}'`;
 		db.query(q2,(err,result1)=>{
-			console.log(result1);
+			
 			res.send(result1);
 		})
 	})}
@@ -376,7 +376,7 @@ app.get('/fdashboard',(req, res)=>{
 app.get('/faculty',(req, res)=>
 {
 	if(req.session.loggedin==true){
-	console.log(req.session);
+	
 	res.sendFile(`${__dirname}/fdashboard.html`)
 	}
 	else{
