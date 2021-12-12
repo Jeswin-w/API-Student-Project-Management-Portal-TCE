@@ -78,6 +78,9 @@ app.get('/course.html',(req, res)=>{
 	var course_id=req.query.cid;
 	var course_name = req.query.dept_name;
 	var regno=req.session.regno;
+	console.log(req.session)
+	req.session.course_id=course_id;
+	req.session.cdept=cdept;
 	arr = [cdept, course_id, course_name];
 	
 	let q=`Select * from team where  course_id='${course_id}' and cdept='${cdept}' and team_members LIKE '%${regno}%' `

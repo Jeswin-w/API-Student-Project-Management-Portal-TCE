@@ -47,16 +47,14 @@ input[type="submit"]{
         <h3>Project: {{course[4]}}</h3>
         <h3>Project desc:{{course[5]}}</h3>
       <br><br>
+      <div ng-repeat="x in sm">
       <div class="col-sm-8" style="box-shadow: 1px 1px 2px 2px; padding: 20px 30px; width: 900px;">
+            <h3>{{x.sub_title}}</h3>
                 
-                <h2>STAGE:1 REQUIREMENT GATHERING</h2><br><br>
-                <form action="/upl" method="post" enctype="multipart/form-data">
-                    <input type="file" name="filer" class='form-control'>upload file
-                    <input type='submit'>
-                </form><br>
+               
                 
             <hr>
-        </div>    
+        </div>   </div> 
     
     </div>
    
