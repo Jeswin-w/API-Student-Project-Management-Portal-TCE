@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const app =express();
 const path = require('path');
+const { Console } = require('console');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
@@ -138,8 +139,19 @@ app.get('/enroll',(req, res)=>{
 		}
 
 	})
-	
-
+})
+app.get('/cfcourse.html',(req, res)=>{
+	var course_id=req.query.cid;
+	var cdept=req.query.cdept;
+	if(req.session.loggedin==false || req.session.fid==''){
+		res.redirect("/flogin.html");
+	}
+	else{
+		req.session.course_id=course_id;
+		req.session.cdept=cdept;
+		
+	res.sendFile(`${__dirname}/cfcourse.html`)
+	}
 
 })
 app.get('/f',(req, res)=>{
@@ -204,6 +216,25 @@ app.get('/flogin.html',(req,res)=>{
     res.sendFile(`${__dirname}/flogin.html`);
 })
 
+app.post('/addsubmission',(req,res)=>{
+	console.log(req.session);
+	var course_id=req.session.course_id;
+	var cdept =req.session.cdept;
+	console.log(cdept);
+	var ptitle=req.body.project_title;
+	var pdesc=req.body.project_desc;
+	var pdue=req.body.project_due;
+	let q=`Insert into add_submission (sub_title,sub_desc,due_date,course_id,cdept) values('${ptitle}','${pdesc}','${pdue}','${course_id}','${cdept}')`;
+	db.query(q,(err,result)=>{
+		if (err){
+			
+			throw(err)
+		}
+		console.log("inserted");
+		res.redirect('/fdashboard.html')
+	})
+
+})
 
 app.post('/register',(req,res)=>{
 
@@ -312,7 +343,7 @@ app.post('/flogin',(req,res)=>{
 						 req.session.loggedin = true;
 						 req.session.email = email;
 						 req.session.fid= results[0].fid;
-						 res.redirect('/faculty');
+						 res.redirect('/fdashboard.html');
 					 }
 					 else{
 						 res.write(`<script>window.alert('Enter the correct password!!!!!');window.location.href = 'flogin.html';</script>`);
@@ -373,10 +404,12 @@ app.get('/fdashboard',(req, res)=>{
 	
 })
 
-app.get('/faculty',(req, res)=>
+app.get('/fdashboard.html',(req, res)=>
 {
 	if(req.session.loggedin==true){
-	
+		req.session.course_id='';
+		req.session.cdept='';
+		
 	res.sendFile(`${__dirname}/fdashboard.html`)
 	}
 	else{
