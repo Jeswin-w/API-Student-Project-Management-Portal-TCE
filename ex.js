@@ -228,9 +228,10 @@ app.post('/register',(req,res)=>{
         if(err){
             console.log(err);
         }
+
 		req.session.loggedin = true;
 		req.session.email = email;
-		req.session.regno= results.regno;
+		req.session.regno= regno;
 		res.redirect('/dashboard.html');
 				});
 			
@@ -244,7 +245,7 @@ app.get('/logout', (req, res)=>{
 	req.session.loggedin=false;
 	req.session.email="";
 	req.session.regno="";
-	res.redirect('/login.html');
+	res.redirect('/');
 })
 app.post('/login',(req,res)=>{
 
@@ -332,7 +333,7 @@ app.post('/flogin',(req,res)=>{
 	req.session.loggedin=false;
 	req.session.email="";
 	req.session.regno="";
-	res.redirect('/flogin.html');
+	res.redirect('/');
 })
  app.get('/fcourses',(req, res)=>{
 	var fid=req.session.fid;
@@ -382,6 +383,3 @@ app.get('/faculty',(req, res)=>
 		res.redirect('/flogin.html');
 	}
 })
-
-
-
