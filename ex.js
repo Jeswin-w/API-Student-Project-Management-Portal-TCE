@@ -21,16 +21,17 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-var storage = multer.diskStorage({
-    destination: function (request, file, callback) {
-        callback(null, 'sub');
-    },
-    filename: function (request, file, callback) {
-        
-        callback(null, file.originalname)
-    }
-});
-
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, 'sub')
+	},
+	filename: function (req, file, cb) {
+	  const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+	  cb(null, file.fieldname + '-' + uniqueSuffix)
+	}
+  })
+  
+ 
 var upload = multer({ storage: storage });
 
 app.post('/upl', upload.single('filer'), function (req, res) {
@@ -77,6 +78,10 @@ app.get('/course.html',(req, res)=>{
 	var course_id=req.query.cid;
 	var course_name = req.query.dept_name;
 	var regno=req.session.regno;
+	
+	req.session.course_id=course_id;
+	req.session.cdept=cdept;
+	console.log(req.session)
 	arr = [cdept, course_id, course_name];
 	
 	let q=`Select * from team where  course_id='${course_id}' and cdept='${cdept}' and team_members LIKE '%${regno}%' `
@@ -216,12 +221,26 @@ app.get('/flogin.html',(req,res)=>{
     res.sendFile(`${__dirname}/flogin.html`);
 })
 app.get('/submissions',(req,res)=>{
-	console.log(req.session);
+	
 	
 		var course_id = req.session.course_id;
 		var cdept=req.session.cdept;
 		let q=`Select * from add_submission where course_id='${course_id}' and cdept='${cdept}'`;
 		db.query(q,function(err,result){
+			for(let i=0;i<result.length;i++){
+				if(result[i]!=undefined){ 
+
+					var datetime=result[i].due_date.toISOString().slice(0, 19).replace('T', ' ');
+					var dt=datetime.split(' ');
+					result[i].date=dt[0];
+					result[i].time=dt[1];
+					let date_ob = new Date();
+					console.log(result[i].due_date)
+					console.log(date_ob);
+					
+			}
+		}
+		console.log(result)
 			res.send(result);
 	})
 	
@@ -230,7 +249,7 @@ app.post('/addsubmission',(req,res)=>{
 	
 	var course_id=req.session.course_id;
 	var cdept =req.session.cdept;
-	console.log(cdept);
+	
 	var ptitle=req.body.project_title;
 	var pdesc=req.body.project_desc;
 	var pdue=req.body.project_due;
