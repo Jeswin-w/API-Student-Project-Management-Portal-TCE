@@ -78,9 +78,10 @@ app.get('/course.html',(req, res)=>{
 	var course_id=req.query.cid;
 	var course_name = req.query.dept_name;
 	var regno=req.session.regno;
-	console.log(req.session)
+	
 	req.session.course_id=course_id;
 	req.session.cdept=cdept;
+	console.log(req.session)
 	arr = [cdept, course_id, course_name];
 	
 	let q=`Select * from team where  course_id='${course_id}' and cdept='${cdept}' and team_members LIKE '%${regno}%' `
@@ -226,6 +227,20 @@ app.get('/submissions',(req,res)=>{
 		var cdept=req.session.cdept;
 		let q=`Select * from add_submission where course_id='${course_id}' and cdept='${cdept}'`;
 		db.query(q,function(err,result){
+			for(let i=0;i<result.length;i++){
+				if(result[i]!=undefined){ 
+
+					var datetime=result[i].due_date.toISOString().slice(0, 19).replace('T', ' ');
+					var dt=datetime.split(' ');
+					result[i].date=dt[0];
+					result[i].time=dt[1];
+					let date_ob = new Date();
+					console.log(result[i].due_date)
+					console.log(date_ob);
+					
+			}
+		}
+		console.log(result)
 			res.send(result);
 	})
 	
