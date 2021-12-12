@@ -4,7 +4,16 @@
     <title>
         LOGIN   
     </title>
-   
+   <style>
+       img{
+           border-radius: 50%;
+           width: 150px;
+           height: 150px;
+       }
+       input{
+           background-color: whitesmoke;
+       }
+   </style>
     <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,22 +22,33 @@
         <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style1.css">
     </head>
+    <nav class="navbar navbar-expand-sm "style="background-color: #003380; color: whitesmoke" id="dark">
+        
+        <a class="navbar-brand" href="/dashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:78px; height:70px; margin-left: 10px;"> </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+               <h4> <a class="nav-link" href="/" style="font-family:lobster;color: whitesmoke;"><h2 style="margin-top: 10px; text-align: center;">TCE-Student Project Management Portal</h2></a></h4>
+            </li></ul>
+            
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"> <h5><a class="nav-link" id='x' href="/" style="font-family:lobster; color:whitesmoke; text-decoration: none; padding-right: 30px;">HOME</a></h5></li>
+                </ul>
+            
+
+      </nav>
     <body style="overflow: hidden; background-color: whitesmoke;">
-        <div class="container-fluid" style="background-color: #003380; color:whitesmoke;text-align: center;">
-        <h1><b>LOGIN</b></h1></div></div>
-        <div class="container"  id="container" style="box-shadow: 0.5px 0.5px 2px 2px #003380; padding-bottom: 10px; margin-top: 50px;padding-left:20px;padding-right: 30px;">
+        <div class="container-fluid" style="font-size: 30px; text-align: center;">
+        <h1><b> </b></h1></div></div>
+        <div class="container"  id="container" style="box-shadow: 0.5px 0.5px 2px 2px #003380;  margin-top: 50px; padding: 20px 20px; height: auto;">
         <form method="post" action="/login">
+            <center><img src="student.jpg" alt="Avatar"></center>
             <br>
             <div class="row">
-            <center> 
-            <label>Email: </label><br>
-            </center>   
-            <center><input type="email" class="form-control" id="text" name="email" style="height: 40px;"></center>
-            <center>    
-            <label>Password:</label><br>
+            <center><label style="padding-bottom: 20px;">EMAIL</label></center> 
+            <center><input type="email" class="form-control" id="text" name="email" style="height: 40px;"></center>    
+            <center><label style="padding-bottom: 20px;">PASSWORD</label></center> 
             </center>
             <center><input type="password" class="form-control" id="text" name="password" style="height: 45px;"></center>                
-        <br>
                 </div>
                 <center><br><button class="button1 bnt btn-primary" >Login</button></center>
                 
