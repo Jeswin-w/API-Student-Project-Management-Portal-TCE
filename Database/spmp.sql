@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 08:28 PM
+-- Generation Time: Dec 12, 2021 at 11:59 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `spmp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `add_submission`
+--
+
+CREATE TABLE `add_submission` (
+  `sid` int(11) NOT NULL,
+  `sub_title` varchar(70) NOT NULL,
+  `sub_desc` varchar(255) NOT NULL,
+  `due_date` datetime NOT NULL,
+  `course_id` varchar(20) NOT NULL,
+  `cdept` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `add_submission`
+--
+
+INSERT INTO `add_submission` (`sid`, `sub_title`, `sub_desc`, `due_date`, `course_id`, `cdept`) VALUES
+(1, 'Requirements gathering', 'dsvds', '2021-12-12 12:19:00', '18ES390 - A', 'IT');
 
 -- --------------------------------------------------------
 
@@ -100,15 +122,16 @@ CREATE TABLE `project` (
   `project_id` int(50) NOT NULL,
   `project_name` varchar(50) NOT NULL,
   `team_id` int(50) NOT NULL,
-  `project_desc` varchar(255) NOT NULL
+  `project_desc` varchar(255) NOT NULL,
+  `domain` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`) VALUES
-(1, 'Clinic Appointment System', 1, 'clinic appointment using node js');
+INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`) VALUES
+(1, 'Clinic Appointment System', 1, 'clinic appointment using node js', 'Web Application');
 
 -- --------------------------------------------------------
 
@@ -159,6 +182,12 @@ INSERT INTO `team` (`team_id`, `team_members`, `course_id`, `team_name`, `fid`, 
 --
 
 --
+-- Indexes for table `add_submission`
+--
+ALTER TABLE `add_submission`
+  ADD PRIMARY KEY (`sid`);
+
+--
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
@@ -193,6 +222,12 @@ ALTER TABLE `team`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `add_submission`
+--
+ALTER TABLE `add_submission`
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `project`

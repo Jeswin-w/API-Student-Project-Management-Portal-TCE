@@ -235,8 +235,9 @@ app.get('/submissions',(req,res)=>{
 					result[i].date=dt[0];
 					result[i].time=dt[1];
 					let date_ob = new Date();
-					console.log(result[i].due_date)
-					console.log(date_ob);
+					if(date_ob>result[i].due_date){
+						
+					}
 					
 			}
 		}
