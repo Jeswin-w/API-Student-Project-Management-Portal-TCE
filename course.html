@@ -44,20 +44,23 @@ input[type="submit"]{
       <div class="container">
         <h1>{{course[2]}}   {{course[1]}}</h1>
         <h3>Team: {{course[3][0]}}, {{course[3][1]}}, {{course[3][2]}}</h3>
-        <h3>Project: {{course[4]}}</h3>
-        <h3>Project desc:{{course[5]}}</h3>
+        <h3>Project: {{course[5]}}</h3>
+        <h3>Project desc:{{course[6]}}</h3>
       <br><br>
+      <div class='row'>
+      <div class='col-sm-10'> 
       <div ng-repeat="x in sd">
-      <div class="col-sm-8" style="box-shadow: 1px 1px 2px 2px; padding: 20px 30px; width: 900px;">
+      <div class="row" style="box-shadow: 1px 1px 2px 2px; padding: 20px 30px; width: 900px;">
             <h3>{{x.sub_title}}</h3>
             <h6>{{x.sub_desc}}</h6>
-            <h6>{{x.due_date}}</h6>
-
-                
-               
-                
+            <h6>{{x.date}}</h6>
+            
+                <form action="/upl" method="post" enctype="multipart/form-data">
+                <input type="file" name="filer" class="form-control">
+                 <button class="btn btn-primary">Upload</button></form>
+                   
             <hr>
-        </div>   </div> 
+        </div>   </div> </div></div>
     
     </div>
    

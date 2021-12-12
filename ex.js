@@ -27,7 +27,10 @@ const storage = multer.diskStorage({
 	},
 	filename: function (req, file, cb) {
 	  const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-	  cb(null, file.fieldname + '-' + uniqueSuffix)
+	  console.log(file.originalname);
+		var file= uniqueSuffix+'.'+path.extname(file.originalname)
+		console.log(file)
+	  cb(null,file )
 	}
   })
   
@@ -35,10 +38,14 @@ const storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 app.post('/upl', upload.single('filer'), function (req, res) {
-
-    
-    res.status(204).end()
+	var sid=req.query.sid;
+	const file = req.file
+	if (!file) {
+	  res.write(`<script>window.alert('Upload file');window.location.href = 'course.html';</script>`);
+	}
+	let q=`Insert into ssub (team_id,sid,)`
 });
+
 
 const db = sql.createConnection({
 	host:'localhost',
@@ -91,9 +98,10 @@ app.get('/course.html',(req, res)=>{
 			throw err;
 		}
 		if(result.length>0){
+			var tid=result[0].team_id;
 		var team=result[0].team_members.split(',');
 		
-		arr=[...arr,team]
+		arr=[...arr,team,tid]
 		
 		let qr1=`Select * from project where team_id='${result[0].team_id}'`;
 		db.query(qr1, (err,result1)=>{
@@ -233,11 +241,20 @@ app.get('/submissions',(req,res)=>{
 					var datetime=result[i].due_date.toISOString().slice(0, 19).replace('T', ' ');
 					var dt=datetime.split(' ');
 					result[i].date=dt[0];
-					result[i].time=dt[1];
+					
 					let date_ob = new Date();
 					if(date_ob>result[i].due_date){
-						
+						result[i].sub_status='Overdue';
 					}
+					else{
+						var diffDays = parseInt((result[i].due_date-date_ob) / (1000 * 60 * 60 * 24)); 
+						console.log(diffDays)
+						if(diffDays==1){
+						result[i].sub_status=`${diffDays} day more`;	}	
+						else{
+							result[i].sub_status=`${diffDays} day more`;	}
+						}	
+					
 					
 			}
 		}
