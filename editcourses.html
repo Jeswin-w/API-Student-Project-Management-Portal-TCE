@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TCE-Student Project Management Portal</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>  
+        <link rel="stylesheet" href="style2.css">
+        
+    </head>
+    <body style="background-color: whitesmoke">
+        <div class="fixed-top">
+        <div class='container-fluid' style='background-color:#003380; border-radius:0% 0% 50% 50%;padding-bottom: 30px;'>
+            <h1 >
+                <center>
+                    <h1 style="color:whitesmoke; font-family: yuji syuku;">TCE</h1>                    
+                    <h3 style="color: whitesmoke;">Student Project Management Portal</h3>
+                </center>
+            </h1>
+        </div>
+    <br><br>
+
+<div class="container">  
+  <center><h1 style = color:#003380; font-size> COURSES </h1></center>
+     <form>  
+          
+    <div class="form-group">  
+      <label>Course ID</label>  
+      <select name="courseid" id="text" class="form-control" placeholder="Select Course ID" required="">
+        <option value="">Select Course ID</option>
+        <option value="Design Thinking">18ES390</option>  
+        <option value="System Thinking">18ES590</option>  
+        <option value="Engineering Design">18ES690</option>  
+        <option value="Capstone Project">18ES790</option>  
+        <option value="Final Year Project">18IT810</option>  
+    </select> 
+    </div>  
+      
+    <div class="form-group">  
+      <label>Faculty ID</label>  
+      <input type="text" fid="faculty_id" class="form-control" required="">  
+    </div>  
+     
+    <div class="form-group">  
+        <label>Course Name</label>  
+        <select name="coursename" id="text" class="form-control" placeholder="Select Course Name" required="">
+          <option value="">Select Course Name</option> 
+          <option value="18ES390">Design Thinking</option>  
+          <option value="18ES590">System Thinking</option>  
+          <option value="18ES690">Engineering Design</option>  
+          <option value="18ES790">Capstone Project</option>  
+          <option value="18IT810">Final Year Project</option>  
+      </select>
+    </div>
+
+    <div class="form-group">  
+      <label>Course Department</label>  
+      <select name="coursedepartment" id="text" class="form-control" placeholder="Select Department" required="">
+        <option value="">Select Course Department</option>
+        <option value="IT">Information Technology</option>   
+        <option value="CSE">Computer Science Engineering</option>   
+        <option value="ECE">Electronics and Communication Engineering</option>  
+        <option value="EEE">Electrical and Electronics Engineering</option>  
+        <option value="MECH">Mechanical Engineering</option>   
+        <option value="CIVIL">Civil Engineering</option> 
+        <option value="MEC">Mechatronics</option>
+    </select>
+    </div>  
+    <center> <button type="submit" class="btn btn-success save-btn">Add Course</button> </center> 
+      
+  </form>  
+  <br/>  
+  <table class="table table-bordered data-table">  
+    <thead>  
+      <th>Course ID</th>  
+      <th>Faculty ID</th>  
+      <th>Course Name</th> 
+      <th>Course Department</th> 
+      <th width="200px">Action</th>  
+    </thead>  
+    <tbody>  
+      
+    </tbody>  
+  </table>  
+     
+</div>  
+     
+<script type="text/javascript">  
+     
+    $("form").submit(function(e){  
+        e.preventDefault();  
+        var courseid = $("input[cid='courseid']").val();  
+        var faculty_id = $("input[fid='faculty_id']").val(); 
+        var coursename = $("input[cname='coursename']").val();
+        var coursedepartment = $("input[cdept='coursedepartment']").val();  
+
+       
+        $(".data-table tbody").append("<tr data-cid='"+courseid+"' data-fid='"+faculty_id+"' data-cname='"+coursename+"' data-cdept='"+coursedepartment+"'><td>"+courseid+"</td><td>"+faculty_id+"</td><td>"+coursename+"</td><td>"+coursedepartment+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button><button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>");  
+      
+        $("input[cid='courseid']").val('');  
+        $("input[fid='faculty_id']").val(''); 
+        $("input[cname='coursename']").val(''); 
+        $("input[cdept='coursedepartment']").val('');  
+    });  
+     
+    $("body").on("click", ".btn-delete", function(){  
+        $(this).parents("tr").remove();  
+    });  
+      
+    $("body").on("click", ".btn-edit", function(){  
+        var courseid = $(this).parents("tr").attr('data-cid');  
+        var faculty_id = $(this).parents("tr").attr('data-fid');
+        var coursename = $(this).parents("tr").attr('data-cname');
+        var coursedepartment = $(this).parents("tr").attr('data-cdept'); 
+      
+        $(this).parents("tr").find("td:eq(0)").html('<input name="edit_courseid" value="'+courseid+'">');  
+        $(this).parents("tr").find("td:eq(1)").html('<input name="edit_faculty_id" value="'+faculty_id+'">'); 
+        $(this).parents("tr").find("td:eq(2)").html('<input name="edit_coursename" value="'+coursename+'">');
+        $(this).parents("tr").find("td:eq(3)").html('<input name="edit_coursedepartment" value="'+coursedepartment+'">'); 
+      
+        $(this).parents("tr").find("td:eq(4)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button><button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")  
+        $(this).hide();  
+    });  
+     
+    $("body").on("click", ".btn-cancel", function(){  
+        var courseid = $(this).parents("tr").attr('data-cid');  
+        var faculty_id = $(this).parents("tr").attr('data-fid');
+        var coursename = $(this).parents("tr").attr('data-cname');
+        var coursedepartment = $(this).parents("tr").attr('data-cdept'); 
+      
+        $(this).parents("tr").find("td:eq(0)").text(courseid);  
+        $(this).parents("tr").find("td:eq(1)").text(faculty_id);
+        $(this).parents("tr").find("td:eq(2)").text(coursename);  
+        $(this).parents("tr").find("td:eq(3)").text(coursedepartment);      
+     
+        $(this).parents("tr").find(".btn-edit").show();  
+        $(this).parents("tr").find(".btn-update").remove();  
+        $(this).parents("tr").find(".btn-cancel").remove();  
+    });  
+     
+    $("body").on("click", ".btn-update", function(){  
+        var courseid = $(this).parents("tr").find("input[name='edit_courseid']").val();  
+        var faculty_id = $(this).parents("tr").find("input[name='edit_faculty_id']").val(); 
+        var coursename = $(this).parents("tr").find("input[name='edit_coursename']").val(); 
+        var coursedepartment = $(this).parents("tr").find("input[name='edit_coursedepartment']").val();  
+      
+        $(this).parents("tr").find("td:eq(0)").text(courseid);  
+        $(this).parents("tr").find("td:eq(1)").text(faculty_id);
+        $(this).parents("tr").find("td:eq(2)").text(coursename); 
+        $(this).parents("tr").find("td:eq(3)").text(coursedeoartment);   
+       
+        $(this).parents("tr").attr('data-cid', courseid);  
+        $(this).parents("tr").attr('data-fid',  faculty_id); 
+        $(this).parents("tr").attr('data-cname', coursename);  
+        $(this).parents("tr").attr('data-cdept', coursedepartment);  
+      
+        $(this).parents("tr").find(".btn-edit").show();  
+        $(this).parents("tr").find(".btn-cancel").remove();  
+        $(this).parents("tr").find(".btn-update").remove();  
+    });  
+      
+</script>  
+       
+</body>  
+</html>  
+</body>
+</html>
