@@ -38,7 +38,7 @@ const storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 app.post('/upl', upload.single('filer'), function (req, res) {
-	console.log(req.session)
+	//console.log(req.session)
 
 	const file = req.file
 	if (!file) {
@@ -82,8 +82,37 @@ app.get('/dashboard',(req, res)=>{
 	})
 	
 })
-app.get('/team', (req, res)=>{
+app.get('/teamdetails.html', (req, res)=>{
+	
 	res.sendFile(`${__dirname}/teamdetails.html`);
+})
+app.post('/teamdetails.html', (req, res)=>{
+	var teamname=req.body.team_name;
+	var guide=req.body.guide;
+
+})
+app.get('/teamrem',(req, res)=>{
+	var course_id=req.session.course_id;
+	var cdept=req.session.cdept;
+	var rem;
+	if ((course_id!=undefined && cdept!=undefined) || (course_id!='' && cdept!='')){
+	let q=`Select count(*) from enrollment where course_id='${course_id}' and dept='${cdept}' and team_status='0'`;
+	db.query(q, (err,result)=>{
+		 if (err) throw err;
+		
+		rem=result[0]['count(*)'];
+		
+		res.send(result);
+	})
+}
+})
+app.get('/guidelist',(req, res)=>{
+	let q=`select fid,fname from faculty_advisor`;
+	db.query(q, (err,result)=>{
+		if (err) throw err;
+		res.send(result);
+	})
+
 })
 
 var arr = [];
@@ -137,9 +166,9 @@ app.get('/course.html',(req, res)=>{
 });
 app.get('/filesub.html',(req,res)=>{
 	var sid=req.query.sid;
-	console.log(sid);
+	//console.log(sid);
 	req.session.sid=sid;
-	console.log(req.session)
+	//console.log(req.session)
 	res.sendFile(`${__dirname}/filesub.html`)
 
 })
@@ -294,8 +323,8 @@ app.get('/submissions',(req,res)=>{
 			}
 			
 		}
-		console.log(t)
-		console.log(sub_status)
+		//console.log(t)
+		//console.log(sub_status)
 		res.send(t);
 		
 			

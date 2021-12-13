@@ -1,6 +1,8 @@
 var app = angular.module('dash',[]);
 
 app.controller('dashcon',function($scope,$http){
+	
+	
 	$http.get('/dashboard').then(function(data){
 		$scope.user = data.data[0];
 	})
@@ -26,7 +28,15 @@ app.controller('dashcon',function($scope,$http){
 	$http.get('/submissions').then(function(data){
 		$scope.sd = data.data;
 	})
-
+	$http.get('/teamrem').then(function(data){
+		$scope.tr = data.data;
+	})
+	$http.get('/guidelist').then(function(data){
+		$scope.gl = data.data;
+		
+	})
+	
+	
 	$scope.filesub = function(sid) {
         $location.url(`/filesub.html?sid=${sid}`);
     };
