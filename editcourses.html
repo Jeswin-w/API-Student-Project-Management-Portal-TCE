@@ -27,11 +27,11 @@
 
 <div class="container">  
   <center><h1 style = color:#003380; font-size> COURSES </h1></center>
-     <form>  
+     <form method="post" action="/editcourses.html">  
           
     <div class="form-group">  
       <label>Course ID</label>  
-      <select name="courseid" id="text" class="form-control" placeholder="Select Course ID" required="">
+      <select name="coursename" id="text" class="form-control" placeholder="Select Course ID" required="">
         <option value="">Select Course ID</option>
         <option value="Design Thinking">18ES390</option>  
         <option value="System Thinking">18ES590</option>  
@@ -43,12 +43,12 @@
       
     <div class="form-group">  
       <label>Faculty ID</label>  
-      <input type="text" fid="faculty_id" class="form-control" required="">  
+      <input type="text"  name="fid" fid="faculty_id" class="form-control" required="">  
     </div>  
      
     <div class="form-group">  
         <label>Course Name</label>  
-        <select name="coursename" id="text" class="form-control" placeholder="Select Course Name" required="">
+        <select name="courseid" id="text" class="form-control" placeholder="Select Course Name" required="">
           <option value="">Select Course Name</option> 
           <option value="18ES390">Design Thinking</option>  
           <option value="18ES590">System Thinking</option>  
@@ -84,7 +84,12 @@
       <th width="200px">Action</th>  
     </thead>  
     <tbody>  
-      
+      <div ng-repeat="x in ecourse">
+      <tr><td>{{x.courseid}}</td>
+      <td>{{x.fid}}</td>
+      <td>{{x.coursename}}</td>
+      <td>{{x.cdept}}</td></tr>
+      </div>
     </tbody>  
   </table>  
      
