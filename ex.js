@@ -86,7 +86,7 @@ app.get('/teamdetails.html', (req, res)=>{
 	
 	res.sendFile(`${__dirname}/teamdetails.html`);
 })
-app.post('/teamdetails.html', (req, res)=>{
+app.post('/teamdetails', (req, res)=>{
 	var teamname=req.body.team_name;
 	var guide=req.body.guide;
 
@@ -115,8 +115,9 @@ app.get('/guidelist',(req, res)=>{
 })
 
 app.get('/reglist',(req, res)=>{
-	let q=`SELECT regno, name FROM student`;
+	let q=`SELECT s.regno, s.name FROM student as s inner join enrollment as e on s.regno = e.regno where e.team_status=0 and e.course_id='${req.session.course_id}' and e.dept='${req.session.cdept}'`;
 	db.query(q, (err,result)=>{
+		if (err) throw err;
 		console.log(result);
 		if (err) throw err;
 		res.send(result);
