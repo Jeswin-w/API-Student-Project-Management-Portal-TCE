@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2021 at 04:39 PM
+-- Generation Time: Dec 13, 2021 at 07:01 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -85,8 +85,10 @@ CREATE TABLE `enrollment` (
 --
 
 INSERT INTO `enrollment` (`regno`, `course_id`, `dept`, `team_status`) VALUES
-('19IT027', '18ES390 - A', 'it', 0),
-('19IT027', '18IT490 - A', 'it', 0);
+('19IT027', '18ES390 - A', 'it', 1),
+('19IT027', '18IT490 - A', 'it', 0),
+('19IT040', '18ES390 - A', 'IT', 1),
+('19IT041', '18ES390 - A', 'IT', 1);
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`) VALUES
-(1, 'Clinic Appointment System', 1, 'clinic appointment using node js', 'Web Application');
+(1, 'Clinic Appointment System', 1, 'clinic appointment using node js', 'Web Application'),
+(2, 'Smart Lab', 5, 'Making labs smart', 'Making labs smart');
 
 -- --------------------------------------------------------
 
@@ -176,7 +179,8 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`regno`, `mail`, `password`, `name`, `dept`) VALUES
 ('19IT027', 'eniyan@student.tce.edu', '$2b$10$GKFmox3lM7VK6FUunW2P5OGjXyqNeFDxhcGhnMtQyDpRnigchJz5y', 'Eniyan', 'IT'),
-('19IT040', 'jeswin@student.tce.edu', '$2b$10$niaF.B4DizHGc462aQvkA.F3oHDTGijjM0EUDpnLTBK8K5dRkJRue', 'Jeswin W', 'IT');
+('19IT040', 'jeswin@student.tce.edu', '$2b$10$niaF.B4DizHGc462aQvkA.F3oHDTGijjM0EUDpnLTBK8K5dRkJRue', 'Jeswin W', 'IT'),
+('19IT041', 'jeya@student.tce.edu', '$2b$10$GKFmox3lM7VK6FUunW2P5OGjXyqNeFDxhcGhnMtQyDpRnigchJz5y', 'Jeya Ganesh', 'IT');
 
 -- --------------------------------------------------------
 
@@ -198,7 +202,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`team_id`, `team_members`, `course_id`, `team_name`, `fid`, `cdept`) VALUES
-(1, '19IT027, 19IT041, 19IT040', '18ES390 - A', 'Eniyan and his fans', 'IT001', 'IT');
+(5, '19IT027,19IT040,19IT041,', '18ES390 - A', 'tech', 'IT001', 'IT');
 
 --
 -- Indexes for dumped tables
@@ -262,7 +266,7 @@ ALTER TABLE `add_submission`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ssub`
@@ -274,7 +278,7 @@ ALTER TABLE `ssub`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `team_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
