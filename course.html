@@ -55,7 +55,9 @@ input[type="submit"]{
             <h6>{{x.sub_desc}}</h6>
             <h6>{{x.date}}</h6>
             
-                
+                <form action="/upl" method="post" enctype="multipart/form-data">
+                <input type="file" name="filer" class="form-control">
+                 <button class="btn btn-primary">Upload</button></form>
                    
             <hr>
         </div>   </div> </div></div>
