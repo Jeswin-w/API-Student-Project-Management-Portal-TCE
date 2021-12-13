@@ -45,42 +45,9 @@
 
       </nav><br><br>
       <div class="container">
-          
-        <div class="row">
-            
-        
-          <h3><u>Enrolled Courses</u></h3><br>
-          
-        <div class="col-sm-10" style="box-shadow: 1px 1px 2px 2px;">
-            <div class="cardsplay">
-            <div ng-repeat="x in ecourse">
-      <main class="page-content">
-        
-        <div class="card">
-          <div class="content">
-            <h2 class="title">{{x.course_id}}</h2>
-            <h3>Faculty: {{x.fname}}</h3>
-            <p class="copy"><div class="col-sm-7">
-                <h4 style="text-align: center;"><a id='cour' href="course.html?cid={{x.course_id}}&cdept={{x.cdept}}&cou_name={{x.course_name}}">{{x.course_name}}</a></h4>
-            </div></p>
-            
-            <button class="btn">Book Now</button>
-          </div>
-        </div>
-        
-        
-      </main>
-        </div>
-        </div>
+        <form action="/upl" method="post" enctype="multipart/form-data">
+            <input type="file" name="filer" class="form-control">
+             <button class="btn btn-primary">Upload</button></form>
       </div>
-      <div class="col-sm" >
-        <h6>Add Project</h6>
-        <form method="get" action="/enroll.html"><center><button class="button3" >Add Project</button></center></form><br>
-        <div  style="border:solid 1px; margin: 5px 5px 5px 5px;" >
-    <h5 style="text-align: center;">Calender</h5></div>
-</div>
-      </div>
-      </div>
-      
-
-</body>
+      </body>
+      </html>
