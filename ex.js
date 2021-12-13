@@ -88,8 +88,27 @@ app.get('/teamdetails.html', (req, res)=>{
 })
 app.post('/teamdetails', (req, res)=>{
 	var teamname=req.body.team_name;
-	var guide=req.body.guide;
-
+	var guide=req.body.guide.substring(7);
+	var tm1=req.body.t1.substring(7);
+	var tm2=req.body.t2.substring(7);
+	var tm3=req.body.t3.substring(7);
+	var tm4=req.body.t4.substring(7);
+	if(tm1!=tm2 & tm2!=tm3 & tm3!=tm4 & tm1!=tm3 & tm2!=tm4){
+	var tm=`${tm1},${tm2},${tm3},${tm4}`;
+	tma=tm.split(',')
+	let q=`insert into team (team_members,course_id,team_name,fid,cdept) values('${tm}','${req.session.course_id}','${teamname}','${guide}','${req.session.cdept}')`;
+	db.query(q, (err,result)=>{
+		if(err) throw err;
+		for (let i=0; i<tma.length; i++){
+			let q1=`Update enrollment SET team_status=1 where regno='${tma[i]}' and dept='${req.session.cdept}' and course_id='${req.session.course_id}'`
+			
+			db.query(q1,(err,result)=>{
+				if(err) throw err;
+			})
+		}
+	})}
+	else{res.write(`<script>window.alert('Invalid input');window.location.href = 'teamdetails.html';</script>`);}
+	res.redirect('/teamdetails.html')
 })
 app.get('/teamrem',(req, res)=>{
 	var course_id=req.session.course_id;
@@ -154,15 +173,15 @@ app.get('/course.html',(req, res)=>{
 		
 		let qr1=`Select * from project where team_id='${result[0].team_id}'`;
 		db.query(qr1, (err,result1)=>{
-			if(result.length>0){
-				
+			if(result1.length>0){
+				console.log(result1);
 				arr=[...arr,result1[0].project_name,result1[0].project_desc]
 				
 				res.sendFile(`${__dirname}/course.html`)}
 			
 			else{
 
-				res.sendFile(`${__dirname}/addproject.html?team=${result[0].team_id}`)
+				res.sendFile(`${__dirname}/addproject.html`)
 			}
 		})
 	}
@@ -254,6 +273,22 @@ app.get('/addproject.html',(req,res)=>{
 	}
 	else{res.sendFile(`${__dirname}/addproject.html`)}
 	
+})
+app.post('/addproject',(req,res)=>{
+	if(req.session.loggedin==false){
+		res.redirect("/login.html");
+	}
+	var title = req.body.project_name;
+	var dom=req.body.project_domain;
+	var pro_desc=req.body.project_desc;
+	var tid=req.session.team_id;
+
+	let q=`Insert into project (project_name,team_id,project_desc,domain) values ('${title}','${tid}','${pro_desc}','${pro_desc}')`
+	db.query(q,(err, results)=>{
+		if(err) throw err;
+	})
+	res.redirect('/dashboard.html')
+
 })
 app.get('/addsubmission.html',(req,res)=>{
 	
