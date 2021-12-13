@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TCE-Student Project Management Portal</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>  
+        <link rel="stylesheet" href="style2.css">
+        
+    </head>
+    <body style="background-color: whitesmoke">
+        <div class="fixed-top">
+        <div class='container-fluid' style='background-color:#003380; border-radius:0% 0% 50% 50%;padding-bottom: 30px;'>
+            <h1 >
+                <center>
+                    <h1 style="color:whitesmoke; font-family: yuji syuku;">TCE</h1>                    
+                    <h3 style="color: whitesmoke;">Student Project Management Portal</h3>
+                </center>
+            </h1>
+        </div>
+    <br><br>
+
+<div class="container">  
+  <center><h1 style = color:#003380; font-size> PROJECTS </h1></center>
+     <form>  
+    
+    <div class="form-group">  
+      <label>Faculty ID</label>  
+      <input type="text" fid="faculty_id" class="form-control" required="">  
+    </div>  
+     
+    <div class="form-group">  
+        <label>Mail ID</label>  
+        <input type="text" mid="mail_id" class="form-control" required="">  
+      </div>  
+             
+    <div class="form-group">  
+      <label>Password</label>  
+     <input type="text" pass="password" class="form-control" required="">  
+    </div>  
+    
+    <div class="form-group">  
+        <label>Course Department</label>  
+        <select name="coursedepartment" id="text" class="form-control" placeholder="Select Department" required="">
+          <option value="">Select Course Department</option>
+          <option value="IT">Information Technology</option>   
+          <option value="CSE">Computer Science Engineering</option>   
+          <option value="ECE">Electronics and Communication Engineering</option>  
+          <option value="EEE">Electrical and Electronics Engineering</option>  
+          <option value="MECH">Mechanical Engineering</option>   
+          <option value="CIVIL">Civil Engineering</option> 
+          <option value="MEC">Mechatronics</option>
+      </select>
+      </div>  
+
+    <div class="form-group">  
+        <label>Faculty Name</label>   
+        <input type="text" fname="faculty_name" class="form-control" required="">  
+      </div>  
+         
+
+    <center> <button type="submit" class="btn btn-success save-btn">Add Guide</button> </center> 
+      
+  </form>  
+  <br/>  
+  <table class="table table-bordered data-table">  
+    <thead>  
+      <th>Faculty ID</th>  
+      <th>Mail ID</th>  
+      <th>Password</th>  
+      <th>Department</th>  
+      <th>Faculty Name</th>
+      <th width="200px">Action</th>  
+    </thead>  
+    <tbody>  
+      
+    </tbody>  
+  </table>  
+     
+</div>  
+    
+       
+</body>  
+</html>  
+</body>
+</html>
