@@ -13,6 +13,9 @@ app.controller('dashcon',function($scope,$http){
 	$http.get('/ecourse').then(function(data){
 		$scope.ecourse = data.data;
 	})
+	$http.get('/coursedetail').then(function(data){
+		$scope.coursedetail = data.data;
+	})
 
 	$http.get('/send').then(function(data){
 		$scope.course = data.data;
