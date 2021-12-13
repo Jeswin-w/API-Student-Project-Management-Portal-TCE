@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
  
 var upload = multer({ storage: storage });
 
-app.get('/upl', upload.single('filer'), function (req, res) {
+app.post('/upl', upload.single('filer'), function (req, res) {
 	var sid=req.query.sid;
 	const file = req.file
 	if (!file) {
