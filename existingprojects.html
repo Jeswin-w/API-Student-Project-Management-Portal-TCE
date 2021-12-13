@@ -25,11 +25,33 @@
             </h1>
         </div>
     <br><br>
-
+    <style>
+        table,th,td {
+        text-align: center;
+        text-shadow: 1.5px;
+        color:#003380;
+        border: 1px solid ;
+        border-width: 3px;
+        border-color:#003380;
+        }
+        table {
+        border-collapse: collapse;
+        width: 1000px;
+        height: 150px;
+        margin-left: 30px;
+        border: solid;
+        border-width: 1px;
+        }
+        td {
+        color:black;
+        text-align: center;
+        border-width: 3px;
+        }
+        </style>
 <body ng-app="myApp">
 <div ng-controller="firstController">
-<center><h2 style="color: #003380">Existing Projects List </h2> 
-<input type="text" ng-model="project" placeholder="Enter the project" style="height:25px;width: 250px;"><br><br><br></center>
+<center><h1 style="color: #003380">Existing Projects List </h1> <br>
+<input type="text" ng-model="project" placeholder="Enter the project" style="height:35px;width: 250px;"><br><br><br></center>
 <center>
 <table>
 <tr>
