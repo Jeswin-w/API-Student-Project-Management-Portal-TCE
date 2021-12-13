@@ -27,9 +27,9 @@ const storage = multer.diskStorage({
 	},
 	filename: function (req, file, cb) {
 	  const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-	  console.log(file.originalname);
+	  
 		var file= uniqueSuffix+'.'+path.extname(file.originalname)
-		console.log(file)
+		
 	  cb(null,file )
 	}
   })
@@ -37,13 +37,21 @@ const storage = multer.diskStorage({
  
 var upload = multer({ storage: storage });
 
-app.get('/upl', upload.single('filer'), function (req, res) {
-	var sid=req.query.sid;
+app.post('/upl', upload.single('filer'), function (req, res) {
+	console.log(req.session)
+
 	const file = req.file
 	if (!file) {
-	  res.write(`<script>window.alert('Upload file');window.location.href = 'course.html';</script>`);
+	  res.write(`<script>window.alert('Upload file');window.location.href = 'filesub.html';</script>`);
 	}
-	let q=`Insert into ssub (team_id,sid,)`
+	
+	let q=`Insert into ssub (team_id,sid,originalfile,file) values('${req.session.team_id}','${req.session.sid}','${file.originalname}','${file.filename}')`
+	db.query(q, (err,result)=>{
+		if (err)
+			throw(err)
+		console.log('Insert')
+		res.redirect(`/course.html?cid=${req.session.course_id}&cdept=${req.session.cdept}&cou_name=${req.session.course_name}`)
+	})
 });
 
 
@@ -83,12 +91,14 @@ var arr = [];
 app.get('/course.html',(req, res)=>{
 	var cdept =req.query.cdept;
 	var course_id=req.query.cid;
-	var course_name = req.query.dept_name;
+	var course_name = req.query.cou_name;
 	var regno=req.session.regno;
+	req.session.sid=undefined;
 	
 	req.session.course_id=course_id;
 	req.session.cdept=cdept;
-	console.log(req.session)
+	req.session.course_name=course_name;
+	
 	arr = [cdept, course_id, course_name];
 	
 	let q=`Select * from team where  course_id='${course_id}' and cdept='${cdept}' and team_members LIKE '%${regno}%' `
@@ -100,7 +110,7 @@ app.get('/course.html',(req, res)=>{
 		if(result.length>0){
 			var tid=result[0].team_id;
 		var team=result[0].team_members.split(',');
-		
+		req.session.team_id=tid;
 		arr=[...arr,team,tid]
 		
 		let qr1=`Select * from project where team_id='${result[0].team_id}'`;
@@ -125,6 +135,14 @@ app.get('/course.html',(req, res)=>{
 	})
 	
 });
+app.get('/filesub.html',(req,res)=>{
+	var sid=req.query.sid;
+	console.log(sid);
+	req.session.sid=sid;
+	console.log(req.session)
+	res.sendFile(`${__dirname}/filesub.html`)
+
+})
 app.get('/send', (req, res)=>{
 	res.send(arr);
 })
@@ -233,31 +251,54 @@ app.get('/submissions',(req,res)=>{
 	
 		var course_id = req.session.course_id;
 		var cdept=req.session.cdept;
+		var tid=req.session.team_id;
+		var t;
+		var sub_status;
 		let q=`Select * from add_submission where course_id='${course_id}' and cdept='${cdept}'`;
-		db.query(q,function(err,result){
+		 db.query(q, async function(err,result){
+			 t=result
+			 
 			for(let i=0;i<result.length;i++){
 				if(result[i]!=undefined){ 
 
 					var datetime=result[i].due_date.toISOString().slice(0, 19).replace('T', ' ');
 					var dt=datetime.split(' ');
-					result[i].date=dt[0];
+					
 					
 					let date_ob = new Date();
-					if(date_ob>result[i].due_date){
-						result[i].sub_status='Overdue';
+					let q1=`select count(*) from ssub where sid='${result[i].sid}' and team_id='${tid}'`
+					 db.query(q1,async (err,result1)=>{
+						if(err){throw(err)}
+						
+					if(result1[0]['count(*)']>=1){
+						sub_status='Submitted'
+					}
+					
+
+					else if(date_ob>result[i].due_date){
+						sub_status='Overdue';
 					}
 					else{
 						var diffDays = parseInt((result[i].due_date-date_ob) / (1000 * 60 * 60 * 24)); 
-						console.log(diffDays)
-						if(diffDays==1){
-						result[i].sub_status=`${diffDays} day more`;	}	
+						if(diffDays==0){
+							sub_status='Submission today';
+						}
+						else if(diffDays==1){
+						sub_status=`${diffDays} day more`;	}	
 						else{
-							result[i].sub_status=`${diffDays} day more`;	}
+							sub_status=`${diffDays} day more`;	}
 						}	
+						
+						
+					})
 			}
+			
 		}
-		console.log(result)
-			res.send(result);
+		console.log(t)
+		console.log(sub_status)
+		res.send(t);
+		
+			
 	})
 	
 })

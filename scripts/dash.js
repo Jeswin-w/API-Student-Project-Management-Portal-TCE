@@ -26,5 +26,9 @@ app.controller('dashcon',function($scope,$http){
 	$http.get('/submissions').then(function(data){
 		$scope.sd = data.data;
 	})
+
+	$scope.filesub = function(sid) {
+        $location.url(`/filesub.html?sid=${sid}`);
+    };
 })
 
