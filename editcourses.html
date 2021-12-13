@@ -76,21 +76,21 @@
   </form>  
   <br/>  
   <table class="table table-bordered data-table">  
-    <thead>  
+<tr>
       <th>Course ID</th>  
       <th>Faculty ID</th>  
       <th>Course Name</th> 
       <th>Course Department</th> 
       <th width="200px">Action</th>  
-    </thead>  
-    <tbody>  
-      <div ng-repeat="x in ecourse">
-      <tr><td>{{x.courseid}}</td>
+    </tr>  
+     
+      <div ng-repeat="x in coursedetail">
+      <tr><td>{{x.course_id}}</td>
       <td>{{x.fid}}</td>
-      <td>{{x.coursename}}</td>
+      <td>{{x.course_name}}</td>
       <td>{{x.cdept}}</td></tr>
       </div>
-    </tbody>  
+    
   </table>  
      
 </div>  

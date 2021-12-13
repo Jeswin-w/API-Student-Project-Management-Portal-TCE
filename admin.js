@@ -61,7 +61,7 @@ app.get('/coursedetail',async (req, res)=>{
 	
 	var q=`SELECT * from course`;
 	db.query(q,(err,result)=>{
-		
+		console.log(result);
 		res.send(result);
 		
 		res.end()
