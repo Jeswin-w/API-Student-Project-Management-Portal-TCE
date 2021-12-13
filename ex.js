@@ -576,3 +576,17 @@ app.get('/fdashboard.html',(req, res)=>
 		res.redirect('/flogin.html');
 	}
 })
+
+app.get('/existingprojects.html', (req, res) =>
+{
+	res.sendFile(`${__dirname}/existingprojects.html`)
+})
+
+app.get('/projectList',(req, res)=>{
+	let q=`SELECT p.* , t.team_id, t.team_members, t.team_name, t.course_id, t.cdept, fa.fname FROM project as p INNER JOIN team as t ON t.team_id = p.team_id INNER JOIN faculty_advisor as fa ON t.fid = fa.fid`;
+	db.query(q, (err,result)=>{
+		//console.log(result);
+		if (err) throw err;
+		res.send(result);
+	});
+});

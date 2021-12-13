@@ -44,5 +44,9 @@ app.controller('dashcon',function($scope,$http){
 	$scope.filesub = function(sid) {
         $location.url(`/filesub.html?sid=${sid}`);
     };
+
+	$http.get('/projectList').then(function(data){
+		$scope.pro = data.data;	
+	})
 })
 
