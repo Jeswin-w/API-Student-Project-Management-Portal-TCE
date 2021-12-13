@@ -65,49 +65,26 @@ select{
     <form method="post" action="/teamdetails">
         <center><h1>TEAM DETAILS</h1></center>
         <br>
-        <div class="row">
-        <center><input type="text" class="form-control" id="text" name="team_name" style="height: 40px;" onfocus="this.value=''" value="TEAM NAME" required></center>
-        <center>
-          <label>Guide: </label>
-          <select name="guide" id="text" class="form-control"  style="width: 350px;" value="SELECT GUIDE" ng-model="Sorting" ng-options="x.fid as x.fname for x in gl">
-           
-          </select>
-        
-      </center>
-        
-        <center><label>Team member 1: </label><select name="team_1" id="text" class="form-control"  style="width: 350px;" value="SELECT TEAM MEMBER 1">
-          <option value="">SELECT THE STUDENT - 1</option>
-          <option value="19IT082">19IT082 SANJAYKUMAR S</option>  
-          <option value="19IT040">19IT041 JESWIN W</option>  
-          <option value="19IT041">19IT041 JEYA GANESH A V</option>  
-          <option value="19IT075">19IT075 RAHUL HARISH B</option>   
-      </select></center>
-      <center><label>Team member 2: </label><select name="team_2" id="text" class="form-control"  style="width: 350px;" value="SELECT TEAM MEMBER 1">
-        <option value="">SELECT THE STUDENT - 2</option>
-        <option value="19IT082">19IT082 SANJAYKUMAR S</option>  
-        <option value="19IT040">19IT041 JESWIN W</option>  
-        <option value="19IT041">19IT041 JEYA GANESH A V</option>  
-        <option value="19IT075">19IT075 RAHUL HARISH B</option>   
-    </select></center>
-    <center><label>Team member 3: </label><select name="team_3" id="text" class="form-control"  style="width: 350px;" value="SELECT TEAM MEMBER 1">
-      <option value="">SELECT THE STUDENT - 3</option>
-      <option value="19IT082">19IT082 SANJAYKUMAR S</option>  
-      <option value="19IT040">19IT041 JESWIN W</option>  
-      <option value="19IT041">19IT041 JEYA GANESH A V</option>  
-      <option value="19IT075">19IT075 RAHUL HARISH B</option>   
-  </select></center>
-  <center><label>Team member 4: </label><select name="team_4" id="text" class="form-control"  style="width: 350px;" value="SELECT TEAM MEMBER 1" >
-    <option value="">SELECT THE STUDENT - 4</option>
-    <option value="19IT082">19IT082 SANJAYKUMAR S</option>  
-    <option value="19IT040">19IT041 JESWIN W</option>  
-    <option value="19IT041">19IT041 JEYA GANESH A V</option>  
-    <option value="19IT075">19IT075 RAHUL HARISH B</option>   
-</select></center>
-        <br><br><br>
-        <br>
-        
-        
-  
+          <div class="row">
+          <center><input type="text" class="form-control" id="text" name="team_name" style="height: 40px;" onfocus="this.value=''" value="TEAM NAME" required></center>
+          <center>
+            <label>Guide: </label>
+            <select name="guide" id="text" class="form-control"  style="width: 350px;" value="SELECT GUIDE" ng-model="guide" ng-options="x.fid as x.fname for x in gl">
+            
+            </select>
+          
+        </center>
+          
+          <center><label>TEAM MEMBER 1</label>
+            <select name="t1" id="text" class="form-control"  style="width: 350px;" value="SELECT STUDENT" ng-model="t1" ng-options="x.regno as x.name for x in reg"> 
+        </select></center>
+        <center><label>TEAM MEMBER 2 </label><select name="t2" id="text" class="form-control"  style="width: 350px;" value="SELECT STUDENT" ng-model="t2" ng-options="x.regno as x.name for x in reg"> </center>
+      <center><label>TEAM MEMBER 3 </label><select name="t3" id="text" class="form-control"  style="width: 350px;" value="SELECT STUDENT" ng-model="t3" ng-options="x.regno as x.name for x in reg"> </center>
+    <center><label>TEAM MEMBER 4  </label><select name="t4" id="text" class="form-control"  style="width: 350px;" value="SELECT STUDENT" ng-model="t4" ng-options="x.regno as x.name for x in reg"> </center>
+          
+          
+          
+    
             </div>
             <center><br><button class="button1 bnt btn-primary" >ADD TEAM</button></center>
             
