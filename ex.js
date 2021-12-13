@@ -112,8 +112,17 @@ app.get('/guidelist',(req, res)=>{
 		if (err) throw err;
 		res.send(result);
 	})
-
 })
+
+app.get('/reglist',(req, res)=>{
+	let q=`SELECT regno, name FROM student`;
+	db.query(q, (err,result)=>{
+		console.log(result);
+		if (err) throw err;
+		res.send(result);
+	});
+});
+
 
 var arr = [];
 
