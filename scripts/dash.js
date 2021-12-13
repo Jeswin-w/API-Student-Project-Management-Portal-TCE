@@ -35,8 +35,9 @@ app.controller('dashcon',function($scope,$http){
 		$scope.gl = data.data;
 		
 	})
-	
-	
+	$http.get('/reglist').then(function(data){
+		$scope.reg = data.data;
+	})
 	$scope.filesub = function(sid) {
         $location.url(`/filesub.html?sid=${sid}`);
     };

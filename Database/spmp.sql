@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2021 at 11:59 AM
+-- Generation Time: Dec 13, 2021 at 04:39 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -31,7 +31,7 @@ CREATE TABLE `add_submission` (
   `sid` int(11) NOT NULL,
   `sub_title` varchar(70) NOT NULL,
   `sub_desc` varchar(255) NOT NULL,
-  `due_date` datetime NOT NULL,
+  `due_date` date NOT NULL,
   `course_id` varchar(20) NOT NULL,
   `cdept` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,7 +41,8 @@ CREATE TABLE `add_submission` (
 --
 
 INSERT INTO `add_submission` (`sid`, `sub_title`, `sub_desc`, `due_date`, `course_id`, `cdept`) VALUES
-(1, 'Requirements gathering', 'dsvds', '2021-12-12 12:19:00', '18ES390 - A', 'IT');
+(2, 'Requirements gathering', 'Get stakeholder requirements', '2021-12-14', '18ES390 - A', 'IT'),
+(3, 'SRS', 'submit srs doc', '2021-12-17', '18ES390 - A', 'IT');
 
 -- --------------------------------------------------------
 
@@ -75,16 +76,17 @@ INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
 CREATE TABLE `enrollment` (
   `regno` varchar(30) NOT NULL,
   `course_id` varchar(30) NOT NULL,
-  `dept` varchar(30) NOT NULL
+  `dept` varchar(30) NOT NULL,
+  `team_status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `enrollment`
 --
 
-INSERT INTO `enrollment` (`regno`, `course_id`, `dept`) VALUES
-('19IT027', '18ES390 - A', 'it'),
-('19IT027', '18IT490 - A', 'it');
+INSERT INTO `enrollment` (`regno`, `course_id`, `dept`, `team_status`) VALUES
+('19IT027', '18ES390 - A', 'it', 0),
+('19IT027', '18IT490 - A', 'it', 0);
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ CREATE TABLE `faculty_advisor` (
 --
 
 INSERT INTO `faculty_advisor` (`fid`, `mail`, `password`, `dept`, `fname`) VALUES
-('CSE011', 'facultycse011@tce.edu', 'password', 'CSE', ''),
+('CSE011', 'facultycse011@tce.edu', 'password', 'CSE', 'ab'),
 ('IT001', 'faculty001@tce.edu', 'password', 'IT', 'Faculty001'),
 ('IT003', 'faculty003@gmail.com', 'password', 'IT', 'Faculty003'),
 ('IT004', 'faculty004@tce.edu', 'password', 'IT', 'Faculty004'),
@@ -132,6 +134,27 @@ CREATE TABLE `project` (
 
 INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`) VALUES
 (1, 'Clinic Appointment System', 1, 'clinic appointment using node js', 'Web Application');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ssub`
+--
+
+CREATE TABLE `ssub` (
+  `subid` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `sid` int(11) NOT NULL,
+  `originalfile` varchar(100) NOT NULL,
+  `file` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ssub`
+--
+
+INSERT INTO `ssub` (`subid`, `team_id`, `sid`, `originalfile`, `file`) VALUES
+(1, 1, 2, '19IT025_xml1.pdf', '1639376185216-893398109..pdf');
 
 -- --------------------------------------------------------
 
@@ -207,6 +230,12 @@ ALTER TABLE `project`
   ADD PRIMARY KEY (`project_id`);
 
 --
+-- Indexes for table `ssub`
+--
+ALTER TABLE `ssub`
+  ADD PRIMARY KEY (`subid`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -227,13 +256,19 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `add_submission`
 --
 ALTER TABLE `add_submission`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
   MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ssub`
+--
+ALTER TABLE `ssub`
+  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `team`
