@@ -99,23 +99,3 @@ app.get('/facultydetail',async (req, res)=>{
 		res.end()
 	})
 })
-app.get('/editguide.html',(req,res)=>{
-    res.sendFile(`${__dirname}/editguide.html`);
-})
-app.post('/editguide.html',(req, res)=>{
-    var fname = req.body.fname;
-    var password = req.body.password;
-    var fid = req.body.fid;
-    var dept = req.body.coursedepartment;
-	var mail = req.body.mail;
-    
-    let qr = `INSERT into faculty_advisor(fname,mail,fid,dept,password) values('${fname}','${mail}','${fid}','${dept}','${password}')`;
-    db.query(qr,(err,result)=>{
-        if(err){
-            console.log(err);
-        }
-        res.redirect('/editguide.html')
-    })
-	
-
-})
