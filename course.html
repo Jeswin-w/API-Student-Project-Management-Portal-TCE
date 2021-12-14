@@ -11,19 +11,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script type="text/javascript" src="dash.js"></script>
 
-        <link rel="stylesheet" href="style1.css">
         
         
 </head>
 <style>
-input[type="submit"]{
-    background-color: #003380;
-    padding: 10px;
-    font-size: 16px;
-    align-content: center;
-    padding: 10px 15px;
-    color: whitesmoke;
+tr, td{
+    padding: 10px 10px;
+    font-size: 20px;
 }
+#title{
+    font-weight: 700;
+}
+
 </style>
 <body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
     <nav class="navbar navbar-expand-sm "style="background-color:#003380; color:whitesmoke" id="dark">
@@ -42,37 +41,53 @@ input[type="submit"]{
 
       </nav><br><br>
       <div class="container">
-        <h1>{{course[2]}}   {{course[1]}}</h1>
-        <h3>Team: {{course[3][0]}}, {{course[3][1]}}, {{course[3][2]}}</h3>
-        <h3>Project: {{course[5]}}</h3>
-        <h3>Project desc: {{course[6]}}</h3>
-      <br>
-    <center>
       <div class='row'>
-      <div class='col-sm-10'> 
-      <div ng-repeat="x in sd">
-      <div class="row" style="box-shadow: 1px 1px 2px 2px; padding: 20px 30px; width: 900px;">
-            
-            <h3>{{x.sub_title}}</h3>
-            <h6>{{x.sub_desc}}</h6>
-            <h6>{{x.due_date}}</h6>
-            <div ng-if="x.sub_status=='submitted'">
-            <h6 style="color:green">{{x.sub_status}}</h6></div>
-            
-
-               
-            <div ng-if="x.sub_status!='submitted'">
-                 <button class="btn btn-primary" ><a href="filesub.html?sid={{x.sid}}"> Add submission</button>
+        <div class='col-sm-10'> 
+            <center>
+      <div class="card">
+        <h5 class="card-header" style="background-color: #800040; color: whitesmoke;">{{course[2]}}   {{course[1]}}</h5>
+        <div class="card-body">
+          <h5 class="card-title">
+          <table style="padding: 40px 40px;">
+              <tr>
+                  <td id="title">TEAM MEMBERS: </td>
+                  <td>{{course[3][0]}}, {{course[3][1]}}, {{course[3][2]}}</td>
+              </tr>
+              <tr>
+                  <td id="title">PROJECT: </td>
+                  <td>{{course[5]}}</td>
+              </tr>
+          </table>
+        </h5>
+    </center>
+    <br><br>
+    <div ng-repeat="x in sd">
+        <br>
+        <div class="card text-center">
+            <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke">
+                {{x.sub_title}}
             </div>
-            
-                   
-          
-        </div>   </div> </div></div>
+            <div class="card-body"><br>
+              <h5 class="card-title" >{{x.sub_desc}}</h5><br>
+              <div ng-if="x.sub_status=='submitted'">
+                <h6 style="color:green"><br>{{x.sub_status | uppercase}} </h6></div>
+                
     
-    </div>
-   
-    </div>
-    </div>
+                   
+                <div ng-if="x.sub_status!='submitted'">
+                    <a href="filesub.html?sid={{x.sid}}" class="btn btn-primary">ADD SUBMISSION</a>
+                </div>
+              
+            </div>
+            <div class="card-footer text-muted" >
+                <p style="color: green">Due Date: {{x.due_date}}</p>
+            </div>
+          </div>
+          <br>
+        </div>
+        </div>
+      </div>
 
+      </div></div>
 </body>
 </html>
