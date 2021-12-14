@@ -58,6 +58,9 @@ app.post('/editcourses.html',(req, res)=>{
 app.get('/editfaculty.html',(req,res)=>{
     res.sendFile(`${__dirname}/editfaculty.html`);
 })
+app.get('/admin.html',(req,res)=>{
+    res.sendFile(`${__dirname}/admin.html`)
+})
 app.post('/editfaculty.html',(req, res)=>{
     var fname = req.body.fname;
     var password = req.body.password;
