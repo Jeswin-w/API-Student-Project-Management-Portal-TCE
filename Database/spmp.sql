@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 02:46 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: Dec 14, 2021 at 05:24 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,7 +65,17 @@ INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
 ('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
 ('18ES390 - B', 'IT004', 'DESIGN THINKING', 'IT'),
 ('18IT490 - A', 'IT007', 'PROJECT MANAGEMENT', 'IT'),
-('18IT490 - B', 'IT003', 'PROJECT MANAGEMENT', 'IT');
+('18IT490 - B', 'IT003', 'PROJECT MANAGEMENT', 'IT'),
+('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
+(' 18ES390 - B', 'IT003', 'DESIGN THINKING', 'IT'),
+(' 18ES590 - A', 'IT002', 'SYSTEM THINKING', 'IT'),
+(' 18ES590 - B', 'IT004', 'SYSTEM THINKING', 'IT'),
+(' 18ES690 - A', 'IT001', 'ENGINEERING DESIGN', 'IT'),
+(' 18ES690 - B', 'IT003', 'ENGINEERING DESIGN', 'IT'),
+(' 18ES790 - A', 'IT002', 'CAPSTONE PROJECT', 'IT'),
+(' 18ES790 - B', 'IT004', 'CAPSTONE PROJECT', 'IT'),
+('18IT810 - A', 'IT001', 'FINAL SEM PROJECT', 'IT'),
+('18IT810 - A', 'IT003', 'FINAL SEM PROJECT', 'IT');
 
 -- --------------------------------------------------------
 
@@ -219,12 +229,6 @@ INSERT INTO `team` (`team_id`, `team_members`, `course_id`, `team_name`, `fid`, 
 --
 ALTER TABLE `add_submission`
   ADD PRIMARY KEY (`sid`);
-
---
--- Indexes for table `course`
---
-ALTER TABLE `course`
-  ADD PRIMARY KEY (`course_id`);
 
 --
 -- Indexes for table `faculty_advisor`
