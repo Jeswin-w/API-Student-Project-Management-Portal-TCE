@@ -14,6 +14,9 @@ app.controller('dashcon', function($scope, $http) {
 	$http.get('/projectdetail').then(function(data){
 		$scope.projectdetail = data.data;
 	})
+    $http.get('/vsub').then(function(data){
+		$scope.vsub = data.data;
+	})
     
 
     $http.get('/dashboard').then(function(data) {

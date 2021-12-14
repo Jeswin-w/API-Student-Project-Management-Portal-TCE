@@ -7,8 +7,15 @@
     height :300px;
 }
 #box1{
-    border: 1px solid #003380;
+    padding: 10px 10px;
+    border-radius: 25px;
+    box-shadow: 0 0 5px;
     
+}
+#box1:hover{
+  border: 1px solid #003380;
+  border-radius: 25px;
+  box-shadow: 0 0 5px;
 }
 .button1{
     background-color: #003380;
@@ -222,48 +229,4 @@ body {
 .btn:focus {
   outline: 1px dashed yellow;
   outline-offset: 3px;
-}
-
-@media (hover: hover) and (min-width: 600px) {
-  .card:after {
-    transform: translateY(0);
-  }
-
-  .content {
-    transform: translateY(calc(100% - 4.5rem));
-  }
-  .content > *:not(.title) {
-    opacity: 0;
-    transform: translateY(1rem);
-    transition: transform var(--d) var(--e), opacity var(--d) var(--e);
-  }
-
-  .card:hover,
-.card:focus-within {
-    align-items: center;
-  }
-  .card:hover:before,
-.card:focus-within:before {
-    transform: translateY(-4%);
-  }
-  .card:hover:after,
-.card:focus-within:after {
-    transform: translateY(-50%);
-  }
-  .card:hover .content,
-.card:focus-within .content {
-    transform: translateY(0);
-  }
-  .card:hover .content > *:not(.title),
-.card:focus-within .content > *:not(.title) {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: calc(var(--d) / 8);
-  }
-
-  .card:focus-within:before, .card:focus-within:after,
-.card:focus-within .content,
-.card:focus-within .content > *:not(.title) {
-    transition-duration: 0s;
-  }
 }

@@ -24,7 +24,7 @@
 	
 		
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic" />
-        <link rel="stylesheet" href="style1.css">
+        
         <script type="text/javascript" src="script.js"></script>
         
 </head>
@@ -45,41 +45,29 @@
 
       </nav><br><br>
       <div class="container">
-          
-        <div class="row">
-            
-        
-          <h3><u>Enrolled Courses</u></h3><br>
-          
-        <div class="col-sm-10" style="box-shadow: 1px 1px 2px 2px;">
-            <div class="cardsplay">
-            <div ng-repeat="x in ecourse">
-      <main class="page-content">
-        
-        <div class="card">
-          <div class="content">
-            <h2 class="title">{{x.course_id}}</h2>
-            <h3>Faculty: {{x.fname}}</h3>
-            <p class="copy"><div class="col-sm-7">
-                <h4 style="text-align: center;"><a id='cour' href="course.html?cid={{x.course_id}}&cdept={{x.cdept}}&cou_name={{x.course_name}}">{{x.course_name}}</a></h4>
-            </div></p>
-            
-            <button class="btn">Book Now</button>
-          </div>
+      <div class="row">
+        <div class="col-sm-10">
+          <center><h2>COURSES</h2></center>
+        <div ng-repeat="x in ecourse">
+        <div style="padding: 10px 10px">
+            <div class="card">
+                <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke">
+                    {{x.cdept}}
+                </div>
+                <div class="card-body" >
+                <h5 class="card-title" >{{x.course_id}}  :  {{x.course_name}}</h5>
+                <h5 class="card-title" style="font-size: 14px">Faculty:  {{x.fname}}.</h5><br>
+                <a href="course.html?cid={{x.course_id}}&cdept={{x.cdept}}&cou_name={{x.course_name}}" class="btn btn-primary" style="background-color: #003380" >ENTER</a>
+                </div>
+              </div>
         </div>
-        
-        
-      </main>
-        </div>
-        </div>
+      </div>
+      <br><br>
+      <form method="get" action="/enroll.html"><center><button class="btn btn-primary" style="background-color: #003380; padding: 15px 20px" >Add Project</button></center></form><br>
       </div>
       <div class="col-sm" >
-        <h6>Add Project</h6>
-        <form method="get" action="/enroll.html"><center><button class="button3" >Add Project</button></center></form><br>
-        <div  style="border:solid 1px; margin: 5px 5px 5px 5px;" >
-    <h5 style="text-align: center;">Calender</h5></div>
+        
 </div>
-      </div>
       </div>
       
 
