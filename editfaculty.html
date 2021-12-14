@@ -11,9 +11,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />  
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>  
         <link rel="stylesheet" href="style2.css">
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript" src="dash.js"></script>
     </head>
-    <body style="background-color: whitesmoke">
+    <body style="background-color: whitesmoke" ng-app="dash" ng-controller="dashcon">
         
         <div class='container-fluid' style='background-color:#003380; border-radius:0% 0% 50% 50%;padding-bottom: 30px;'>
             <h1 >
@@ -27,21 +28,21 @@
 
 <div class="container">  
   <center><h1 style = color:#003380; font-size> PROJECTS </h1></center>
-     <form>  
+     <form method="post" action="/editfaculty.html">  
     
     <div class="form-group">  
       <label>Faculty ID</label>  
-      <input type="text" fid="faculty_id" class="form-control" required="">  
+      <input type="text" name="fid" fid="faculty_id" class="form-control" required="">  
     </div>  
      
     <div class="form-group">  
         <label>Mail ID</label>  
-        <input type="text" mid="mail_id" class="form-control" required="">  
+        <input type="text" name="mail" mid="mail_id" class="form-control" required="">  
       </div>  
              
     <div class="form-group">  
       <label>Password</label>  
-     <input type="text" pass="password" class="form-control" required="">  
+     <input type="text" name="password" pass="password" class="form-control" required="">  
     </div>  
     
     <div class="form-group">  
@@ -60,26 +61,31 @@
 
     <div class="form-group">  
         <label>Faculty Name</label>   
-        <input type="text" fname="faculty_name" class="form-control" required="">  
+        <input type="text" name="fname" fname="faculty_name" class="form-control" required="">  
       </div>  
          
 
     <center> <button type="submit" class="btn btn-success save-btn">Add Faculty</button> </center> 
       
   </form>  
+  
   <br/>  
   <table class="table table-bordered data-table">  
-    <thead>  
+    <tr>
       <th>Faculty ID</th>  
       <th>Mail ID</th>  
       <th>Password</th>  
       <th>Department</th>  
       <th>Faculty Name</th>
-      <th width="200px">Action</th>  
-    </thead>  
-    <tbody>  
-      
-    </tbody>  
+       
+    </tr> 
+    <tr ng-repeat="x in facultydetail">
+      <td>{{x.fid}}</td>
+      <td>{{x.mail}}</td>
+      <td>{{x.password}}</td>
+      <td>{{x.department}}</td>
+      <td>{{x.fname}}</td></tr>
+        
   </table>  
      
 </div>  
@@ -87,5 +93,3 @@
        
 </body>  
 </html>  
-</body>
-</html>

@@ -55,11 +55,43 @@ app.post('/editcourses.html',(req, res)=>{
 	
 
 })
+app.get('/editfaculty.html',(req,res)=>{
+    res.sendFile(`${__dirname}/editfaculty.html`);
+})
+app.post('/editfaculty.html',(req, res)=>{
+    var fname = req.body.fname;
+    var password = req.body.password;
+    var fid = req.body.fid;
+    var dept = req.body.coursedepartment;
+	var mail = req.body.mail;
+    
+    let qr = `INSERT into faculty_advisor(fname,mail,fid,dept,password) values('${fname}','${mail}','${fid}','${dept}','${password}')`;
+    db.query(qr,(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/editfaculty.html')
+    })
+	
+
+})
 app.get('/coursedetail',async (req, res)=>{
 	
 	
 	
 	var q=`SELECT * from course`;
+	db.query(q,(err,result)=>{
+		console.log(result);
+		res.send(result);
+		
+		res.end()
+	})
+})
+app.get('/facultydetail',async (req, res)=>{
+	
+	
+	
+	var q=`SELECT * from faculty_advisor`;
 	db.query(q,(err,result)=>{
 		console.log(result);
 		res.send(result);
