@@ -319,11 +319,15 @@ app.get('/submissions', (req, res) => {
     let q = `Select * from add_submission where course_id='${course_id}' and cdept='${cdept}'`;
     db.query(q, async function(err, result) {
         sub = result
+       
         let q1 = `select * from ssub where team_id='${tid}'`
         db.query(q1, async(err, result1) => {
             if (err) { throw (err) }
             ssub = result1
             for (let i = 0; i < result.length; i++) {
+                var datetime=result[i].due_date.toISOString().slice(0, 10).replace('T', ' ');
+                console.log(datetime);
+                result[i].due_date = datetime;
                 result[i]['sub_status'] = ''
                 for (let j = 0; j < result1.length; j++) {
                     if (result[i].sid == result1[j].sid) {
