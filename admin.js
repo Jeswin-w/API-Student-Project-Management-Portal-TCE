@@ -107,9 +107,10 @@ app.post('/editprojects.html',(req, res)=>{
     var project_name = req.body.project_name;
     var team_id = req.body.team_id;
     var project_desc = req.body.project_desc;
+	var domain = req.body.domain;
 	
     
-    let qr = `INSERT into project(project_id,project_name,team_id,project_desc) values('${project_id}','${project_name}','${team_id}','${project_desc}')`;
+    let qr = `INSERT into project(project_id,project_name,team_id,project_desc,domain) values('${project_id}','${project_name}','${team_id}','${project_desc}','${domain}'')`;
     
     db.query(qr,(err,result)=>{
         if(err){
