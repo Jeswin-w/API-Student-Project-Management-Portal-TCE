@@ -495,12 +495,16 @@ app.get('/vsub',(req, res)=>{
     var fid= req.session.fid;
     var sid=req.session.sid;
 
-    let q=`select * from ssub inner join team on ssub.team_id = team.team_id where sid = '${sid}'`
+    let q=`select ssub.*,team.team_name,team.team_members from ssub inner join team on ssub.team_id = team.team_id where sid = '${sid}'`
     db.query(q,(err,result)=>{
         res.send(result);
     })
 
 
+})
+app.get('/download1',(req, res)=>{
+    var filen=req.query.filen;
+    res.download(`${__dirname }/sub/${filen}`)
 })
 app.get('/flogout', (req, res) => {
     req.session.loggedin = false;
