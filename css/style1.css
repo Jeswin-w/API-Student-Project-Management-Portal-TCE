@@ -7,8 +7,15 @@
     height :300px;
 }
 #box1{
-    border: 1px solid #003380;
+    padding: 10px 10px;
+    border-radius: 25px;
+    box-shadow: 0 0 5px;
     
+}
+#box1:hover{
+  border: 1px solid #003380;
+  border-radius: 25px;
+  box-shadow: 0 0 5px;
 }
 .button1{
     background-color: #003380;

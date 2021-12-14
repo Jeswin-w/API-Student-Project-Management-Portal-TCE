@@ -227,6 +227,7 @@ app.get('/enroll', (req, res) => {
 app.get('/cfcourse.html', (req, res) => {
     var course_id = req.query.cid;
     var cdept = req.query.cdept;
+    req.session.sid='';
     if (req.session.loggedin == false || req.session.fid == '') {
         res.redirect("/flogin.html");
     } else {
@@ -343,7 +344,10 @@ app.get('/submissions', (req, res) => {
     })
 })
 
-
+app.get('/viewsubmissions.html',(req, res)=>{
+    req.session.sid=req.query.sid;
+    res.sendFile(`${__dirname}/viewsubmissions.html`);
+})
 app.post('/addsubmission', (req, res) => {
 
     var course_id = req.session.course_id;
@@ -485,6 +489,19 @@ app.post('/flogin', (req, res) => {
         res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = 'login.html';</script>`)
     }
 });
+app.get('/vsub',(req, res)=>{
+    var course_id=req.session.course_id;
+    var cdept = req.session.cdept;
+    var fid= req.session.fid;
+    var sid=req.session.sid;
+
+    let q=`select * from ssub inner join team on ssub.team_id = team.team_id where sid = '${sid}'`
+    db.query(q,(err,result)=>{
+        res.send(result);
+    })
+
+
+})
 app.get('/flogout', (req, res) => {
     req.session.loggedin = false;
     req.session.email = "";
