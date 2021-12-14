@@ -10,42 +10,43 @@
         <link rel="stylesheet" href="style1.css">
         <script type="text/javascript" src="dash.js"></script>
     </head>
-    <body style="background-color: lemonchiffon;"  ng-app="dash" ng-controller='dashcon'>
-        <nav class="navbar navbar-expand-sm "style="background-color:brown; color:lemonchiffon" id="dark">
+    <body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
+        <nav class="navbar navbar-expand-sm "style="background-color:#003380; color:whitesmoke" id="dark">
             
             <a class="navbar-brand" href="/dashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:60px; height:60px ;margin-left: 10px;"> </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                   <h4> <a class="nav-link" href="/dashboard.html" style="font-family:lobster;color:lemonchiffon;">TCE-Student Project Management Portal</a></h4>
+                   <h4> <a class="nav-link" href="/dashboard.html" style="font-family:lobster;color:whitesmoke;">TCE-Student Project Management Portal</a></h4>
                 </li></ul>
                 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color:lemonchiffon">{{user.name}}</a></h5></li>
-                        <li class="nav-item"> <h5><a class="nav-link" id='x' href="/logout" style="font-family:lobster;color:lemonchiffon;">Logout</a></h5></li>
+                        <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color:whitesmoke">{{user.name}}</a></h5></li>
+                        <li class="nav-item"> <h5><a class="nav-link" id='x' href="/logout" style="font-family:lobster;color:whitesmoke;">Logout</a></h5></li>
                     </ul>
             </nav>
-            
-                <center><h1><b>ADD SUBMISSION</center>
+            <br><br>
+                <center><h1 style="color:#003380">ADD SUBMISSION</center>
                 
                     <form method="post" action="/addsubmission">
+                    
                         <div class="container">
                     <div class="row">
                         
                     
-                    <label>Submission title: </label><br>
+                    <center><label>Submission title: </label><br></center>
         
-                    <input type="text" class="form-control" id="text" name="project_title" style="height: 50px;">
+                    <center><input type="text" class="form-control" id="text" name="project_title" style="height: 40px"></center>
+        
+                    <center> <label>Submission Description:</label><br></center>
+                    <center>  <textarea class="form-control" id="text"  name="project_desc" style="height: 200px;"></textarea><br></center>        
                    
-            
-                    <label>Submission Description:</label><br>
-                    <textarea class="form-control" id="text"  name="project_desc" style="height: 250px;"></textarea>                
-                <br>
-                <label>Due date:</label><br>
-                    <input type="date" class="form-control" id="text" name="project_due" style="height: 50px;">                
-                <br>
+                    <center><label>Due date:</label><br></center>
+                    <center><input type="date" class="form-control" id="text" name="project_due" style="height: 40px;"></center>              
+                
                         </div>
-                        <center><br><button class="button1" >ADD</button></center>
+                        <center><button class="button1" >ADD</button></center>
                     </div>
+                
                 </form>  
                             
 
