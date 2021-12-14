@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TCE-Student Project Management Portal</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript" src="dash.js"></script>
+        <link rel="stylesheet" href="style1.css">        
+</head>
+
+<body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
+    <nav class="navbar navbar-expand-sm "style="background-color:#003380; color:whitesmoke" id="dark">
+        
+        <a class="navbar-brand" href="/fdashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:60px; height:60px ;margin-left: 10px;   "> </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <h4> <a class="nav-link" href="/fdashboard.html" style="font-family:lobster;color:whitesmoke;"><h2 style="margin-top: 1px;">TCE-Student Project Management Portal</h2></a></h4>
+            </li></ul>
+            
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color: whitesmoke">{{fuser.fname}}</a></h5></li>
+                    <li class="nav-item"> <h5><a class="nav-link" id='x' href="/flogout" style="font-family:lobster;color:whitesmoke;">Logout</a></h5></li>
+                </ul>
+            
+
+      </nav>
+
+      <div class="container">
+        <center><h1 style="color: #003380">SUBMISSIONS</h1> 
+            <input type="text" ng-model="sub" placeholder="SEARCH" style="height:45px; width: 300px; padding: 20px 20px;"><br></center>
+            <center>
+        <table class="table table-bordered" style="padding: 30px 30px; width: 100%; font-size: 16px;">
+
+            <tr style="padding: 30px 30px; background-color: #003380; color: whitesmoke;text-align: center">
+                <th>Title</th>
+                <th>description</th>
+                <th>File submitted</th>
+                <th>Guide Status</th>
+                <th>Status</th>
+                
+                </tr>
+                <tbody>
+    
+                    <tr ng-repeat="x in ts | filter : sub">
+                        <td>{{x.sub_title}}</td>
+                        <td>{{x.sub_desc}}</td>
+                        <td><a style='color:#003380' href="/download1?filen={{x.file}}">{{x.originalfile}}</a></td>
+                        <td>{{x.cf_status}}</td>
+                        <td>
+                            <center><div ng-show="!showForm">{{x.guide_status}}<br><button type="submit" class='button3' ng-click="onClickForm()" > 
+                            Edit
+                         </button>        </div></center>
+                         <center><div ng-show="showForm"><form  method="post" action='/gstatus'>
+                             <input type="text" name='guidestatus'ng-model="firstname" placeholder="Status">
+                             <input type='hidden' name='subid' value='{{x.subid}}'> 
+                            <button type="submit" class='button3'>Update</button>
+                         </form></div></center>
+                           </td>
+                        </tr>
+                    </tbody>
+      </div>
+      </body>
+      </html>

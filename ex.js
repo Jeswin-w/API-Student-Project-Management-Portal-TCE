@@ -45,6 +45,17 @@ app.post('/cfstatus', (req, res)=>{
         res.redirect(`/viewsubmissions.html`)
     })
 })
+app.post('/gstatus', (req, res)=>{
+    var id= req.body.subid;
+    var status=req.body.guidestatus;
+    
+    let q=`Update ssub set guide_status='${status}' where subid='${id}'`;
+    db.query(q, (err,result)=>{
+        if (err) throw err;
+
+        res.redirect(`/viewteamsub.html`)
+    })
+})
 
 var upload = multer({ storage: storage });
 
@@ -143,7 +154,20 @@ app.get('/guidelist', (req, res) => {
         res.send(result);
     })
 })
-
+app.get('/guideteams',(req, res)=>{
+    let q=`select * from team inner join project on team.team_id=project.team_id where team.fid = '${req.session.fid}' and team.course_id='${req.session.course_id}' and team.cdept='${req.session.cdept}'`;
+    db.query(q, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+        
+    })
+})
+app.get('/fcourse.html', (req, res)=>{
+    req.session.course_id=req.query.cid;
+    req.session.cdept=req.query.cdept;
+    console.log(req.session)
+    res.sendFile(`${__dirname}/fcourse.html`)
+})
 app.get('/reglist', (req, res) => {
     let q = `SELECT s.regno, s.name FROM student as s inner join enrollment as e on s.regno = e.regno where e.team_status=0 and e.course_id='${req.session.course_id}' and e.dept='${req.session.cdept}'`;
     db.query(q, (err, result) => {
@@ -206,6 +230,22 @@ app.get('/filesub.html', (req, res) => {
     req.session.sid = sid;
     //console.log(req.session)
     res.sendFile(`${__dirname}/filesub.html`)
+
+})
+app.get('/teamsub',(req, res)=>{
+    var team_id=req.session.team_id;
+    console.log(req.session);
+    let q=`select ss.*,asub.sub_title,asub.sub_desc,asub.due_date from ssub ss inner join add_submission asub on ss.sid=asub.sid where ss.team_id='${team_id}' and asub.course_id='${req.session.course_id}' and asub.cdept='${req.session.cdept}'`;
+    db.query(q, (err, result)=>{
+        if(err) throw err;
+        res.send(result);
+    })
+})
+app.get('/viewteamsub.html',(req, res)=>{
+    if(req.query.tid!=null){
+        
+        req.session.team_id=req.query.tid;}
+        res.sendFile(`${__dirname}/viewteamsub.html`);
 
 })
 app.get('/send', (req, res) => {
@@ -337,7 +377,7 @@ app.get('/submissions', (req, res) => {
             ssub = result1
             for (let i = 0; i < result.length; i++) {
                 var datetime=result[i].due_date.toISOString().slice(0, 10).replace('T', ' ');
-                console.log(datetime);
+                
                 result[i].due_date = datetime;
                 result[i]['sub_status'] = ''
                 for (let j = 0; j < result1.length; j++) {
@@ -508,6 +548,7 @@ app.get('/vsub',(req, res)=>{
 
     let q=`select ssub.*,team.team_name,team.team_members from ssub inner join team on ssub.team_id = team.team_id where sid = '${sid}'`
     db.query(q,(err,result)=>{
+       
         res.send(result);
     })
 
@@ -540,7 +581,7 @@ app.get('/fcourses1', (req, res) => {
         var q1 = `select dept from faculty_advisor where fid='${fid}'`;
         db.query(q1, (err, result) => {
             var dept = result[0].dept;
-            var q2 = `select * from course where cdept='${dept}'`;
+            var q2 = `select * from course  where cdept='${dept}'`;
             db.query(q2, (err, result1) => {
 
                 res.send(result1);

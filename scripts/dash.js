@@ -22,6 +22,12 @@ app.controller('dashcon', function($scope, $http) {
 $scope.onClickForm = function(){
     $scope.showForm = true;
 }
+$http.get('/guideteams').then(function(data) {
+    $scope.gt = data.data;
+})
+$http.get('/teamsub').then(function(data) {
+    $scope.ts = data.data;
+})
 
     $http.get('/dashboard').then(function(data) {
         $scope.user = data.data[0];
