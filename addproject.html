@@ -10,6 +10,15 @@
         <link rel="stylesheet" href="style1.css">
         <script type="text/javascript" src="dash.js"></script>
     </head>
+    <style>
+        #text{
+            align-content: center;
+        }
+        label{
+            font-size: 20px;
+            padding: 10px 10px;
+        }
+    </style>
     <body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
         <nav class="navbar navbar-expand-sm "style="background-color:#003380; color:whitesmoke" id="dark">
             
@@ -26,22 +35,22 @@
             </nav>
             
                 <center><h1><b>ADD PROJECT</b></h1></center>
-                <div class="container" style="box-shadow: 1px 1px 2px 2px #003380; padding-bottom: 10px; margin-top: 50px;padding-left: 30px;padding-right: 30px">
-                    <center><h1>Team ID:</h1></center>
+                <div class="container" style="box-shadow: 1px 1px 2px 2px #003380; padding-bottom: 10px; margin-top: 50px;padding-left: 20px;padding-right: 20px; width: 600px; height:900px">
+                    <center><h1 style="padding: 10px 10px">Team ID:</h1>
                     <form method="post" action="/addproject">
                     <div class="row">
                         
                     
-                    <label>Project Name: </label><br>
+                    <label>PROJECT</label><br>
         
-                    <input type="text" class="form-control" id="text" name="project_name" style="height: 50px;">
-                    <label>Domain: </label><br>
+                    <center><input type="text" class="form-control" id="text" name="project_name" style="height: 50px;"></center>
+                    <label>DOMAIN</label><br>
         
-                    <input type="text" class="form-control" id="text" name="project_domain" style="height: 50px;">
+                    <center><input type="text" class="form-control" id="text" name="project_domain" style="height: 50px;"></center>
                    
             
-                    <label>Project Description:</label><br>
-                    <input type="textarea" class="form-control" id="text" name="project_desc" style="height: 250px;">                
+                    <label>PROJECT DESCRIPTION</label><br>
+                    <center><textarea class="form-control"  id="text" name="project_name" style="height: 400px"></textarea> </center>            
                 <br>
                         </div>
                         <center><br><button class="button1" >ADD</button></center>
