@@ -11,6 +11,10 @@ app.controller('dashcon', function($scope, $http) {
 	$http.get('/facultydetail').then(function(data){
 		$scope.facultydetail = data.data;
 	})
+	$http.get('/projectdetail').then(function(data){
+		$scope.projectdetail = data.data;
+	})
+    
 
     $http.get('/dashboard').then(function(data) {
         $scope.user = data.data[0];
