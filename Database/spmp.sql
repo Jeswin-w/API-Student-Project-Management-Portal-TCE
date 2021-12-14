@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 05:24 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Dec 14, 2021 at 06:35 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,8 +64,6 @@ CREATE TABLE `course` (
 INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
 ('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
 ('18ES390 - B', 'IT004', 'DESIGN THINKING', 'IT'),
-('18IT490 - A', 'IT007', 'PROJECT MANAGEMENT', 'IT'),
-('18IT490 - B', 'IT003', 'PROJECT MANAGEMENT', 'IT'),
 ('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
 (' 18ES390 - B', 'IT003', 'DESIGN THINKING', 'IT'),
 (' 18ES590 - A', 'IT002', 'SYSTEM THINKING', 'IT'),
@@ -164,8 +162,8 @@ CREATE TABLE `ssub` (
   `sid` int(11) NOT NULL,
   `originalfile` varchar(100) NOT NULL,
   `file` varchar(255) NOT NULL,
-  `cf_status` varchar(100) NOT NULL,
-  `guide_status` varchar(100) NOT NULL
+  `cf_status` varchar(100) NOT NULL DEFAULT 'Not updated',
+  `guide_status` varchar(100) NOT NULL DEFAULT 'Not Updated'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
