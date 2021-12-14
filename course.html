@@ -26,7 +26,7 @@ input[type="submit"]{
 }
 </style>
 <body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
-    <nav class="navbar navbar-expand-sm "style="background-color:brown; color:lemonchiffon" id="dark">
+    <nav class="navbar navbar-expand-sm "style="background-color:#003380; color:whitesmoke" id="dark">
         
         <a class="navbar-brand" href="/dashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:60px; height:60px ;margin-left: 10px;"> </a>
         <ul class="navbar-nav">
@@ -45,8 +45,9 @@ input[type="submit"]{
         <h1>{{course[2]}}   {{course[1]}}</h1>
         <h3>Team: {{course[3][0]}}, {{course[3][1]}}, {{course[3][2]}}</h3>
         <h3>Project: {{course[5]}}</h3>
-        <h3>Project desc:{{course[6]}}</h3>
-      <br><br>
+        <h3>Project desc: {{course[6]}}</h3>
+      <br>
+    <center>
       <div class='row'>
       <div class='col-sm-10'> 
       <div ng-repeat="x in sd">
@@ -76,3 +77,4 @@ input[type="submit"]{
     </div>
 
 </body>
+</html>
