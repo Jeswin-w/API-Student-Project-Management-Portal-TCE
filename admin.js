@@ -99,3 +99,36 @@ app.get('/facultydetail',async (req, res)=>{
 		res.end()
 	})
 })
+app.get('/editprojects.html',(req,res)=>{
+    res.sendFile(`${__dirname}/editprojects.html`);
+})
+app.post('/editprojects.html',(req, res)=>{
+    var project_id = req.body.project_id;
+    var project_name = req.body.project_name;
+    var team_id = req.body.team_id;
+    var project_desc = req.body.project_desc;
+	
+    
+    let qr = `INSERT into project(project_id,project_name,team_id,project_desc) values('${project_id}','${project_name}','${team_id}','${project_desc}')`;
+    
+    db.query(qr,(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/editprojects.html')
+    })
+	
+
+})
+app.get('/projectdetail',async (req, res)=>{
+	
+	
+	
+	var q=`SELECT * from project`;
+	db.query(q,(err,result)=>{
+		console.log(result);
+		res.send(result);
+		
+		res.end()
+	})
+})
