@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TCE-Student Project Management Portal</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript" src="dash.js"></script>   
+        <link rel="stylesheet" href="style1.css">  
+</head>
+
+<body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
+    <nav class="navbar navbar-expand-sm "style="background-color:#003380; color:whitesmoke" id="dark">
+        
+        <a class="navbar-brand" href="/fdashboard.html" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:60px; height:60px ;margin-left: 10px;   "> </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <h4> <a class="nav-link" href="/fdashboard.html" style="font-family:lobster;color:whitesmoke;"><h2 style="margin-top: 1px;">TCE-Student Project Management Portal</h2></a></h4>
+            </li></ul>
+            
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color: whitesmoke">{{fuser.fname}}</a></h5></li>
+                    <li class="nav-item"> <h5><a class="nav-link" id='x' href="/flogout" style="font-family:lobster;color:whitesmoke;">Logout</a></h5></li>
+                </ul>
+            
+
+      </nav>
+      <div class="container">
+          <div class="row">
+            <div class="col-sm-10">
+                <H1>Teams:</H1>
+                
+                <div ng-repeat="x in gt">
+                    
+                  <div id='box1' class='row'><div calss='col-sm-5'><h3>{{x.team_name}}</h3><h5 ><b style="color: #003380">team members:</b> {{x.team_members}}</h5>
+                  </div><div class='col-sm'><h5><b style="color: #003380">project name:</b>{{x.project_name}}</h5>
+                    <h5><b style="color: #003380">project desc:</b>{{x.project_desc}}</h5>
+                    <h5><b style="color: #003380">project domain:</b>{{x.domain}}</h5></div>
+                    <button><a style='color: #003380'href='/viewteamsub.html?tid={{x.team_id}}'>View Submissions</a></button>
+                    
+                  
+                      </div>
+                  </div><br>
+              </div></div>
+          </div>   
+         </div>
+        </div>
+
+</body>
+
+</html>
