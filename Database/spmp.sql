@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2021 at 07:01 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Generation Time: Dec 14, 2021 at 02:46 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -88,7 +88,11 @@ INSERT INTO `enrollment` (`regno`, `course_id`, `dept`, `team_status`) VALUES
 ('19IT027', '18ES390 - A', 'it', 1),
 ('19IT027', '18IT490 - A', 'it', 0),
 ('19IT040', '18ES390 - A', 'IT', 1),
-('19IT041', '18ES390 - A', 'IT', 1);
+('19IT041', '18ES390 - A', 'IT', 1),
+('19IT027', '18ES390 - B', 'IT', 0),
+('19IT027', '18ES590 - B', 'it', 0),
+('19IT027', '18ES790 - B', 'it', 0),
+('19IT027', '18ES590 - A', 'it', 0);
 
 -- --------------------------------------------------------
 
@@ -136,7 +140,7 @@ CREATE TABLE `project` (
 
 INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`) VALUES
 (1, 'Clinic Appointment System', 1, 'clinic appointment using node js', 'Web Application'),
-(2, 'Smart Lab', 5, 'Making labs smart', 'Making labs smart');
+(3, 'smart labs', 5, 'making labs automatic', 'making labs automatic');
 
 -- --------------------------------------------------------
 
@@ -149,15 +153,17 @@ CREATE TABLE `ssub` (
   `team_id` int(11) NOT NULL,
   `sid` int(11) NOT NULL,
   `originalfile` varchar(100) NOT NULL,
-  `file` varchar(255) NOT NULL
+  `file` varchar(255) NOT NULL,
+  `cf_status` varchar(100) NOT NULL,
+  `guide_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ssub`
 --
 
-INSERT INTO `ssub` (`subid`, `team_id`, `sid`, `originalfile`, `file`) VALUES
-(1, 1, 2, '19IT025_xml1.pdf', '1639376185216-893398109..pdf');
+INSERT INTO `ssub` (`subid`, `team_id`, `sid`, `originalfile`, `file`, `cf_status`, `guide_status`) VALUES
+(4, 5, 3, 'Lang_id.xlsx', '1639484596944-513534371..xlsx', '', '');
 
 -- --------------------------------------------------------
 
@@ -266,13 +272,13 @@ ALTER TABLE `add_submission`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ssub`
 --
 ALTER TABLE `ssub`
-  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `team`
