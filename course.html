@@ -64,8 +64,8 @@ tr, td{
     <div ng-repeat="x in sd">
         <br>
         <div class="card text-center">
-            <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke">
-                {{x.sub_title}}
+            <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke; font-weight: 600; font-size: 18px;">
+                {{x.sub_title | uppercase}}
             </div>
             <div class="card-body"><br>
               <h5 class="card-title" >{{x.sub_desc}}</h5><br>
