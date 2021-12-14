@@ -51,7 +51,16 @@
                         <td>{{x.team_members}}</td>
                         <td><a style='color:#003380' href="/download1?filen={{x.file}}">{{x.originalfile}}</a></td>
                         <td>{{x.guide_status}}</td>
-                        <td></td>
+                        <td>
+                            <center><div ng-show="!showForm">{{x.cf_status}}<br><button type="submit" class='button3' ng-click="onClickForm()" > 
+                            Edit
+                         </button>        </div></center>
+                         <center><div ng-show="showForm"><form  method="post" action='/cfstatus'>
+                             <input type="text" name='cfstatus'ng-model="firstname" placeholder="Status">
+                             <input type='hidden' name='subid' value='{{x.subid}}'> 
+                            <button type="submit" class='button3'>Update</button>
+                         </form></div></center>
+                           </td>
                         </tr>
                     </tbody>
       </div>
