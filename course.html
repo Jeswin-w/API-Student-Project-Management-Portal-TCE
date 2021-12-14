@@ -55,15 +55,13 @@ input[type="submit"]{
             
             <h3>{{x.sub_title}}</h3>
             <h6>{{x.sub_desc}}</h6>
-            <div ng-if="x.sub_status=='Submitted'">
+            <h6>{{x.due_date}}</h6>
+            <div ng-if="x.sub_status=='submitted'">
             <h6 style="color:green">{{x.sub_status}}</h6></div>
-            <div ng-if="x.sub_status=='Overdue'">
-                <h6 style="color:red">{{x.sub_status}}</h6></div>
-                <div ng-if="x.sub_status!='Submitted' & x.sub_status!='Overdue'">
-                    <h6>{{x.sub_status}}</h6></div>
+            
 
                
-            <div ng-if="x.sub_status!='Submitted'">
+            <div ng-if="x.sub_status!='submitted'">
                  <button class="btn btn-primary" ><a href="filesub.html?sid={{x.sid}}"> Add submission</button>
             </div>
             
