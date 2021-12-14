@@ -17,7 +17,11 @@ app.controller('dashcon', function($scope, $http) {
     $http.get('/vsub').then(function(data){
 		$scope.vsub = data.data;
 	})
-    
+    $scope.showForm= false;
+
+$scope.onClickForm = function(){
+    $scope.showForm = true;
+}
 
     $http.get('/dashboard').then(function(data) {
         $scope.user = data.data[0];
