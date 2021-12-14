@@ -34,7 +34,17 @@ const storage = multer.diskStorage({
         cb(null, file)
     }
 })
+app.post('/cfstatus', (req, res)=>{
+    var id= req.body.subid;
+    var status=req.body.cfstatus;
+    
+    let q=`Update ssub set cf_status='${status}' where subid='${id}'`;
+    db.query(q, (err,result)=>{
+        if (err) throw err;
 
+        res.redirect(`/viewsubmissions.html`)
+    })
+})
 
 var upload = multer({ storage: storage });
 
@@ -345,7 +355,8 @@ app.get('/submissions', (req, res) => {
 })
 
 app.get('/viewsubmissions.html',(req, res)=>{
-    req.session.sid=req.query.sid;
+    if(req.query.sid!=null){
+    req.session.sid=req.query.sid;}
     res.sendFile(`${__dirname}/viewsubmissions.html`);
 })
 app.post('/addsubmission', (req, res) => {
