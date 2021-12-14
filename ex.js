@@ -277,7 +277,7 @@ app.get('/enroll', (req, res) => {
                     throw err;
                 }
                 console.log("inserted");
-                res.redirect('/addproject.html');
+                res.redirect('/enroll.html');
             })
         }
 
@@ -311,7 +311,7 @@ app.get('/ecourse', async(req, res) => {
 
     var regno = req.session.regno;
 
-    var q = `Select * from enrollment as e inner join course as c on e.course_id=c.course_id inner join faculty_advisor as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
+    var q = `Select distinct * from enrollment as e inner join course as c on e.course_id=c.course_id inner join faculty_advisor as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
     db.query(q, (err, result) => {
 
         res.send(result);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 06:35 PM
+-- Generation Time: Dec 14, 2021 at 07:36 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -62,18 +62,16 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
-('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
 ('18ES390 - B', 'IT004', 'DESIGN THINKING', 'IT'),
-('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
-(' 18ES390 - B', 'IT003', 'DESIGN THINKING', 'IT'),
-(' 18ES590 - A', 'IT002', 'SYSTEM THINKING', 'IT'),
-(' 18ES590 - B', 'IT004', 'SYSTEM THINKING', 'IT'),
-(' 18ES690 - A', 'IT001', 'ENGINEERING DESIGN', 'IT'),
-(' 18ES690 - B', 'IT003', 'ENGINEERING DESIGN', 'IT'),
-(' 18ES790 - A', 'IT002', 'CAPSTONE PROJECT', 'IT'),
-(' 18ES790 - B', 'IT004', 'CAPSTONE PROJECT', 'IT'),
+('18ES590 - A', 'IT002', 'SYSTEM THINKING', 'IT'),
+('18ES590 - B', 'IT004', 'SYSTEM THINKING', 'IT'),
+('18ES690 - A', 'IT001', 'ENGINEERING DESIGN', 'IT'),
+('18ES690 - B', 'IT003', 'ENGINEERING DESIGN', 'IT'),
+('18ES790 - A', 'IT002', 'CAPSTONE PROJECT', 'IT'),
+('18ES790 - B', 'IT004', 'CAPSTONE PROJECT', 'IT'),
 ('18IT810 - A', 'IT001', 'FINAL SEM PROJECT', 'IT'),
-('18IT810 - A', 'IT003', 'FINAL SEM PROJECT', 'IT');
+('18IT810 - A', 'IT003', 'FINAL SEM PROJECT', 'IT'),
+('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT');
 
 -- --------------------------------------------------------
 
@@ -94,12 +92,9 @@ CREATE TABLE `enrollment` (
 
 INSERT INTO `enrollment` (`regno`, `course_id`, `dept`, `team_status`) VALUES
 ('19IT027', '18ES390 - A', 'it', 1),
-('19IT027', '18IT490 - A', 'it', 0),
 ('19IT040', '18ES390 - A', 'IT', 1),
 ('19IT041', '18ES390 - A', 'IT', 1),
-('19IT027', '18ES390 - B', 'IT', 0),
-('19IT027', '18ES590 - B', 'it', 0),
-('19IT027', '18ES790 - B', 'it', 0),
+('19IT027', '18ES390 - B', 'it', 0),
 ('19IT027', '18ES590 - A', 'it', 0);
 
 -- --------------------------------------------------------
@@ -123,7 +118,8 @@ CREATE TABLE `faculty_advisor` (
 INSERT INTO `faculty_advisor` (`fid`, `mail`, `password`, `dept`, `fname`) VALUES
 ('CSE011', 'facultycse011@tce.edu', 'password', 'CSE', 'ab'),
 ('IT001', 'faculty001@tce.edu', 'password', 'IT', 'Faculty001'),
-('IT003', 'faculty003@gmail.com', 'password', 'IT', 'Faculty003'),
+('IT002', 'faculty002@tce.edu', 'password', 'IT', 'faculty002'),
+('IT003', 'faculty003@tce.edu', 'password', 'IT', 'Faculty003'),
 ('IT004', 'faculty004@tce.edu', 'password', 'IT', 'Faculty004'),
 ('IT007', 'faculty010@tce.edu', 'password', 'IT', 'Faculty010'),
 ('MA001', 'facultymech001@tce.edu', 'password', 'MECH', '');
@@ -147,8 +143,7 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`) VALUES
-(1, 'Clinic Appointment System', 1, 'clinic appointment using node js', 'Web Application'),
-(3, 'smart labs', 5, 'making labs automatic', 'making labs automatic');
+(8, 'social media', 5, 'make a social media set', 'web dev');
 
 -- --------------------------------------------------------
 
@@ -274,7 +269,7 @@ ALTER TABLE `add_submission`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ssub`
