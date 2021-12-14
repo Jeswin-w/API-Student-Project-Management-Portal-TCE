@@ -13,8 +13,8 @@
         <link rel="stylesheet" href="style2.css">
         
     </head>
-    <body style="background-color: whitesmoke">
-        <div class="fixed-top">
+    <body style="background-color: whitesmoke" ng-app="dash" ng-controller="dashcon">
+       
         <div class='container-fluid' style='background-color:#003380; border-radius:0% 0% 50% 50%;padding-bottom: 30px;'>
             <h1 >
                 <center>
@@ -27,7 +27,7 @@
 
 <div class="container">  
   <center><h1 style = color:#003380; font-size> PROJECTS </h1></center>
-     <form>  
+     <form method="post" action="/editprojects.html">  
     
     <div class="form-group">  
       <label>Project ID</label>  
@@ -55,16 +55,17 @@
   </form>  
   <br/>  
   <table class="table table-bordered data-table">  
-    <thead>  
+    <tr>
       <th>Project ID</th>  
       <th>Project Name</th>  
       <th>Team ID</th> 
-      <th>Team Name</th>  
-      <th width="200px">Action</th>  
-    </thead>  
-    <tbody>  
-      
-    </tbody>  
+      <th>Project Desc</th>    
+    </tr>  
+    <tr ng-repeat="x in projectdetail">
+      <td>{{x.project_id}}</td>
+      <td>{{x.project_name}}</td>
+      <td>{{x.team_id}}</td>
+      <td>{{x.project_desc}}</td></tr>
   </table>  
      
 </div>  
