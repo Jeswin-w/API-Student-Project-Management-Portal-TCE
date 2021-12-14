@@ -24,7 +24,7 @@
 	
 		
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic" />
-        <link rel="stylesheet" href="style1.css">
+       
         <script type="text/javascript" src="script.js"></script>
         
 </head>
@@ -96,17 +96,33 @@
       </nav><br><br>
       <div class="container">
         <div class="row"> 
-          
-            <center><h1><b>Title: </b>{{fsd.sub_title}}</h1>
-              <h3><b>Desc: </b>{{fsd.sub_desc}}</h3>
-              <h3><b>Due date: </b>{{fsd.due_date.slice(0,10)}}</h3>
-            <div class="drop-zone">
-                <span class="drop-zone__prompt" style="width: 800px">Drop file here or click to upload</span>
-                <form action="/upl" method="post" enctype="multipart/form-data">
-                    <input type="file" name="filer" class="drop-zone__input">
+            <div class="card text-center">
+                <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke; font-weight: 600; font-size: 18px;">
+                    {{fsd.sub_title}}
                 </div>
-                <button class="btn btn-primary" style="background-color: #003380; padding: 20px 30px; font-size: 16px;">SUBMIT</button>
-                </form>
+                <div class="card-body"><br>
+                  <h5 class="card-title" >{{fsd.sub_desc}}</h5><br>
+                  <center>
+                  <div class="drop-zone">
+                    <span class="drop-zone__prompt" style="width: 800px">Drop file here or click to upload</span>
+                    <form action="/upl" method="post" enctype="multipart/form-data">
+                        <input type="file" name="filer" class="drop-zone__input">
+                    </div><br><br>
+                    <button class="btn btn-primary" style="background-color: #003380; padding: 20px 30px; font-size: 16px;">SUBMIT</button>
+                    </form>
+                   
+                    
+        
+                       
+                  
+                </div></center>
+                <div class="card-footer text-muted" >
+                    <p style="color: green">Due Date: {{fsd.due_date.slice(0,10)}}</p>
+                </div>
+              </div>
+
+
+
                 </form>
                 
             </center>
