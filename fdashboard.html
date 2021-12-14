@@ -11,7 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script type="text/javascript" src="dash.js"></script>
 
-        <link rel="stylesheet" href="style1.css">        
+            
 </head>
 
 <body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
@@ -28,49 +28,48 @@
                     <li class="nav-item"> <h5><a class="nav-link" id='x' href="/flogout" style="font-family:lobster;color:whitesmoke;">Logout</a></h5></li>
                 </ul>
             
-
       </nav><br><br>
       <div class="container">
           
       <div class="row">
           
       
-      
-      <div class="col-sm-10" style="box-shadow: 1px 1px 2px 2px;">
-        <center><h3><u>Course in charge:</u> </h3></center>
+
+      <div class="col-sm-10">
+          <center><h2>COURSES IN CHARGE</h2></center>
         <div ng-repeat="x in fic">
-            <br>
-            <div class="container" style="border:solid 1px;">
-                <div class="row">
-                    <div class="col-sm">
-                        <h5 >{{x.course_id}}</h5>
-                    </div>
-                    <div class="col-sm-7">
-                        <h4 style="text-align: center;"><a id='cour' href="cfcourse.html?cid={{x.course_id}}&fid={{x.fid}}&cdept={{x.cdept}}&course_name={{x.course_name}}"><br>{{x.course_name}}<br></a></h4>
-                    </div>
-                    <div class="col-sm"><h5>Dept: {{x.cdept}}</h5></div></div></div><hr></div>
-                    <div>
-                        <center><h3><u>Courses</u></h3></center>
-                        <div ng-repeat="x in fm">
-                            <br>
-                            <div class="container" style="border:solid 1px;">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <h5 >{{x.course_id}}</h5>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <h4 style="text-align: center;"><a id='cour' href="fcourse.html?cid={{x.course_id}}&fid={{x.fid}}&cdept={{x.cdept}}&course_name={{x.course_name}}"><br>{{x.course_name}}<br></a></h4>
-                                    </div>
-                                    <div class="col-sm"><h5>Dept: {{x.cdept}}</h5></div></div></div><hr></div>
+        <div style="padding: 10px 10px">
+            <div class="card">
+                <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke">
+                    {{x.cdept}}
+                </div>
+                <div class="card-body" >
+                <h5 class="card-title" >{{x.course_id}}  :  {{x.course_name}}</h5><br>
+                <a href="cfcourse.html?cid={{x.course_id}}&fid={{x.fid}}&cdept={{x.cdept}}&course_name={{x.course_name}}" class="btn btn-primary" style="background-color: #003380" >ENTER</a>
+                </div>
+            </div>
 
+       
+        </div>
+        </div>
+        <br><br>
+        <center><h2>COURSES</h2></center>
+        <div ng-repeat="x in fm">
+            <div style="padding: 10px 10px">
+                <div class="card">
+                    <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke">
+                        {{x.cdept}}
                     </div>
-
-    </div>
-      <div class="col-sm" >
-        
-        <div  style="border:solid 1px; margin: 5px 5px 5px 5px;" >
-    <h5 style="text-align: center;">Calender</h5></div>
-</div>
+                    <div class="card-body" >
+                    <h5 class="card-title" >{{x.course_id}}  :  {{x.course_name}}</h5><br>
+                    <a href="fcourse.html?cid={{x.course_id}}&fid={{x.fid}}&cdept={{x.cdept}}&course_name={{x.course_name}}" class="btn btn-primary" style="background-color: #003380" >ENTER</a>
+                    </div>
+                </div>
+    
+           
+            </div>
+            </div>
+    
 
 </div>
 </div>
