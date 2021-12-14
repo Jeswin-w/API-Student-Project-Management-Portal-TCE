@@ -4,6 +4,7 @@
   "description": "api",
   "main": "ex.js",
   "dependencies": {
+    "async": "^3.2.2",
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
