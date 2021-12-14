@@ -222,12 +222,18 @@ app.get('/course.html', (req, res) => {
             res.send('No team registered');
         }
     })
+    
 
 });
+app.get('/filesubdet'){
+    let q = `select * from add_submission where sid='${req.session.sid}'`
+    db.query(q,(err, results) => {})
+}
 app.get('/filesub.html', (req, res) => {
+    if(req.query.sid!=null){
     var sid = req.query.sid;
     //console.log(sid);
-    req.session.sid = sid;
+    req.session.sid = sid;}
     //console.log(req.session)
     res.sendFile(`${__dirname}/filesub.html`)
 
