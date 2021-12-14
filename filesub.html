@@ -96,7 +96,10 @@
       </nav><br><br>
       <div class="container">
         <div class="row"> 
-            <center>
+          
+            <center><h1><b>Title: </b>{{fsd.sub_title}}</h1>
+              <h3><b>Desc: </b>{{fsd.sub_desc}}</h3>
+              <h3><b>Due date: </b>{{fsd.due_date.slice(0,10)}}</h3>
             <div class="drop-zone">
                 <span class="drop-zone__prompt" style="width: 800px">Drop file here or click to upload</span>
                 <form action="/upl" method="post" enctype="multipart/form-data">

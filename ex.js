@@ -227,7 +227,10 @@ app.get('/course.html', (req, res) => {
 });
 app.get('/filesubdet',(req, res) => {
     let q = `select * from add_submission where sid='${req.session.sid}'`
-    db.query(q,(err, results) => {})
+    db.query(q,(err, results) => {
+        if(err) throw err;
+        res.send(results)
+    })
 })
 app.get('/filesub.html', (req, res) => {
     if(req.query.sid!=null){
@@ -274,7 +277,7 @@ app.get('/enroll', (req, res) => {
                     throw err;
                 }
                 console.log("inserted");
-                res.redirect('/enroll.html');
+                res.redirect('/addproject.html');
             })
         }
 
@@ -332,7 +335,7 @@ app.post('/addproject', (req, res) => {
     var pro_desc = req.body.project_desc;
     var tid = req.session.team_id;
 
-    let q = `Insert into project (project_name,team_id,project_desc,domain) values ('${title}','${tid}','${pro_desc}','${pro_desc}')`
+    let q = `Insert into project (project_name,team_id,project_desc,domain) values ('${title}','${tid}','${pro_desc}','${dom}')`
     db.query(q, (err, results) => {
         if (err) throw err;
     })
