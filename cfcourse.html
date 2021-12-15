@@ -10,7 +10,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script type="text/javascript" src="dash.js"></script>
-        <link rel="stylesheet" href="style1.css">        
+        <link rel="stylesheet" href="style1.css">
+     
 </head>
 
 <body style="background-color: whitesmoke;"  ng-app="dash" ng-controller='dashcon'>
@@ -23,8 +24,8 @@
             </li></ul>
             
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color: whitesmoke">{{fuser.fname}}</a></h5></li>
-                    <li class="nav-item"> <h5><a class="nav-link" id='x' href="/flogout" style="font-family:lobster;color:whitesmoke;">Logout</a></h5></li>
+                    <li class="nav-item"><h5><a class="nav-link" id='x' href="/" style="font-family:lobster;color: whitesmoke; text-decoration:none;">{{fuser.fname}}</a></h5></li>
+                    <li class="nav-item"> <h5><a class="nav-link" id='x' href="/flogout" style="font-family:lobster;color:whitesmoke; text-decoration:none;">Logout</a></h5></li>
                 </ul>
             
 
@@ -32,14 +33,22 @@
       <div class="container">
           <div class="row">
               <div class="col-sm-10">
-          <H1>Submmisions added</H1>
+          <center><h1 style="font-size: 30px; padding: 20px 20px;">SUBMISSIONS</h1></center>
           <div ng-repeat="x in sd">
-            <div id='box1' class='row'><div calss='col-sm-9'><h3>{{x.sub_title}}</h3><h5 ><b style="color: #003380">Description:</b> {{x.sub_desc}}</h5>
-            <h5><b style="color: #003380">Due date: </b>{{x.due_date}}</h5></div><div class='col-sm-2'>
-                <button class="button3"><a style='text-decoration: none;color: whitesmoke;' href='/viewsubmissions.html?sid={{x.sid}}' >View Submissions</a></button><br></div>
-            </div><br>
-        </div></div><div class="col-sm-2">
-            <br>
+            <div style="padding: 10px 10px">
+                <div class="card">
+                    <div class="card-header" style="padding: 10px 10px; background-color: #003380; color:whitesmoke; font-size: 18px">
+                        {{x.sub_title | uppercase}}
+                    </div>
+                    <div class="card-body" >
+                    <h5 class="card-title" >{{x.sub_desc}}</h5><br>
+                    <h5 class="card-title" >Due date: {{x.due_date}}</h5><br>
+                    <a href='/viewsubmissions.html?sid={{x.sid}}' class="btn btn-primary" data-toggle="button" style="background-color: #003380; padding: 10px 10px; color:whitesmoke; font-size: 14px" >VIEW SUBMISSIONS</a>
+                    </div>
+                </div>        
+            </div>
+        </div></div><div class="col-sm-2" style="padding: 20px 20px;">
+            <br><br><br><br>
           <form class="form-horizontal" method="get" action="/addsubmission.html"><button class="button3">Add Submission</button></form><br>
           <form class="form-horizontal" method="get" action="/teamdetails.html"><button class="button3">Add Team</button></form></div></div>
       
