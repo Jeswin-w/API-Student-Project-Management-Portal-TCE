@@ -182,15 +182,28 @@ app.get('/reglist', (req, res) => {
 var arr = [];
 
 app.get('/course.html', (req, res) => {
-    var cdept = req.query.cdept;
-    var course_id = req.query.cid;
-    var course_name = req.query.cou_name;
+    if(req.query.cid == null)
+    {
+        var cdept = req.query.cdept;
+        var course_id = req.query.cid;
+        var course_name = req.query.course_name;
+
+        req.session.course_id = course_id;
+        req.session.cdept = cdept;
+        req.session.course_name = course_name;
+
+    }
+    else
+    {
+        var course_name = req.session.course_name;
+        var cdept = req.session.cdept;
+        var course_id = req.session.cid;
+    }
+   
     var regno = req.session.regno;
     req.session.sid = undefined;
 
-    req.session.course_id = course_id;
-    req.session.cdept = cdept;
-    req.session.course_name = course_name;
+   
 
     arr = [cdept, course_id, course_name];
 
@@ -265,6 +278,11 @@ app.get('/enroll', (req, res) => {
     var dept = req.query.dept;
     var course_id = req.query.course_id;
     var regno = req.session.regno;
+    var course_name = req.query.course_name;
+
+    req.session.course_id = course_id;
+    req.session.cdept = dept;
+    req.session.cou_name = course_name;
 
     let qr = `select * from enrollment where course_id = ${course_id} AND regno='${regno}'`
     db.query(qr, (err, resu) => {
@@ -277,7 +295,7 @@ app.get('/enroll', (req, res) => {
                     throw err;
                 }
                 console.log("inserted");
-                res.redirect('/enroll.html');
+                res.redirect('/course.html');
             })
         }
 
@@ -576,7 +594,7 @@ app.get('/flogout', (req, res) => {
 app.get('/fcourses', (req, res) => {
     var fid = req.session.fid;
     if (fid != null) {
-        var q1 = `select * from course where fid='${fid}'`;
+        var q1 = `select distinct * from course where fid='${fid}'`;
         db.query(q1, (err, result) => {
 
             res.send(result);
