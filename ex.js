@@ -185,7 +185,7 @@ app.get('/course.html', (req, res) => {
     if(req.query.cid == null)
     {
         var cdept = req.query.cdept;
-        var course_id = req.query.cid;
+        var course_id = req.query.course_id;
         var course_name = req.query.course_name;
 
         req.session.course_id = course_id;
@@ -197,7 +197,7 @@ app.get('/course.html', (req, res) => {
     {
         var course_name = req.session.course_name;
         var cdept = req.session.cdept;
-        var course_id = req.session.cid;
+        var course_id = req.session.course_id;
     }
    
     var regno = req.session.regno;
@@ -206,7 +206,7 @@ app.get('/course.html', (req, res) => {
    
 
     arr = [cdept, course_id, course_name];
-
+    console.log(arr)
     let q = `Select * from team where  course_id='${course_id}' and cdept='${cdept}' and team_members LIKE '%${regno}%' `
     db.query(q, (err, result) => {
 
@@ -231,7 +231,8 @@ app.get('/course.html', (req, res) => {
                     res.sendFile(`${__dirname}/addproject.html`)
                 }
             })
-        } else {
+        } 
+        else {
             res.send('No team registered');
         }
     })
@@ -282,7 +283,7 @@ app.get('/enroll', (req, res) => {
 
     req.session.course_id = course_id;
     req.session.cdept = dept;
-    req.session.cou_name = course_name;
+    req.session.course_name = course_name;
 
     let qr = `select * from enrollment where course_id = ${course_id} AND regno='${regno}'`
     db.query(qr, (err, resu) => {
