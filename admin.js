@@ -139,14 +139,15 @@ app.get('/editprojects.html',(req,res)=>{
     res.sendFile(`${__dirname}/editprojects.html`);
 })
 app.post('/editprojects.html',(req, res)=>{
-    var project_id = req.body.project_id;
+    var batch = req.body.batch;
     var project_name = req.body.project_name;
     var team_id = req.body.team_id;
     var project_desc = req.body.project_desc;
 	var domain = req.body.domain;
+
 	
     
-    let qr = `INSERT into project(project_id,project_name,team_id,project_desc,domain) values('${project_id}','${project_name}','${team_id}','${project_desc}','${domain}'')`;
+    let qr = `INSERT into project(project_name,team_id,project_desc,domain,batch) values('${project_name}','${team_id}','${project_desc}','${domain}','${batch}')`;
     
     db.query(qr,(err,result)=>{
         if(err){
@@ -158,7 +159,7 @@ app.post('/editprojects.html',(req, res)=>{
 
 })
 app.get('/projectdetail',async (req, res)=>{
-	var q=`SELECT * from project`;
+	var q=`SELECT p.*,t.team_members from project p inner join team t on p.team_id=t.team_id`;
 	db.query(q,(err,result)=>{
 		console.log(result);
 		res.send(result);

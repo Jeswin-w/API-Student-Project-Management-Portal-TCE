@@ -8,7 +8,7 @@ const app = express();
 const path = require('path');
 const { Console } = require('console');
 
-const QuickChart = require('quickchart-js');
+
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
@@ -246,7 +246,29 @@ app.get('/course.html', (req, res) => {
 app.get('/alert', (req, res) =>{
     res.sendFile(`${__dirname}/alert.html`);
 })
+app.get('/chartbatch',(req, res)=>{
+    let q=`select batch,count(*) from project group by batch`;
+    db.query(q,(err, result)=>{
+        let q1=`select t.cdept,count(*) from project p inner join team t on p.team_id=t.team_id group by t.cdept`;
+        db.query(q1,(err,result1)=>{
+            var re=[]
+            for( var i=0;i<result.length;i++){
+                var t={c:[{v: result[i]['batch']},{v:result[i]['count(*)']},]};
+                re.push(t)
+            }
+            
+            var re1=[];
+            for( var i=0;i<result1.length;i++){
+                var t1={c:[{v: result1[i]['cdept']},{v:result1[i]['count(*)']},]};
+                re1.push(t1)
+            }
 
+            arr3=[re,re1]
+            res.send(arr3)
+        })
+
+    })
+})
 app.get('/changepass.html', (req, res) =>{
     res.sendFile(`${__dirname}/changepassword.html`);
 })
@@ -403,8 +425,12 @@ app.post('/addproject', (req, res) => {
     var dom = req.body.project_domain;
     var pro_desc = req.body.project_desc;
     var tid = req.session.team_id;
+    var regno= req.session.regno;
+    var year=parseInt('20'+regno.substring(0,2));
+    var endyear=year+4;
+    var batch=year+"-"+endyear;
 
-    let q = `Insert into project (project_name,team_id,project_desc,domain) values ('${title}','${tid}','${pro_desc}','${dom}')`
+    let q = `Insert into project (project_name,team_id,project_desc,domain,batch) values ('${title}','${tid}','${pro_desc}','${dom}','${batch}')`
     db.query(q, (err, results) => {
         if (err) throw err;
     })

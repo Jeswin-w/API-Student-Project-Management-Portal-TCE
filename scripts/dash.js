@@ -10,6 +10,34 @@ app.controller('dashcon', function($scope, $http ) {
 	$http.get('/coursedetail').then(function(data){
 		$scope.coursedetail = data.data;
 	})
+    $http.get('/chartbatch').then(function(data){
+        $scope.type=this.batch
+		$scope.cb = data.data;
+        $scope.ba=$scope.cb[0];
+        $scope.de=$scope.cb[1];
+        $scope.barChartObject = {};
+    $scope.barChartObject.type = $scope.type;
+    $scope.barChartObject.data = {"cols": [
+    {id: "t", label: "Batch", type: "string"},
+    {id: "s", label: "No of projects", type: "number"}
+    ], "rows": $scope.ba};
+
+$scope.barChartObject.options = {
+	'title': 'Batch'
+};
+$scope.barChartObject1 = {};
+    $scope.barChartObject1.type = "PieChart";
+    $scope.barChartObject1.data = {"cols": [
+    {id: "t", label: "Dept", type: "string"},
+    {id: "s", label: "No of projects", type: "number"}
+    ], "rows": $scope.de};
+
+$scope.barChartObject1.options = {
+	'title': 'Department'
+};
+
+
+	})
 	$http.get('/facultydetail').then(function(data){
 		$scope.facultydetail = data.data;
 	})
