@@ -2,8 +2,6 @@ var app = angular.module('dash', ['googlechart']);
 
 app.controller('dashcon', function($scope, $http ) {
     
-
-
 	$http.get('/ecourse').then(function(data){
 		$scope.ecourse = data.data;
 	})
@@ -38,6 +36,11 @@ $scope.barChartObject1.options = {
 
 
 	})
+
+    $http.get('/admindashboard').then(function(data){
+		$scope.admin = data.data;
+	})
+
 	$http.get('/facultydetail').then(function(data){
 		$scope.facultydetail = data.data;
 	})

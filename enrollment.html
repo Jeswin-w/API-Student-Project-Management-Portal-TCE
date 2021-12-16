@@ -27,7 +27,7 @@
     <br><br>
 
 <div class="container">  
-  <center><h1 style = color:#003380; font-size> ENROLLMENT</h1></center>
+  <center><h1 style = "color:#003380; font-size:30px"> ENROLLMENT</h1></center>
      <form method="post" action="/editfaculty.html">  
     
     <div class="form-group">  
@@ -54,38 +54,17 @@
           <option value="MEC">Mechatronics</option>
       </select>
       </div>  
-
-      <div class="form-group">  
-        <label>Team Status</label>  
-        <select name="teamstatus" id="text" class="form-control" placeholder="Select status" required="">
-          <option value="0">0</option>   
-          <option value="1">1</option>   
-      </select>
-      </div>  
       
     <center> <button type="submit" class="btn btn-success save-btn">Enroll</button> </center> 
       
   </form>  
   
   <br/>  
-  <table class="table table-bordered data-table">  
-    <tr>
-      <th>Register Number</th>  
-      <th>Course ID</th>  
-      <th>Department</th>  
-      <th>Team Status</th>
-       
-    </tr> 
-    <tr ng-repeat="x in enrollment">
-      <td>{{x.regno}}</td>
-      <td>{{x.course_id}}</td>
-      <td>{{x.dept}}</td>
-      <td>{{x.team_status}}</td></tr>
-        
-  </table>  
-     
-</div>  
-    
-       
+  <center><h1 style = "color:#003380; font-size:30px"> ENROLL VIA UPLOADING</h1></center>
+  <form action="/uploadfile" enctype="multipart/form-data" method="post">
+    <input type="file" name="uploadfile" accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' >
+    <input type="submit" value="Upload Excel">
+  </form>  
+</div>            
 </body>  
 </html>  
