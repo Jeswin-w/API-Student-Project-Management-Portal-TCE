@@ -10,6 +10,12 @@ const { Console } = require('console');
 const nodemailer = require("nodemailer");
 const { getMaxListeners } = require('process');
 const { findSeries } = require('async');
+const bodyparser = require('body-parser')
+const fs = require('fs');
+const readXlsxFile = require('read-excel-file/node');
+const mysql = require('mysql')
+
+
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
@@ -18,6 +24,12 @@ app.use(express.static('scripts'));
 app.use(express.static('css'));
 app.use(express.static('sub'));
 
+app.use(express.static("./public"))
+
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({
+extended: true
+}))
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -230,3 +242,64 @@ app.get('/admindashboard', (req, res) => {
         res.end();
     })
 })
+
+app.get('/enroll.html', (req, res) =>{
+    res.sendFile(`${__dirname}/enrollment.html`);
+})
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+    cb(null, __dirname + '/importFiles/')
+    },
+    filename: (req, file, cb) => {
+    cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname)
+    }
+    });
+
+const upload = multer({storage: storage});
+app.post('/uploadfile', upload.single("uploadfile"), (req, res) =>{
+    importExcelData2MySQL(__dirname  + '/importFiles/' + req.file.filename);
+    
+    console.log(res);
+    res.write(`<script>window.alert('Inserted!'); window.location.href = 'enroll.html';</script>`)
+});
+
+function importExcelData2MySQL(filePath){
+    // File path.
+    readXlsxFile(filePath).then((rows) => {
+    // `rows` is an array of rows
+    // each row being an array of cells.     
+    console.log(rows);
+    /**
+    [ [ 'Id', 'Name', 'Address', 'Age' ],
+    [ 1, 'john Smith', 'London', 25 ],
+    [ 2, 'Ahman Johnson', 'New York', 26 ]
+    */
+    // Remove Header ROW
+    rows.shift();
+    // Open the MySQL connection
+    db.connect((error) => {
+    if (error) {
+    console.error(error);
+    } else {
+    let query = 'INSERT INTO enrollment(regno, course_id, dept) VALUES ?';
+    db.query(query, [rows], (error, response) => {
+    if(error) throw error;
+    
+    console.log(error || response);
+    /**
+    OkPacket {
+    fieldCount: 0,
+    affectedRows: 5,
+    insertId: 0,
+    serverStatus: 2,
+    warningCount: 0,
+    message: '&Records: 5  Duplicates: 0  Warnings: 0',
+    protocol41: true,
+    changedRows: 0 } 
+    */
+    });
+    }
+    });
+    })
+    }
