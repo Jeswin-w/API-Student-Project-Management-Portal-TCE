@@ -247,6 +247,48 @@ app.get('/alert', (req, res) =>{
     res.sendFile(`${__dirname}/alert.html`);
 })
 
+app.get('/changepass.html', (req, res) =>{
+    res.sendFile(`${__dirname}/changepassword.html`);
+})
+app.post('/changepass', (req, res)=>{
+    var oldpass = req.body.oldpassword;
+    var newpass = req.body.newpassword1;
+    var newpass1 = req.body.newpassword2;
+    var email = req.session.email;
+    console.log(email)
+    console.log(newpass)
+    console.log(newpass1)
+    console.log(oldpass)
+    if(newpass1 == newpass)
+    {
+        let qr = `SELECT password from faculty_advisor WHERE mail='${email}'`
+        db.query(qr, (err, result)=>{
+            if(err) throw err;
+            
+            var hash = result[0]['password'];
+            console.log(hash)
+            if(bcrypt.compareSync(oldpass, hash))
+            {
+                let q = `UPDATE faculty_advisor SET password='${bcrypt.hashSync(newpass,10)}' WHERE mail='${email}'`
+                db.query(q, (err, result)=>{
+                    if(err) throw err;
+                    res.write(`<script>window.alert('Password Changed!'); window.location.href = '/fdashboard.html'</script>`);
+                })
+            }
+            else
+            {
+                res.write(`<script>window.alert('Incorrect Password!'); window.location.href = '/changepass.html'</script>`);
+            }
+        })
+    }
+    else{
+        res.redirect('/password.html');
+    }
+    
+});
+app.get('/password.html', (req, res)=>{
+    res.sendFile(`${__dirname}/password.html`)
+})
 app.get('/filesubdet',(req, res) => {
     let q = `select * from add_submission where sid='${req.session.sid}'`
     db.query(q,(err, results) => {
