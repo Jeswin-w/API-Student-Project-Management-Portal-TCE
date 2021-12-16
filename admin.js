@@ -7,6 +7,9 @@ const multer = require('multer');
 const app =express();
 const path = require('path');
 const { Console } = require('console');
+const nodemailer = require("nodemailer");
+const { getMaxListeners } = require('process');
+const { findSeries } = require('async');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
@@ -20,6 +23,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: false
 }));
+
 const db = sql.createConnection({
 	host:'localhost',
 	user:'root',
@@ -55,12 +59,15 @@ app.post('/editcourses.html',(req, res)=>{
 	
 
 })
+
 app.get('/editfaculty.html',(req,res)=>{
     res.sendFile(`${__dirname}/editfaculty.html`);
 })
+
 app.get('/admin.html',(req,res)=>{
     res.sendFile(`${__dirname}/admin.html`)
 })
+
 app.post('/editfaculty.html',(req, res)=>{
     var fname = req.body.fname;
     var password = req.body.password;
@@ -68,37 +75,64 @@ app.post('/editfaculty.html',(req, res)=>{
     var dept = req.body.coursedepartment;
 	var mail = req.body.mail;
     
-    let qr = `INSERT into faculty_advisor(fname,mail,fid,dept,password) values('${fname}','${mail}','${fid}','${dept}','${password}')`;
-    db.query(qr,(err,result)=>{
-        if(err){
-            console.log(err);
+    var msg = `<p>Respected Sir/Madam,<br>This is the notification about registration on TCE Project Management Portal. You are requested to change your password after successful login. <br><br> MAIL: ${mail} <br> PASSWORD: ${password} <br><br>Thank you<br><br>Regards,<br>TCE PROJECTS ADMIN.`
+    
+    let q = `SELECT fid FROM faculty_advisor WHERE fid=('${fid}')`
+    db.query(q, (err, result)=>{
+        if(err) throw err;
+        if(result.length != 0)
+        {
+            res.write(`<script>window.alert('Faculty already exists!!'); window.location.href = 'admin.html';</script>`)
         }
-        res.redirect('/editfaculty.html')
+        else{
+            const passwordHash = bcrypt.hashSync(password, 10);
+            let qr = `INSERT into faculty_advisor(fname,mail,fid,dept,password) values('${fname}','${mail}','${fid}','${dept}','${passwordHash}')`;
+            db.query(qr,(err,result)=>{
+                if(err){
+                    console.log(err);
+                }
+                let transporter = nodemailer.createTransport({
+                    host: "smtp.gmail.com",
+                    port: 465,
+                    secure: true,
+                    auth:{
+                        user: "tceprojectportal@gmail.com",
+                        pass: "tceit123"
+                    },
+                    tls:{
+                        rejectUnauthorized: false
+                    }
+                });
+                let mailoptions = {
+                    from: '"ADMIN" <tceprojectportal@gmail.com>',
+                    to: `${mail}`,
+                    subject: "TCE PROJECTS PORTAL - Registration",
+                    html: msg,
+                }
+                transporter.sendMail(mailoptions, (err, info)=>{
+                    if(err)
+                        throw err;
+                    console.log("Message sent");
+                    res.redirect('/editfaculty.html')
+                })
+            })
+        }
     })
-	
-
+    //connection.release();
 })
 app.get('/coursedetail',async (req, res)=>{
-	
-	
-	
 	var q=`SELECT * from course`;
 	db.query(q,(err,result)=>{
 		console.log(result);
 		res.send(result);
-		
 		res.end()
 	})
 })
 app.get('/facultydetail',async (req, res)=>{
-	
-	
-	
 	var q=`SELECT * from faculty_advisor`;
 	db.query(q,(err,result)=>{
 		console.log(result);
 		res.send(result);
-		
 		res.end()
 	})
 })
@@ -125,9 +159,6 @@ app.post('/editprojects.html',(req, res)=>{
 
 })
 app.get('/projectdetail',async (req, res)=>{
-	
-	
-	
 	var q=`SELECT * from project`;
 	db.query(q,(err,result)=>{
 		console.log(result);

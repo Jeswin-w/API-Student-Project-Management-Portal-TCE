@@ -238,12 +238,15 @@ app.get('/course.html', (req, res) => {
             })
         } 
         else {
-            res.send('No team registered');
-        }
+            res.redirect("/alert");
+        } 
     })
-
-
 });
+
+app.get('/alert', (req, res) =>{
+    res.sendFile(`${__dirname}/alert.html`);
+})
+
 app.get('/filesubdet',(req, res) => {
     let q = `select * from add_submission where sid='${req.session.sid}'`
     db.query(q,(err, results) => {
@@ -461,7 +464,7 @@ app.post('/register', (req, res) => {
     var password = req.body.password;
     var dept = req.body.dept;
 
-
+    
     let qr1 = `SELECT regno FROM student WHERE regno=('${regno}')`;
     db.query(qr1, (err, result) => {
         if (result.length != 0) {
@@ -544,13 +547,10 @@ app.post('/flogin', (req, res) => {
     if (email && password) {
         db.query(`SELECT * FROM faculty_advisor WHERE mail = '${email}' `, function(error, results) {
             if (results.length > 0) {
-                //  var hash=results[0].password;
-
-
-                //  const passwordHash = bcrypt.hashSync(password, 10);
-
-                //  const verified = bcrypt.compareSync(password, hash);
-                var verified = true;
+                var hash=results[0].password;
+                const passwordHash = bcrypt.hashSync(password, 10);
+                const verified = bcrypt.compareSync(password, hash);
+             
 
                 if (verified) {
 
