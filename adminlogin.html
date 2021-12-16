@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        LOGIN
+    </title>
+    <style>
+        img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        
+        input {
+            background-color: whitesmoke;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Yuji+Syuku&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style1.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/1.0.0-beta.1/ng-google-chart.min.js" type="text/javascript"></script>
+</head>
+<nav class="navbar navbar-expand-sm " style="background-color: #003380; color: whitesmoke" id="dark">
+
+    <a class="navbar-brand" href="/" style="font-family:lobster"><img src="tce_logo.png" alt="logo" style="width:78px; height:70px; margin-left: 10px;"> </a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <h4>
+                <a class="nav-link" href="/" style="font-family:lobster;color: whitesmoke;">
+                    <h2 style="margin-top: 10px; text-align: center;">TCE-Student Project Management Portal</h2>
+                </a>
+            </h4>
+        </li>
+    </ul>
+</nav>
+
+<body style=" background-color: whitesmoke;">
+    <div class="container-fluid" style="font-size: 30px; text-align: center;">
+        <h1><b> </b></h1>
+    </div>
+    </div>
+    <div class="container" id="container" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  margin-top: 50px; padding: 20px 20px; height: 550px;">
+        <form method="post" action="/adminlogin">
+            <center><img src="admin.png" alt="Avatar"></center>
+            <br>
+            <div class="row">
+                <center><label style="padding-bottom: 20px;">EMAIL</label></center>
+                <center><input type="email" class="form-control" id="text" name="email" style="height: 40px;"></center>
+                <center><label style="padding-bottom: 20px;">PASSWORD</label></center>
+                </center>
+                <center><input type="password" class="form-control" id="text" name="password" style="height: 45px;"></center>
+            </div>
+            <center><br><button class="button1 bnt btn-primary">Login</button></center>
+
+    </div>
+    </form>
+
+    </div>
+</body>
+
+</html>
