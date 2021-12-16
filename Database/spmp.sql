@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 07:36 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: Dec 16, 2021 at 06:11 AM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,8 @@ CREATE TABLE `add_submission` (
 
 INSERT INTO `add_submission` (`sid`, `sub_title`, `sub_desc`, `due_date`, `course_id`, `cdept`) VALUES
 (2, 'Requirements gathering', 'Get stakeholder requirements', '2021-12-14', '18ES390 - A', 'IT'),
-(3, 'SRS', 'submit srs doc', '2021-12-17', '18ES390 - A', 'IT');
+(3, 'SRS', 'submit srs doc', '2021-12-17', '18ES390 - A', 'IT'),
+(4, 'sub1', 'do submission', '2021-12-18', '18ES590 - A', 'IT');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,12 @@ INSERT INTO `enrollment` (`regno`, `course_id`, `dept`, `team_status`) VALUES
 ('19IT040', '18ES390 - A', 'IT', 1),
 ('19IT041', '18ES390 - A', 'IT', 1),
 ('19IT027', '18ES390 - B', 'it', 0),
-('19IT027', '18ES590 - A', 'it', 0);
+('19IT027', '18ES590 - A', 'it', 0),
+('19IT040', '18ES590 - A', 'IT', 0),
+('19IT041', '18ES590 - A', 'IT', 0),
+('19IT027', '18ES690 - A', 'IT', 0),
+('19IT041', '18ES690 - A', 'IT', 0),
+('19IT040', '18ES690 - A', 'IT', 0);
 
 -- --------------------------------------------------------
 
@@ -121,6 +127,7 @@ INSERT INTO `faculty_advisor` (`fid`, `mail`, `password`, `dept`, `fname`) VALUE
 ('IT002', 'faculty002@tce.edu', 'password', 'IT', 'faculty002'),
 ('IT003', 'faculty003@tce.edu', 'password', 'IT', 'Faculty003'),
 ('IT004', 'faculty004@tce.edu', 'password', 'IT', 'Faculty004'),
+('IT005', 'faculty005@tce.edu', 'password', 'IT', 'Faculty005'),
 ('IT007', 'faculty010@tce.edu', 'password', 'IT', 'Faculty010'),
 ('MA001', 'facultymech001@tce.edu', 'password', 'MECH', '');
 
@@ -166,7 +173,9 @@ CREATE TABLE `ssub` (
 --
 
 INSERT INTO `ssub` (`subid`, `team_id`, `sid`, `originalfile`, `file`, `cf_status`, `guide_status`) VALUES
-(4, 5, 3, 'Lang_id.xlsx', '1639484596944-513534371..xlsx', '', '');
+(4, 5, 3, 'Lang_id.xlsx', '1639484596944-513534371..xlsx', '', ''),
+(5, 6, 4, 'cast1 (2).jpg', '1639557917330-813187229..jpg', 'submitted', 'Not Updated'),
+(6, 5, 2, 'cast1 (1).jpg', '1639565538585-897500320..jpg', 'submitted', 'Not Updated');
 
 -- --------------------------------------------------------
 
@@ -263,25 +272,25 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `add_submission`
 --
 ALTER TABLE `add_submission`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ssub`
 --
 ALTER TABLE `ssub`
-  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `team_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
