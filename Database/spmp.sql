@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 08:47 AM
+-- Generation Time: Dec 16, 2021 at 09:05 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -44,6 +44,26 @@ INSERT INTO `add_submission` (`sid`, `sub_title`, `sub_desc`, `due_date`, `cours
 (2, 'Requirements gathering', 'Get stakeholder requirements', '2021-12-14', '18ES390 - A', 'IT'),
 (3, 'SRS', 'submit srs doc', '2021-12-17', '18ES390 - A', 'IT'),
 (4, 'sub1', 'do submission', '2021-12-18', '18ES590 - A', 'IT');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(50) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `mail` varchar(150) NOT NULL,
+  `password` varchar(400) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `mail`, `password`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2b$10$7X7FISgpSEJWysKYcs5kpOE4Gih4w9S0FX.AzdP9FF8PTV2CfzA1y');
 
 -- --------------------------------------------------------
 
@@ -229,6 +249,13 @@ ALTER TABLE `add_submission`
   ADD PRIMARY KEY (`sid`);
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `mail` (`mail`);
+
+--
 -- Indexes for table `faculty_advisor`
 --
 ALTER TABLE `faculty_advisor`
@@ -269,6 +296,12 @@ ALTER TABLE `team`
 --
 ALTER TABLE `add_submission`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `project`

@@ -166,3 +166,7 @@ app.get('/projectdetail',async (req, res)=>{
 		res.end()
 	})
 })
+
+// app.get('/', (req, res)={
+//     res.sendFile(`${__dirname}/adminlogin.html`)
+// })
