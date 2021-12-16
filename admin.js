@@ -159,9 +159,6 @@ app.post('/editprojects.html',(req, res)=>{
 
 })
 app.get('/projectdetail',async (req, res)=>{
-	
-	
-	
 	var q=`SELECT * from project`;
 	db.query(q,(err,result)=>{
 		console.log(result);

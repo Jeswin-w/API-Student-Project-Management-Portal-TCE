@@ -233,12 +233,15 @@ app.get('/course.html', (req, res) => {
             })
         } 
         else {
-            res.send('No team registered');
-        }
+            res.redirect("/alert");
+        } 
     })
-
-
 });
+
+app.get('/alert', (req, res) =>{
+    res.sendFile(`${__dirname}/alert.html`);
+})
+
 app.get('/filesubdet',(req, res) => {
     let q = `select * from add_submission where sid='${req.session.sid}'`
     db.query(q,(err, results) => {
