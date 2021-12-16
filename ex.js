@@ -7,7 +7,8 @@ const multer = require('multer');
 const app = express();
 const path = require('path');
 const { Console } = require('console');
-var async = require('async');
+
+const QuickChart = require('quickchart-js');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: false }));
@@ -15,6 +16,9 @@ app.use(express.static('images'));
 app.use(express.static('scripts'));
 app.use(express.static('css'));
 app.use(express.static('sub'));
+
+
+
 
 app.use(session({
     secret: 'secret',
@@ -165,14 +169,14 @@ app.get('/guideteams',(req, res)=>{
 app.get('/fcourse.html', (req, res)=>{
     req.session.course_id=req.query.cid;
     req.session.cdept=req.query.cdept;
-    console.log(req.session)
+    // console.log(req.session)
     res.sendFile(`${__dirname}/fcourse.html`)
 })
 app.get('/reglist', (req, res) => {
     let q = `SELECT s.regno, s.name FROM student as s inner join enrollment as e on s.regno = e.regno where e.team_status=0 and e.course_id='${req.session.course_id}' and e.dept='${req.session.cdept}'`;
     db.query(q, (err, result) => {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         if (err) throw err;
         res.send(result);
     });
@@ -180,6 +184,7 @@ app.get('/reglist', (req, res) => {
 
 
 var arr = [];
+
 
 app.get('/course.html', (req, res) => {
     if(req.query.cid == null)
@@ -206,7 +211,7 @@ app.get('/course.html', (req, res) => {
    
 
     arr = [cdept, course_id, course_name];
-    console.log(arr)
+    // console.log(arr)
     let q = `Select * from team where  course_id='${course_id}' and cdept='${cdept}' and team_members LIKE '%${regno}%' `
     db.query(q, (err, result) => {
 
@@ -222,7 +227,7 @@ app.get('/course.html', (req, res) => {
             let qr1 = `Select * from project where team_id='${result[0].team_id}'`;
             db.query(qr1, (err, result1) => {
                 if (result1.length > 0) {
-                    console.log(result1);
+                    // console.log(result1);
                     arr = [...arr, result1[0].project_name, result1[0].project_desc]
 
                     res.sendFile(`${__dirname}/course.html`)
@@ -260,7 +265,7 @@ app.get('/filesub.html', (req, res) => {
 })
 app.get('/teamsub',(req, res)=>{
     var team_id=req.session.team_id;
-    console.log(req.session);
+    // console.log(req.session);
     let q=`select ss.*,asub.sub_title,asub.sub_desc,asub.due_date from ssub ss inner join add_submission asub on ss.sid=asub.sid where ss.team_id='${team_id}' and asub.course_id='${req.session.course_id}' and asub.cdept='${req.session.cdept}'`;
     db.query(q, (err, result)=>{
         if(err) throw err;
@@ -569,15 +574,31 @@ app.post('/flogin', (req, res) => {
     }
 });
 app.get('/vsub',(req, res)=>{
-    var course_id=req.session.course_id;
-    var cdept = req.session.cdept;
+    
     var fid= req.session.fid;
     var sid=req.session.sid;
-
+    var total;
+    var s;
+    var rem;
+    var course_id=req.session.course_id;
+        var cdept = req.session.cdept;
     let q=`select ssub.*,team.team_name,team.team_members from ssub inner join team on ssub.team_id = team.team_id where sid = '${sid}'`
     db.query(q,(err,result)=>{
+        
+            let q1=`select * from team where course_id='${course_id}'and cdept='${cdept}'`;
+            db.query(q1,(err,result1)=>{
+                console.log(result1)
+                 total=result1.length;
+                 s=result.length;
+                rem=total-result.length;
+
+                var array=[s,rem,result]
+                res.send(array);
+
+            })
+           
        
-        res.send(result);
+        
     })
 
 
