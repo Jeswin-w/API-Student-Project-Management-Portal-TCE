@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 06:11 AM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Dec 16, 2021 at 08:47 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -122,14 +122,10 @@ CREATE TABLE `faculty_advisor` (
 --
 
 INSERT INTO `faculty_advisor` (`fid`, `mail`, `password`, `dept`, `fname`) VALUES
-('CSE011', 'facultycse011@tce.edu', 'password', 'CSE', 'ab'),
-('IT001', 'faculty001@tce.edu', 'password', 'IT', 'Faculty001'),
-('IT002', 'faculty002@tce.edu', 'password', 'IT', 'faculty002'),
-('IT003', 'faculty003@tce.edu', 'password', 'IT', 'Faculty003'),
-('IT004', 'faculty004@tce.edu', 'password', 'IT', 'Faculty004'),
-('IT005', 'faculty005@tce.edu', 'password', 'IT', 'Faculty005'),
-('IT007', 'faculty010@tce.edu', 'password', 'IT', 'Faculty010'),
-('MA001', 'facultymech001@tce.edu', 'password', 'MECH', '');
+('IT001', 'faculty001@gmail.com', '$2b$10$vQKo6ILwgeCqdkP4AO2KvekCifdMxYT6HmlRzDWlGZXmrIBu1Wueu', 'IT', 'Faculty_001'),
+('IT002', 'faculty002@gmail.com', '$2b$10$7X7FISgpSEJWysKYcs5kpOE4Gih4w9S0FX.AzdP9FF8PTV2CfzA1y', 'IT', 'Faculty_002'),
+('IT003', 'faculty003@gmail.com', '$2b$10$7X7FISgpSEJWysKYcs5kpOE4Gih4w9S0FX.AzdP9FF8PTV2CfzA1y', 'IT', 'Faculty_003'),
+('IT004', 'faculty004@gmail.com', '$2b$10$LW1BF8iFTw9BCn0LJC0t0..XD1PclurczEmBmm6WAEXzwLD4aRv0G', 'IT', 'Faculty_004');
 
 -- --------------------------------------------------------
 
