@@ -38,7 +38,6 @@ db.connect((err)=>{
 });
 app.listen(3200,()=>{
 	console.log("Server listening to port 3200!!!!")
-
 })
 app.get('/editcourses.html',(req,res)=>{
     res.sendFile(`${__dirname}/editcourses.html`);
