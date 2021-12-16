@@ -63,9 +63,7 @@ app.get('/editfaculty.html',(req,res)=>{
     res.sendFile(`${__dirname}/editfaculty.html`);
 })
 
-app.get('/admin.html',(req,res)=>{
-    res.sendFile(`${__dirname}/admin.html`)
-})
+
 
 app.post('/editfaculty.html',(req, res)=>{
     var fname = req.body.fname;
@@ -167,6 +165,68 @@ app.get('/projectdetail',async (req, res)=>{
 	})
 })
 
-// app.get('/', (req, res)={
-//     res.sendFile(`${__dirname}/adminlogin.html`)
-// })
+app.get('/', (req, res)=>{
+    res.sendFile(`${__dirname}/adminlogin.html`)
+})
+
+app.post('/adminlogin', (req, res) => {
+    req.session.loggedin = false;
+    var email = req.body.email;
+    var password = req.body.password;
+
+    console.log(email)
+    console.log(password)
+
+    if (email && password) {
+        db.query(`SELECT * FROM admin WHERE mail = '${email}' `, function(error, results) {
+            if (results.length > 0) {
+                var hash=results[0].password;
+                const passwordHash = bcrypt.hashSync(password, 10);
+                const verified = bcrypt.compareSync(password, hash);
+             
+
+                if (verified) {
+
+                    req.session.loggedin = true;
+                    req.session.email = email;
+                    req.session.id = results[0].id;
+                    res.redirect('/admin.html');
+                } else {
+                    res.write(`<script>window.alert('Enter the correct password!!!!!');window.location.href = '/';</script>`);
+                }
+
+            } else {
+
+                res.write(`<script>window.alert('Enter the correct email!!!!!');window.location.href = '/';</script>`)
+            }
+            res.end();
+        });
+    } else {
+        res.write(`<script>window.alert('Enter  password and email!!!!!!');window.location.href = '/';</script>`)
+    }
+});
+
+app.get('/admin.html', (req, res) => {
+    if (req.session.loggedin == true) {  
+        res.sendFile(`${__dirname}/admin.html`)
+    } else {
+        res.redirect('/');
+    }
+})
+
+app.get('/logout', (req, res) => {
+    req.session.loggedin = false;
+    req.session.email = "";
+    res.redirect('/');
+})
+
+app.get('/admindashboard', (req, res) => {
+    var obj;
+    var email = req.session.email;
+    db.query(`SELECT * FROM  admin WHERE mail = '${email}'`, (err, result) => {
+        obj = result;
+        console.log(obj)
+        res.send(obj);
+        res.end();
+    })
+})
