@@ -1,6 +1,8 @@
-var app = angular.module('dash', []);
+var app = angular.module('dash', ['googlechart']);
 
-app.controller('dashcon', function($scope, $http) {
+app.controller('dashcon', function($scope, $http ) {
+    
+
 
 	$http.get('/ecourse').then(function(data){
 		$scope.ecourse = data.data;
@@ -16,7 +18,29 @@ app.controller('dashcon', function($scope, $http) {
 	})
     $http.get('/vsub').then(function(data){
 		$scope.vsub = data.data;
-	})
+        $scope.pieChartObject = {};
+    $scope.pieChartObject.type = "PieChart";
+
+    //set title
+    $scope.pieChartObject.options = {
+        'title': 'Submission Status'
+    };
+    //set data
+    $scope.pieChartObject.data = {"cols": [
+        {id: "t", label: "Status", type: "string"},
+        {id: "s", label: "no of teams", type: "number"}
+        ], "rows": [
+            {c: [
+                {v: "submitted"},
+                {v: $scope.vsub[0]},
+            ]},
+           
+            {c: [
+                {v: "not submitted"},
+                {v: $scope.vsub[1]},
+            ]}
+    ]};
+        })
     $scope.showForm= false;
 
 $scope.onClickForm = function(){
