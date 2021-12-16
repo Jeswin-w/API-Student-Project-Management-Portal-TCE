@@ -15,7 +15,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/1.0.0-beta.1/ng-google-chart.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="dash.js"></script>
     </head>
-    <body style="background-color: whitesmoke" ng-app="dash" ng-controller='dashcon'>
+    <body style="background-color: white" ng-app="dash" ng-controller='dashcon'>
         
         <div class='container-fluid' style='background-color:#003380; border-radius:0% 0% 50% 50%;padding-bottom: 30px;'>
             <h1 >
@@ -27,9 +27,8 @@
         </div>
     <br><br>
     <div class="row"><div class="col-sm-6">
-        {{batch}}
-        {{type}}
-        <h3>Batch:</h3><select ng-model="batch"><option value='BarChart'>Bar chart</option><option value='PieChart'>Pie chart</option></select>
+        
+        <h3>Batch:</h3>
     <div google-chart chart="barChartObject" style="height:200px; width:100%;"></div></div>
 <div class="col-sm-6"> <h3>Department:</h3>
     <div google-chart chart="barChartObject1" style="height:200px; width:100%;"></div></div></div>

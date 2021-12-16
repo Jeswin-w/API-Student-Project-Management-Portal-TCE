@@ -9,12 +9,12 @@ app.controller('dashcon', function($scope, $http ) {
 		$scope.coursedetail = data.data;
 	})
     $http.get('/chartbatch').then(function(data){
-        $scope.type=this.batch
+       
 		$scope.cb = data.data;
         $scope.ba=$scope.cb[0];
         $scope.de=$scope.cb[1];
         $scope.barChartObject = {};
-    $scope.barChartObject.type = $scope.type;
+    $scope.barChartObject.type = 'BarChart';
     $scope.barChartObject.data = {"cols": [
     {id: "t", label: "Batch", type: "string"},
     {id: "s", label: "No of projects", type: "number"}
