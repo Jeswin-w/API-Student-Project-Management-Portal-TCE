@@ -79,7 +79,51 @@
       <td>{{x.team_members}}</td>
       <td>{{x.project_desc}}</td>
       <td>{{x.domain}}</td>
-      <td>{{x.batch}}</td></tr>
+      <td>{{x.batch}}</td>
+      <td><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="btn btn-primary">Update</button>
+ 
+        <div id="id01" class="modal">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+            
+            <form class="modal-content animate" method='post' action="/upproject">
+              
+                <div class="container">
+                  <center><h2><u>Update</u></h2></center>
+                    <label><b>project Name:</b></label>
+                    <input type="text" name="project_name" fid="faculty_id" class="form-control" value="{{x.project_name}}" required="">  
+                    <label>Team ID:</label>   
+        <input type="text" name="team_id" fname="faculty_name" class="form-control" value={{x.team_id}} required="">  
+     
+                    <label><b>Project Description</b></label>
+                    <input type="text" name="project_desc" mid="mail_id" class="form-control" value={{x.project_desc}} required=""> 
+                    <label><b>Domain</b></label>
+                    <input type="text" name="domain" mid="mail_id" class="form-control" value={{x.domain}} required=""> 
+                    <label><b>Batch</b></label>
+                    <input type="text" name="batch" mid="mail_id" class="form-control" value={{x.batch}} required=""> 
+                    <input type="hidden" name="project_id" value='{{x.project_id}}'>
+     
+                    <div class="clearfix"><center>
+                       
+                        <button type="submit" class="btn btn-primary">Update</button></center><br>
+                    </div>
+                </div>
+            </form>
+        </div>
+     
+        <!--close the modal by just clicking outside of the modal-->
+        <script>
+            var modal = document.getElementById('id01');
+     
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script></td>
+    <td><form method="post" action="/delproject">
+      <input type="hidden" name="project_id" value='{{x.project_id}}'>
+      <button type="submit" class="btn btn-danger save-btn">Delete</button></form></td>
+    </tr>
   </table>  
      
 </div>  
