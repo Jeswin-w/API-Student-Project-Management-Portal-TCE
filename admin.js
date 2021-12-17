@@ -337,6 +337,14 @@ app.post('/delfac',(req,res)=>{
             res.redirect('editcourses.html')
         })})
 
+        app.post('/delproject',(req,res)=>{
+            var project_id=req.body.project_id;
+            let q=`delete from project where project_id='${project_id}'`;
+            db.query(q,(err,result)=>{
+                if( err) throw err;
+                res.redirect('editprojects.html')
+            })})
+
 app.post('/upfac',(req, res)=>{
     var id=req.body.fid;
     var email=req.body.mail;
@@ -361,10 +369,26 @@ app.post('/upcou',(req, res)=>{
     let q=`Update course SET fid='${id}', course_id='${cid}', course_name='${name}', cdept='${dept}' where course_id='${cid}'`;
     db.query(q,(err,result)=>{
         if(err) throw err;
-        res.redirect('editfaculty.html')
+        res.redirect('editcourses.html')
     })
     
 
+
+})
+app.post('/upproject',(req, res)=>{
+    
+    var batch = req.body.batch;
+    var project_name = req.body.project_name;
+    var team_id = req.body.team_id;
+    var project_desc = req.body.project_desc;
+    var project_id = req.body.project_id;
+	var domain = req.body.domain;
+
+    let q=`Update project SET batch='${batch}', team_id='${team_id}', domain='${domain}', project_desc='${project_desc}' ,project_name='${project_name}' where project_id='${project_id}'`;
+    db.query(q,(err,result)=>{
+        if(err) throw err;
+        res.redirect('editprojects.html')
+    })
 })
 
 function importExcelData2MySQL(filePath){
