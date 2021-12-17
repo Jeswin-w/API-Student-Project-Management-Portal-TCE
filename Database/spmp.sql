@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2021 at 06:35 AM
+-- Generation Time: Dec 17, 2021 at 07:50 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -83,7 +83,6 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
-('18ES390 - B', 'IT004', 'DESIGN THINKING', 'IT'),
 ('18ES590 - A', 'IT002', 'SYSTEM THINKING', 'IT'),
 ('18ES590 - B', 'IT004', 'SYSTEM THINKING', 'IT'),
 ('18ES690 - A', 'IT001', 'ENGINEERING DESIGN', 'IT'),
@@ -92,7 +91,8 @@ INSERT INTO `course` (`course_id`, `fid`, `course_name`, `cdept`) VALUES
 ('18ES790 - B', 'IT004', 'CAPSTONE PROJECT', 'IT'),
 ('18IT810 - A', 'IT001', 'FINAL SEM PROJECT', 'IT'),
 ('18IT810 - A', 'IT003', 'FINAL SEM PROJECT', 'IT'),
-('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT');
+('18ES390 - A', 'IT001', 'DESIGN THINKING', 'IT'),
+('18ES390 - B', 'IT004', 'design thinking', 'IT');
 
 -- --------------------------------------------------------
 
@@ -145,10 +145,8 @@ CREATE TABLE `faculty_advisor` (
 --
 
 INSERT INTO `faculty_advisor` (`fid`, `mail`, `password`, `dept`, `fname`) VALUES
-('IT001', 'faculty001@gmail.com', '$2b$10$vQKo6ILwgeCqdkP4AO2KvekCifdMxYT6HmlRzDWlGZXmrIBu1Wueu', 'IT', 'Faculty_001'),
-('IT002', 'faculty002@gmail.com', '$2b$10$7X7FISgpSEJWysKYcs5kpOE4Gih4w9S0FX.AzdP9FF8PTV2CfzA1y', 'IT', 'Faculty_002'),
-('IT003', 'faculty003@gmail.com', '$2b$10$7X7FISgpSEJWysKYcs5kpOE4Gih4w9S0FX.AzdP9FF8PTV2CfzA1y', 'IT', 'Faculty_003'),
-('IT004', 'faculty004@gmail.com', '$2b$10$LW1BF8iFTw9BCn0LJC0t0..XD1PclurczEmBmm6WAEXzwLD4aRv0G', 'IT', 'Faculty_004');
+('IT001', 'faculty001@gmail.com', '$2b$10$3TagMF3ExLxHS1Kg.Xa7DufZQAZTnpfPIEnBR7DmM2SZftkjhiU62', 'IT', 'Faculty_001'),
+('IT002', 'faculty002@gmail.com', '$2b$10$7X7FISgpSEJWysKYcs5kpOE4Gih4w9S0FX.AzdP9FF8PTV2CfzA1y', 'IT', 'Faculty_002');
 
 -- --------------------------------------------------------
 
@@ -170,7 +168,7 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`, `batch`) VALUES
-(8, 'social media', 5, 'make a social media set', 'web dev', '2019-2023');
+(8, 'social medias', 5, 'make a social media set', 'web dev', '2019-2023');
 
 -- --------------------------------------------------------
 
@@ -193,9 +191,7 @@ CREATE TABLE `ssub` (
 --
 
 INSERT INTO `ssub` (`subid`, `team_id`, `sid`, `originalfile`, `file`, `cf_status`, `guide_status`) VALUES
-(4, 5, 3, 'Lang_id.xlsx', '1639484596944-513534371..xlsx', '', ''),
-(5, 6, 4, 'cast1 (2).jpg', '1639557917330-813187229..jpg', 'submitted', 'Not Updated'),
-(6, 5, 2, 'cast1 (1).jpg', '1639565538585-897500320..jpg', 'submitted', 'Not Updated');
+(7, 5, 2, 'testfile.xlsx', '1639723863052-388471683..xlsx', 'Not updated', 'Not Updated');
 
 -- --------------------------------------------------------
 
@@ -317,7 +313,7 @@ ALTER TABLE `project`
 -- AUTO_INCREMENT for table `ssub`
 --
 ALTER TABLE `ssub`
-  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `subid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `team`
