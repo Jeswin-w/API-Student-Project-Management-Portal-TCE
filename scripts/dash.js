@@ -132,4 +132,5 @@ $http.get('/teamsub').then(function(data) {
     $http.get('/projectList').then(function(data) {
         $scope.pro = data.data;
     })
+    
 })
