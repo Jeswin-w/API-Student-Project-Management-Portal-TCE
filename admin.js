@@ -248,6 +248,29 @@ app.get('/enroll.html', (req, res) =>{
     res.sendFile(`${__dirname}/enrollment.html`);
 })
 
+
+app.post('/enroll.html',(req, res)=>{
+    var regno = req.body.regno;
+    var course_id= req.body.course_id;
+    var dept = req.body.coursedepartment;
+    
+
+	
+    
+    let qr = `INSERT into enrollment(regno,course_id,dept) values('${regno}','${course_id}','${dept}')`;
+    
+    db.query(qr,(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        res.write(`<script>window.alert('Inserted!'); window.location.href = 'enroll.html';</script>`)
+
+        
+    })
+	
+
+})
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
     cb(null, __dirname + '/importFiles/')
