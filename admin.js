@@ -329,6 +329,14 @@ app.post('/delfac',(req,res)=>{
         res.redirect('editfaculty.html')
     })})
 
+    app.post('/delcou',(req,res)=>{
+        var id=req.body.dcou;
+        let q=`delete from course where course_id='${id}'`
+        db.query(q,(err,result)=>{
+            if( err) throw err;
+            res.redirect('editcourses.html')
+        })})
+
 app.post('/upfac',(req, res)=>{
     var id=req.body.fid;
     var email=req.body.mail;
@@ -336,6 +344,21 @@ app.post('/upfac',(req, res)=>{
     var dept= req.body.dept;
 
     let q=`Update faculty_advisor SET fid='${id}', mail='${email}', fname='${name}',dept='${dept}' where fid='${id}'`;
+    db.query(q,(err,result)=>{
+        if(err) throw err;
+        res.redirect('editfaculty.html')
+    })
+    
+
+})
+
+app.post('/upcou',(req, res)=>{
+    var id=req.body.fid;
+    var cid=req.body.courseid;
+    var name=req.body.coursename;
+    var dept= req.body.cdept;
+
+    let q=`Update course SET fid='${id}', course_id='${cid}', course_name='${name}', cdept='${dept}' where course_id='${cid}'`;
     db.query(q,(err,result)=>{
         if(err) throw err;
         res.redirect('editfaculty.html')
