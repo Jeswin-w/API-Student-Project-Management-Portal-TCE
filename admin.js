@@ -187,8 +187,8 @@ app.post('/adminlogin', (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
 
-    console.log(email)
-    console.log(password)
+    // console.log(email)
+    // console.log(password)
 
     if (email && password) {
         db.query(`SELECT * FROM admin WHERE mail = '${email}' `, function(error, results) {
@@ -238,7 +238,7 @@ app.get('/admindashboard', (req, res) => {
     var email = req.session.email;
     db.query(`SELECT * FROM  admin WHERE mail = '${email}'`, (err, result) => {
         obj = result;
-        console.log(obj)
+        //console.log(obj)
         res.send(obj);
         res.end();
     })
@@ -316,7 +316,7 @@ const upload = multer({storage: storage});
 app.post('/uploadfile', upload.single("uploadfile"), (req, res) =>{
     importExcelData2MySQL(__dirname  + '/importFiles/' + req.file.filename);
     
-    console.log(res);
+    //console.log(res);
     res.write(`<script>window.alert('Inserted!'); window.location.href = 'enroll.html';</script>`)
 });
 app.post('/delfac',(req,res)=>{
@@ -329,19 +329,11 @@ app.post('/delfac',(req,res)=>{
 })
 
 function importExcelData2MySQL(filePath){
-    // File path.
+
     readXlsxFile(filePath).then((rows) => {
-    // `rows` is an array of rows
-    // each row being an array of cells.     
-    //console.log(rows);
-    /**
-    [ [ 'Id', 'Name', 'Address', 'Age' ],
-    [ 1, 'john Smith', 'London', 25 ],
-    [ 2, 'Ahman Johnson', 'New York', 26 ]
-    */
-    // Remove Header ROW
+
     rows.shift();
-    // Open the MySQL connection
+   
     db.connect((error) => {
     if (error) {
     console.error(error);
@@ -362,8 +354,8 @@ function importExcelData2MySQL(filePath){
             console.log(q2)
             db.query(q2, (err, res)=>{
                 if(err) throw err;
-                console.log(result);
-                console.log(res);
+                //console.log(result);
+                //console.log(res);
                 var msg = `<p>Dear ${result[0]['name']} - ${regno} ,<br>This is the notification about registration on TCE Project Management Portal. You successfully enrolled in the below course. <br><br> Course ID: ${course_id} <br> Course name: ${res[0]['course_name']} <br> Course Dept: ${dept} <br><br>Thank you<br><br>Regards,<br>TCE PROJECTS ADMIN.`
                 let transporter = nodemailer.createTransport({
                     host: "smtp.gmail.com",
@@ -395,19 +387,7 @@ function importExcelData2MySQL(filePath){
     }
     db.query(query, [rows], (error, response) => {
     if(error) throw error;
-    
-    //console.log(error || response);
-    /**
-    OkPacket {
-    fieldCount: 0,
-    affectedRows: 5,
-    insertId: 0,
-    serverStatus: 2,
-    warningCount: 0,
-    message: '&Records: 5  Duplicates: 0  Warnings: 0',
-    protocol41: true,
-    changedRows: 0 } 
-    */
+
     });
     }
     });
