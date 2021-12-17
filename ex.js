@@ -404,6 +404,7 @@ app.get('/ecourse', async(req, res) => {
 
     var q = `Select distinct * from enrollment as e inner join course as c on e.course_id=c.course_id inner join faculty_advisor as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
     db.query(q, (err, result) => {
+        
 
         res.send(result);
 
@@ -477,6 +478,9 @@ app.get('/submissions', (req, res) => {
        
         let q1 = `select * from ssub where team_id='${tid}'`
         db.query(q1, async(err, result1) => {
+            var total=result.length;
+            var n=result1.length;
+            var per=parseInt((n/total)*100);
             if (err) { throw (err) }
             ssub = result1
             for (let i = 0; i < result.length; i++) {
@@ -491,7 +495,7 @@ app.get('/submissions', (req, res) => {
                     }
                 }
             }
-            res.send(result)
+            res.send([per,result])
 
 
         })

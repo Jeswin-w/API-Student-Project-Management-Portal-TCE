@@ -264,6 +264,14 @@ app.post('/uploadfile', upload.single("uploadfile"), (req, res) =>{
     console.log(res);
     res.write(`<script>window.alert('Inserted!'); window.location.href = 'enroll.html';</script>`)
 });
+app.post('/delfac',(req,res)=>{
+    var fid=req.body.dfac;
+    let q=`delete from faculty_advisor where fid='${fid}'`
+    db.query(q,(err,result)=>{
+        if( err) throw err;
+        res.redirect('editfaculty.html')
+    })
+})
 
 function importExcelData2MySQL(filePath){
     // File path.
