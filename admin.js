@@ -319,13 +319,29 @@ app.post('/uploadfile', upload.single("uploadfile"), (req, res) =>{
     //console.log(res);
     res.write(`<script>window.alert('Inserted!'); window.location.href = 'enroll.html';</script>`)
 });
+
+})
 app.post('/delfac',(req,res)=>{
     var fid=req.body.dfac;
     let q=`delete from faculty_advisor where fid='${fid}'`
     db.query(q,(err,result)=>{
         if( err) throw err;
         res.redirect('editfaculty.html')
+    })})
+
+app.post('/upfac',(req, res)=>{
+    var id=req.body.fid;
+    var email=req.body.mail;
+    var name=req.body.fname;
+    var dept= req.body.dept;
+
+    let q=`Update faculty_advisor SET fid='${id}', mail='${email}', fname='${name}',dept='${dept}' where fid='${id}'`;
+    db.query(q,(err,result)=>{
+        if(err) throw err;
+        res.redirect('editfaculty.html')
     })
+    
+
 })
 
 function importExcelData2MySQL(filePath){
@@ -393,4 +409,3 @@ function importExcelData2MySQL(filePath){
     });
     });
 }
-})
