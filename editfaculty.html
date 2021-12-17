@@ -104,6 +104,7 @@
             
               <div class="container">
                 <center><h2><u>Update</u></h2></center>
+                <input type='hidden' name='old' value="{{}}"
                   <label><b>Faculty Id:</b></label>
                   <input type="text" name="fid" fid="faculty_id" class="form-control" value="{{x.fid}}" required="">  
                   <label>Faculty Name</label>   
@@ -134,20 +135,21 @@
       </div>
    
       <!--close the modal by just clicking outside of the modal-->
-      <script>
-          var modal = document.getElementById('id01');
-   
-          window.onclick = function(event) {
-              if (event.target == modal) {
-                  modal.style.display = "none";
-              }
-          }
-      </script></td>
+     </td>
   <td><form method="post" action="/delfac">
     <input type="hidden" name="dfac" value='{{x.fid}}'>
     <button type="submit" class="btn btn-danger save-btn">Delete</button></form></td></tr>
         
   </table>  
+  <script>
+    var modal = document.getElementById('id01');
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
      
 </div>  
     
