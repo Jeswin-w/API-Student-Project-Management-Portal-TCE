@@ -137,10 +137,10 @@ app.get('/coursedetail',async (req, res)=>{
 		res.end()
 	})
 })
-app.get('/facultydetail',async (req, res)=>{
+app.get('/facultydetail', (req, res)=>{
 	var q=`SELECT * from faculty_advisor`;
 	db.query(q,(err,result)=>{
-		console.log(result);
+		//console.log(result);
 		res.send(result);
 		res.end()
 	})
@@ -346,7 +346,7 @@ app.post('/upfac',(req, res)=>{
     let q=`Update faculty_advisor SET fid='${id}', mail='${email}', fname='${name}',dept='${dept}' where fid='${id}'`;
     db.query(q,(err,result)=>{
         if(err) throw err;
-        res.redirect('editfaculty.html')
+        res.redirect('/editfaculty.html')
     })
     
 

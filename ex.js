@@ -75,7 +75,7 @@ app.post('/upl', upload.single('filer'), function(req, res) {
     db.query(q, (err, result) => {
         if (err)
             throw (err)
-        console.log('Insert')
+        //console.log('Insert')
         res.redirect(`/course.html?cid=${req.session.course_id}&cdept=${req.session.cdept}&cou_name=${req.session.course_name}`)
     })
 });
@@ -277,10 +277,10 @@ app.post('/changepass', (req, res)=>{
     var newpass = req.body.newpassword1;
     var newpass1 = req.body.newpassword2;
     var email = req.session.email;
-    console.log(email)
-    console.log(newpass)
-    console.log(newpass1)
-    console.log(oldpass)
+    // console.log(email)
+    // console.log(newpass)
+    // console.log(newpass1)
+    // console.log(oldpass)
     if(newpass1 == newpass)
     {
         let qr = `SELECT password from faculty_advisor WHERE mail='${email}'`
@@ -288,7 +288,7 @@ app.post('/changepass', (req, res)=>{
             if(err) throw err;
             
             var hash = result[0]['password'];
-            console.log(hash)
+            //console.log(hash)
             if(bcrypt.compareSync(oldpass, hash))
             {
                 let q = `UPDATE faculty_advisor SET password='${bcrypt.hashSync(newpass,10)}' WHERE mail='${email}'`
@@ -367,7 +367,7 @@ app.get('/enroll', (req, res) => {
                 if (err) {
                     throw err;
                 }
-                console.log("inserted");
+                //console.log("inserted");
                 res.redirect('/course.html');
             })
         }
@@ -461,6 +461,7 @@ app.get('/register.html', (req, res) => {
     res.sendFile(`${__dirname}/register.html`);
 })
 app.get('/login.html', (req, res) => {
+    
     res.sendFile(`${__dirname}/login.html`);
 })
 app.get('/flogin.html', (req, res) => {
@@ -521,7 +522,7 @@ app.post('/addsubmission', (req, res) => {
 
             throw (err)
         }
-        console.log("inserted");
+        //console.log("inserted");
         res.redirect('/fdashboard.html')
     })
 
@@ -582,7 +583,7 @@ app.get('/logout', (req, res) => {
                 var hash = results[0].password;
 
 
-                const passwordHash = bcrypt.hashSync(password, 10);
+               // const passwordHash = bcrypt.hashSync(password, 10);
 
                 const verified = bcrypt.compareSync(password, hash);
 
@@ -661,7 +662,7 @@ app.get('/vsub',(req, res)=>{
         
             let q1=`select * from team where course_id='${course_id}'and cdept='${cdept}'`;
             db.query(q1,(err,result1)=>{
-                console.log(result1)
+                
                  total=result1.length;
                  s=result.length;
                 rem=total-result.length;
