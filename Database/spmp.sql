@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 09:05 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: Dec 17, 2021 at 06:35 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -121,7 +121,10 @@ INSERT INTO `enrollment` (`regno`, `course_id`, `dept`, `team_status`) VALUES
 ('19IT041', '18ES590 - A', 'IT', 0),
 ('19IT027', '18ES690 - A', 'IT', 0),
 ('19IT041', '18ES690 - A', 'IT', 0),
-('19IT040', '18ES690 - A', 'IT', 0);
+('19IT040', '18ES690 - A', 'IT', 0),
+('17IT041', '18ES390', 'IT', 0),
+('17IT075', '18ES390', 'CSE', 0),
+('17IT088', '18ES590', 'CSE', 0);
 
 -- --------------------------------------------------------
 
@@ -158,15 +161,16 @@ CREATE TABLE `project` (
   `project_name` varchar(50) NOT NULL,
   `team_id` int(50) NOT NULL,
   `project_desc` varchar(255) NOT NULL,
-  `domain` varchar(30) NOT NULL
+  `domain` varchar(30) NOT NULL,
+  `batch` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`) VALUES
-(8, 'social media', 5, 'make a social media set', 'web dev');
+INSERT INTO `project` (`project_id`, `project_name`, `team_id`, `project_desc`, `domain`, `batch`) VALUES
+(8, 'social media', 5, 'make a social media set', 'web dev', '2019-2023');
 
 -- --------------------------------------------------------
 
@@ -307,7 +311,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `project_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `ssub`
