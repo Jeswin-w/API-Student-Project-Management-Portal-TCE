@@ -620,7 +620,7 @@ app.post('/flogin', (req, res) => {
         db.query(`SELECT * FROM faculty_advisor WHERE mail = '${email}' `, function(error, results) {
             if (results.length > 0) {
                 var hash=results[0].password;
-                const passwordHash = bcrypt.hashSync(password, 10);
+                
                 const verified = bcrypt.compareSync(password, hash);
              
 

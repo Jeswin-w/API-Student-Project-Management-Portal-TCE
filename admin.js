@@ -273,6 +273,19 @@ app.post('/delfac',(req,res)=>{
     })
 })
 
+app.post('/upfac',(req, res)=>{
+    var id=req.body.fid;
+    var email=req.body.mail;
+    var name=req.body.fname;
+    var dept= req.body.dept;
+
+    let q=`Update faculty_advisor SET fid='${id}', mail='${email}', fname='${name}',dept='${dept}' where fid='${id}'`;
+    db.query(q,(err,result)=>{
+        if(err) throw err;
+    })
+
+})
+
 function importExcelData2MySQL(filePath){
     // File path.
     readXlsxFile(filePath).then((rows) => {
