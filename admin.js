@@ -105,8 +105,8 @@ app.post('/editfaculty.html',(req, res)=>{
                     port: 465,
                     secure: true,
                     auth:{
-                        user: "tsscarservice@gmail.com",
-                        pass: "aj1ma2ra3ha4"
+                        user: "apiprojectportal@gmail.com",
+                        pass: "tceit123"
                     },
                     tls:{
                         rejectUnauthorized: false
@@ -253,21 +253,53 @@ app.post('/enroll.html',(req, res)=>{
     var regno = req.body.regno;
     var course_id= req.body.course_id;
     var dept = req.body.coursedepartment;
-    
 
-	
-    
     let qr = `INSERT into enrollment(regno,course_id,dept) values('${regno}','${course_id}','${dept}')`;
     
     db.query(qr,(err,result)=>{
         if(err){
             console.log(err);
         }
+        var q1 = `SELECT regno, mail, name FROM student WHERE regno='${regno}'`
+        //console.log(q1);
+        db.query(q1, (error, result)=>{
+            if(error) throw error;
+            //console.log(rows[i][1])
+            var q2 = `SELECT course_name FROM course WHERE course_id='${course_id}'`
+            console.log(q2)
+            db.query(q2, (err, res)=>{
+                if(err) throw err;
+                console.log(result);
+                console.log(res);
+                var msg = `<p>Dear ${result[0]['name']} - ${regno} ,<br>This is the notification about registration on TCE Project Management Portal. You successfully enrolled in the below course. <br><br> Course ID: ${course_id} <br> Course name: ${res[0]['course_name']} <br> Course Dept: ${dept} <br><br>Thank you<br><br>Regards,<br>TCE PROJECTS ADMIN.`
+                let transporter = nodemailer.createTransport({
+                    host: "smtp.gmail.com",
+                    port: 465,
+                    secure: true,
+                    auth:{
+                        user: "apiprojectportal@gmail.com",
+                        pass: "tceit123"
+                    },
+                    tls:{
+                        rejectUnauthorized: false
+                    }
+                });
+                var mailid = `${result[0]['mail']}`;
+                console.log(mailid)
+                let mailoptions = {
+                    from: '"ADMIN" <tceprojectportal@gmail.com>',
+                    to: `${mailid}`,
+                    subject: "TCE PROJECTS PORTAL - Registration",
+                    html: msg,
+                }
+                transporter.sendMail(mailoptions, (err, info)=>{
+                    if(err)
+                        throw err;
+                    console.log("Message sent");
+                })
+            })
         res.write(`<script>window.alert('Inserted!'); window.location.href = 'enroll.html';</script>`)
-
-        
     })
-	
 
 })
 
@@ -338,8 +370,8 @@ function importExcelData2MySQL(filePath){
                     port: 465,
                     secure: true,
                     auth:{
-                        user: "tsscarservice@gmail.com",
-                        pass: "aj1ma2ra3ha4"
+                        user: "apiprojectportal@gmail.com",
+                        pass: "tceit123"
                     },
                     tls:{
                         rejectUnauthorized: false
@@ -379,5 +411,6 @@ function importExcelData2MySQL(filePath){
     });
     }
     });
-    })
-    }
+    });
+}
+})
