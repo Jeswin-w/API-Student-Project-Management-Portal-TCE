@@ -404,6 +404,7 @@ app.get('/ecourse', async(req, res) => {
 
     var q = `Select distinct * from enrollment as e inner join course as c on e.course_id=c.course_id inner join faculty_advisor as cf on c.fid=cf.fid WHERE e.regno = '${regno}'`;
     db.query(q, (err, result) => {
+        console.log(result)
 
         res.send(result);
 
